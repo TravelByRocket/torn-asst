@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct ContentView: View {
     @Binding var apikey: String
@@ -25,6 +26,15 @@ struct ContentView: View {
             }
             SyncSection(response: $response, apikey: $apikey)
         }
+        .onAppear{
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                if success {
+                    print("All set!")
+                } else if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
 }
 
@@ -42,6 +52,7 @@ struct TempDevNotes: View {
         Text("spin the wheel of the day")
         Text("items for day")
         Text("refills")
+        Text("out of the hospital, esp abroad")
     }
 }
 

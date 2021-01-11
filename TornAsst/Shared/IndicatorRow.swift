@@ -47,7 +47,7 @@ struct IndicatorRow: View {
                 Text(name)
                 curValText+Text("/")+maxValText
                 Spacer()
-                Text("+\(barInfo.increment, specifier: "%2.d")\(String(name.prefix(1)).lowercased())/\(barInfo.interval/60, specifier: "%2.d")min").font(.caption)
+                Text("+\(barInfo.increment, specifier: "%2.d")\(String(name.prefix(1)).lowercased())/\(barInfo.interval/60, specifier: "%2.d")min").font(.system(.caption, design: .monospaced))
             }
             .font(.system(.body, design: .monospaced))
             .background(color.opacity(0.2))
