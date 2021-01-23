@@ -134,7 +134,7 @@ struct APIPrompt: View {
                                 apikey = apikeytry
                             }
                         } else {
-                            self.errorMessage = decodedResponse.error.codeMeaning
+                            self.errorMessage = "placeholder"
                             showAPIErrorAlert = true
                             loading = false
                         }

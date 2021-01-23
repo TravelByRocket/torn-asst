@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct TornAsstApp: App {
     @AppStorage("apikey") var apikey: String = ""
-    @AppStorage("apiresponse") var apiresponse: String = #"{"error":{"code":2,"error":"Incorrect key"}}"#
+    @AppStorage("apiresponse") var apiresponse: String = ""
     
     @State private var response = TornResponse.default
     var body: some Scene {
@@ -23,6 +23,8 @@ struct TornAsstApp: App {
         }
     }
 }
+
+let api = ApiManager()
 
 /// Epoch Time to use with `Date(timeIntervalSince1970: TimeInterval)`
 typealias UnixTime = Double

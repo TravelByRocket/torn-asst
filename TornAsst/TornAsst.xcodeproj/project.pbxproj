@@ -37,8 +37,16 @@
 		2F333D902570A40200D356F2 /* TravelSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F333D8E2570A40200D356F2 /* TravelSection.swift */; };
 		2F35113B257429E4002B96ED /* NerveControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F35113A257429E4002B96ED /* NerveControls.swift */; };
 		2F35113C257429E4002B96ED /* NerveControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F35113A257429E4002B96ED /* NerveControls.swift */; };
-		2F70075525ABE8DC0084AE54 /* UserStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70075425ABE8DC0084AE54 /* UserStatus.swift */; };
-		2F70075625ABE8DC0084AE54 /* UserStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70075425ABE8DC0084AE54 /* UserStatus.swift */; };
+		2F5346C025AC181E00A02345 /* Ticking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5346BF25AC181E00A02345 /* Ticking.swift */; };
+		2F5346C125AC181E00A02345 /* Ticking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5346BF25AC181E00A02345 /* Ticking.swift */; };
+		2F70075525ABE8DC0084AE54 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70075425ABE8DC0084AE54 /* Activity.swift */; };
+		2F70075625ABE8DC0084AE54 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70075425ABE8DC0084AE54 /* Activity.swift */; };
+		2F70075A25ABFA290084AE54 /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70075925ABFA290084AE54 /* UserState.swift */; };
+		2F70075B25ABFA290084AE54 /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70075925ABFA290084AE54 /* UserState.swift */; };
+		2F7E88ED25B94B420010BD60 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E88EC25B94B420010BD60 /* ApiManager.swift */; };
+		2F7E88EE25B94B420010BD60 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7E88EC25B94B420010BD60 /* ApiManager.swift */; };
+		2F7F0B4225BC047A00C5CD0A /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F0B4125BC047A00C5CD0A /* Stats.swift */; };
+		2F7F0B4325BC047A00C5CD0A /* Stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F0B4125BC047A00C5CD0A /* Stats.swift */; };
 		2FF1CD6725ABC2BB00B2A80E /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF1CD6625ABC2BA00B2A80E /* Flight.swift */; };
 		2FF1CD6825ABC2BB00B2A80E /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF1CD6625ABC2BA00B2A80E /* Flight.swift */; };
 		2FF1CD6C25ABC33E00B2A80E /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF1CD6B25ABC33E00B2A80E /* Location.swift */; };
@@ -66,7 +74,11 @@
 		2F24902F2574207900830D26 /* NerveSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NerveSection.swift; sourceTree = "<group>"; };
 		2F333D8E2570A40200D356F2 /* TravelSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelSection.swift; sourceTree = "<group>"; };
 		2F35113A257429E4002B96ED /* NerveControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NerveControls.swift; sourceTree = "<group>"; };
-		2F70075425ABE8DC0084AE54 /* UserStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatus.swift; sourceTree = "<group>"; };
+		2F5346BF25AC181E00A02345 /* Ticking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ticking.swift; sourceTree = "<group>"; };
+		2F70075425ABE8DC0084AE54 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
+		2F70075925ABFA290084AE54 /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
+		2F7E88EC25B94B420010BD60 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		2F7F0B4125BC047A00C5CD0A /* Stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stats.swift; sourceTree = "<group>"; };
 		2FF1CD6625ABC2BA00B2A80E /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
 		2FF1CD6B25ABC33E00B2A80E /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,7 +130,11 @@
 				2F173C3025704E6400E904D4 /* TornResult.swift */,
 				2FF1CD6625ABC2BA00B2A80E /* Flight.swift */,
 				2FF1CD6B25ABC33E00B2A80E /* Location.swift */,
-				2F70075425ABE8DC0084AE54 /* UserStatus.swift */,
+				2F70075425ABE8DC0084AE54 /* Activity.swift */,
+				2F70075925ABFA290084AE54 /* UserState.swift */,
+				2F7F0B4125BC047A00C5CD0A /* Stats.swift */,
+				2F5346BF25AC181E00A02345 /* Ticking.swift */,
+				2F7E88EC25B94B420010BD60 /* ApiManager.swift */,
 				2F173C0F2570111B00E904D4 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -194,7 +210,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1220;
-				LastUpgradeCheck = 1220;
+				LastUpgradeCheck = 1230;
 				TargetAttributes = {
 					2F173C132570111B00E904D4 = {
 						CreatedOnToolsVersion = 12.2;
@@ -247,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F70075A25ABFA290084AE54 /* UserState.swift in Sources */,
 				2F2490302574207A00830D26 /* NerveSection.swift in Sources */,
 				2F24901F257334A300830D26 /* IndicatorRow.swift in Sources */,
 				2F24902925735D2800830D26 /* TravelControls.swift in Sources */,
@@ -254,13 +271,16 @@
 				2F173C222570111C00E904D4 /* ContentView.swift in Sources */,
 				2F35113B257429E4002B96ED /* NerveControls.swift in Sources */,
 				2F24901A25731B9600830D26 /* SyncSection.swift in Sources */,
-				2F70075525ABE8DC0084AE54 /* UserStatus.swift in Sources */,
+				2F70075525ABE8DC0084AE54 /* Activity.swift in Sources */,
 				2F2490042571EF9F00830D26 /* APIPrompt.swift in Sources */,
+				2F7F0B4225BC047A00C5CD0A /* Stats.swift in Sources */,
 				2F173C3125704E6400E904D4 /* TornResult.swift in Sources */,
 				2F24900B2572CE5400830D26 /* EnergySection.swift in Sources */,
+				2F7E88ED25B94B420010BD60 /* ApiManager.swift in Sources */,
 				2F333D8F2570A40200D356F2 /* TravelSection.swift in Sources */,
 				2F2490102572F5FC00830D26 /* EnergyControls.swift in Sources */,
 				2F173C202570111C00E904D4 /* TornAsstApp.swift in Sources */,
+				2F5346C025AC181E00A02345 /* Ticking.swift in Sources */,
 				2F24901525731B2E00830D26 /* IndicatorBar.swift in Sources */,
 				2FF1CD6C25ABC33E00B2A80E /* Location.swift in Sources */,
 				2F2490242573369A00830D26 /* BasicsSection.swift in Sources */,
@@ -271,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F70075B25ABFA290084AE54 /* UserState.swift in Sources */,
 				2F2490312574207A00830D26 /* NerveSection.swift in Sources */,
 				2F249020257334A300830D26 /* IndicatorRow.swift in Sources */,
 				2F24902A25735D2800830D26 /* TravelControls.swift in Sources */,
@@ -278,13 +299,16 @@
 				2F173C232570111C00E904D4 /* ContentView.swift in Sources */,
 				2F35113C257429E4002B96ED /* NerveControls.swift in Sources */,
 				2F24901B25731B9600830D26 /* SyncSection.swift in Sources */,
-				2F70075625ABE8DC0084AE54 /* UserStatus.swift in Sources */,
+				2F70075625ABE8DC0084AE54 /* Activity.swift in Sources */,
 				2F2490052571EF9F00830D26 /* APIPrompt.swift in Sources */,
+				2F7F0B4325BC047A00C5CD0A /* Stats.swift in Sources */,
 				2F173C3225704E6400E904D4 /* TornResult.swift in Sources */,
 				2F24900C2572CE5400830D26 /* EnergySection.swift in Sources */,
+				2F7E88EE25B94B420010BD60 /* ApiManager.swift in Sources */,
 				2F333D902570A40200D356F2 /* TravelSection.swift in Sources */,
 				2F2490112572F5FC00830D26 /* EnergyControls.swift in Sources */,
 				2F173C212570111C00E904D4 /* TornAsstApp.swift in Sources */,
+				2F5346C125AC181E00A02345 /* Ticking.swift in Sources */,
 				2F24901625731B2E00830D26 /* IndicatorBar.swift in Sources */,
 				2FF1CD6D25ABC33E00B2A80E /* Location.swift in Sources */,
 				2F2490252573369A00830D26 /* BasicsSection.swift in Sources */,
@@ -456,6 +480,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = CX9A4TZM67;
@@ -480,6 +505,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = CX9A4TZM67;

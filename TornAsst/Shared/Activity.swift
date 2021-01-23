@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum UserStatus {
+enum Activity {
     case flying(on: Flight)
     case onGround(at: Location)
     case hospital(at: Location, until: Date)
-    case jail(at: Location, until: Date) // TODO what about jail abroad?
-    case apiError(problem: ErrorResult) // TODO should this be an optional or create a case for no problem?
+    case jail(at: Location, until: Date)
+    case apiPrompt(problem: ErrorResponse?) // nil with fresh app install
     
-    func expectedStatus(at date: Date) -> UserStatus {
+    func expected(at date: Date) -> Activity {
         switch self {
         case .flying(on: let flight):
             if flight.isStillFlying(at: date) {
@@ -36,8 +36,15 @@ enum UserStatus {
             } else {
                 return self
             }
-        case .apiError(problem: _):
+        case .apiPrompt(problem: _):
             return self
         }
+    }
+    
+    struct ErrorResponse: Codable {
+        var code: Int
+        var error: String
+        
+        static var `default` = ErrorResponse(code: 13, error: "A Placeholder error message")
     }
 }

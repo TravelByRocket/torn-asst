@@ -11,6 +11,23 @@ import UserNotifications
 struct ContentView: View {
     @Binding var apikey: String
     @Binding var response: TornResponse
+    @AppStorage("responsestring") var temptext: String = "temp"
+    @AppStorage("responsedata") var tempdata: Data?
+    var templevelvalue: Int
+    
+    init(apikey: Binding<String>, response: Binding<TornResponse>) {
+        print("ran init")
+        self._apikey = apikey
+        self._response = response
+        
+        if let tempdata = UserDefaults.standard.object(forKey: "responsedata") as? Data {
+            if let decodedResponse = try? JSONDecoder().decode(TempLevel.self, from: tempdata) {
+                templevelvalue = decodedResponse.level
+                return
+            }
+        }
+        templevelvalue = 1234
+    }
     
     var body: some View {
         VStack {
@@ -22,10 +39,21 @@ struct ContentView: View {
                 LifeSection(life: response.life, serverTime: response.server_time)
                 TravelSection(travel: response.travel, server_time: response.server_time)
                 Spacer()
+                Text("If it works then let's see 33 = \(templevelvalue)")
                 TempDevNotes().background(Color.secondary)
+                Text(temptext).lineLimit(3)
             }
+            Button(action: {
+                let api = ApiManager()
+                api.loadData()
+            }, label: {
+                Text("New Decoupled Query")
+            })
             SyncSection(response: $response, apikey: $apikey)
         }
+        .onChange(of: tempdata, perform: { value in
+            print("data changed")
+        })
         .onAppear{
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
                 if success {
@@ -78,4 +106,8 @@ struct LifeSection: View {
                      barInfo: life,
                      server_time: serverTime)
     }
+}
+
+struct TempLevel: Codable {
+    var level: Int
 }
