@@ -81,4 +81,21 @@ extension DatedResetItem {
 
         return task
     }
+
+    static var exampleWeekly: DatedResetItem {
+        let dataController = DataController.preview
+        let viewContext = dataController.container.viewContext
+
+        let task = DatedResetItem(context: viewContext)
+        task.label = "Example Task"
+        task.dateCompleted = nil
+        task.intervalDays = 7
+        task.isHidden = false
+        task.section = "Spin the Wheel"
+        task.triggerHourCode = midnightHourCode16
+        let daily = Daily(context: viewContext)
+        task.daily = daily
+
+        return task
+    }
 }

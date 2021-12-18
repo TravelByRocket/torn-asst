@@ -11,6 +11,9 @@ struct PeriodicTaskToggleView: View {
     @State private var completed = false
     @ObservedObject var task: DatedResetItem
 
+    @EnvironmentObject var dataController: DataController
+    @Environment(\.managedObjectContext) var managedObjectContext
+
     init(task: DatedResetItem) {
         _task = ObservedObject(wrappedValue: task)
         _completed = State(wrappedValue: task.isCompletedThisPeriod)
@@ -31,6 +34,7 @@ struct PeriodicTaskToggleView: View {
                 } else {
                     task.dateCompleted = nil
                 }
+                dataController.save()
             }
         }
     }
@@ -38,11 +42,14 @@ struct PeriodicTaskToggleView: View {
 
 struct PeriodicToggleView_Previews: PreviewProvider {
     @ObservedObject static var task = DatedResetItem.example
+    static var dataController = DataController.preview
 
     static var previews: some View {
         Form {
-            PeriodicTaskToggleView(task: task)
-            Text(task.dateCompleted.debugDescription)
+            PeriodicTaskToggleView(task: DatedResetItem.example)
+            PeriodicTaskToggleView(task: DatedResetItem.exampleWeekly)
         }
+        .environment(\.managedObjectContext, dataController.container.viewContext)
+        .environmentObject(dataController)
     }
 }

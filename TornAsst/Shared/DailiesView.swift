@@ -12,71 +12,85 @@ struct DailiesView: View {
     @State private var refreshDate = Date.nextQuarterHour
 
     @FetchRequest(
-        entity: Daily.entity(),
-        sortDescriptors: [],
-        predicate: nil) private var dailies: FetchedResults<Daily>
+        entity: DatedResetItem.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \DatedResetItem.label, ascending: true)
+        ]
+    ) private var tasks: FetchedResults<DatedResetItem>
 
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
 
     let timer = Timer.publish(every: Date.nextQuarterHour.timeIntervalSinceNow, on: .main, in: .common).autoconnect()
 
-    var daily: Daily {
-        if let onlyOne = dailies.first {
-            return onlyOne
-        } else {
-            try? dataController.createDailyDefaults()
+    var tasksAlphabetical: [DatedResetItem] {
+        tasks.sorted(by: \DatedResetItem.itemLabel)
+    }
+
+    var tasksMidnight: [DatedResetItem] {
+        tasksAlphabetical.filter { task in
+            task.triggerHourCode == DatedResetItem.midnightHourCode16 &&
+            task.intervalDays == 1 &&
+            !task.isHidden
         }
-        return dailies.first ?? Daily.example
+    }
+
+    var tasksCOB: [DatedResetItem] {
+        tasksAlphabetical.filter { task in
+            task.triggerHourCode == DatedResetItem.closeOfBusinessHourCode16 &&
+            task.intervalDays == 1 &&
+            !task.isHidden
+        }
+    }
+
+    var tasksOther: [DatedResetItem] {
+        tasksAlphabetical.filter { task in
+            (
+                task.triggerHourCode != DatedResetItem.midnightHourCode16 &&
+                task.triggerHourCode != DatedResetItem.closeOfBusinessHourCode16
+            ) || task.intervalDays != 1 && !task.isHidden
+        }
+    }
+
+    var tasksInactive: [DatedResetItem] {
+        tasksAlphabetical.filter { task in
+            task.isHidden
+        }
     }
 
     let labels = DatedResetItem.Labels.self // swiftling:ignore
 
     var body: some View {
         Form {
-            Section {
-                BigSectionBarView(
-                    systemImage: "moon.stars",
-                    message: "Reset at Midnight",
-                    color: .purple,
-                    date: Date.nextMidnight
-                )
-                ForEach(daily.dailyTasksMidnight) {task in
-                    DailyToggleView(task: task)
-                }
-            }
-            Section {
-                BigSectionBarView(
-                    systemImage: "sunset",
-                    message: "Reset at C.O.B.",
-                    color: .cyan,
-                    date: Date.nextCloseOfBusiness
-                )
-                ForEach(daily.dailyTasksCOB) {task in
-                    DailyToggleView(task: task)
-                }
-            }
-            Section {
-                BigSectionBarView(
-                    systemImage: "scribble.variable",
-                    message: "Other",
-                    color: .indigo,
-                    date: nil
-                )
-                ForEach(daily.otherTasks) {task in
-                    DailyToggleView(task: task)
-                }
-                Text("Next Quarter Hour in \(refreshDate, style: .timer)")
-                    .onReceive(timer) { _ in
-                        refreshDate = Date.nextQuarterHour
-                    }
-            }
-            BigSectionBarView(
+            PeriodicSectionView(
+                systemImage: "moon.stars",
+                message: "Reset at Midnight",
+                color: .purple,
+                date: Date.nextMidnight,
+                tasks: tasksMidnight)
+            PeriodicSectionView(
+                systemImage: "sunset",
+                message: "Reset at C.O.B.",
+                color: .cyan,
+                date: Date.nextCloseOfBusiness,
+                tasks: tasksCOB)
+            PeriodicSectionView(
+                systemImage: "scribble.variable",
+                message: "Other",
+                color: .indigo,
+                date: nil,
+                tasks: tasksOther)
+            PeriodicSectionView(
                 systemImage: "xmark.circle",
-                message: "Hidden",
+                message: "Inactive",
                 color: .gray,
-                date: nil
-            )
+                date: nil,
+                tasks: tasksInactive)
+        }
+        .onAppear {
+            if tasks.isEmpty {
+                try? dataController.createDailyDefaults()
+            }
         }
     }
 }

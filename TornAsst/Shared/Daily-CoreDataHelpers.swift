@@ -35,12 +35,17 @@ extension Daily { // maybe `Dated` or `Periodic`
     var dailyTasksMidnight: [DatedResetItem] {
         dailyTasksAlphabetical.filter {
             $0.triggerHourCode == DatedResetItem.midnightHourCode16 &&
-            $0.intervalDays == 1
+            $0.intervalDays == 1 &&
+            !$0.isHidden
         }
     }
 
     var dailyTasksCOB: [DatedResetItem] {
-        dailyTasksAlphabetical.filter { $0.triggerHourCode == DatedResetItem.closeOfBusinessHourCode16 }
+        dailyTasksAlphabetical.filter {
+            $0.triggerHourCode == DatedResetItem.closeOfBusinessHourCode16 &&
+            $0.intervalDays == 1 &&
+            !$0.isHidden
+        }
     }
 
     var otherTasks: [DatedResetItem] {
@@ -55,7 +60,11 @@ extension Daily { // maybe `Dated` or `Periodic`
                 tasksConsidered.remove(at: index)
             }
         }
-        return tasksConsidered
+        return tasksConsidered.filter { !$0.isHidden }
+    }
+
+    var inactiveTasks: [DatedResetItem] {
+        dailyTasksAlphabetical.filter { $0.isHidden }
     }
 
     func getTask(labeled label: String) -> DatedResetItem? {
