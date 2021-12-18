@@ -26,7 +26,8 @@ struct PeriodicTaskToggleView: View {
         .onAppear {
             DispatchQueue.main.asyncAfter(
                 deadline: .now() + task.nextReset.timeIntervalSinceNow) {
-                    completed = false
+                    // does this work if not observed here? otherwise use completed = false
+                    task.objectWillChange.send()
                 }
         }
         .onChange(of: completed) { isNowCompleted in

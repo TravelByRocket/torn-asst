@@ -28,7 +28,7 @@ struct ContentView: View {
                 .tag(DailiesView.tag)
                 .tabItem {
                     Image(systemName: "calendar.badge.exclamationmark")
-                    Text("Daily")
+                    Text("Dated")
                 }
         }
     }
