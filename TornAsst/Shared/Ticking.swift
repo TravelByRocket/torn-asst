@@ -7,37 +7,33 @@
 
 import Foundation
 
-/// A statistic that increases predictably with time
-class Ticking {
+/// A statistic that increases predictably with time. This is only intended as a base protocol.
+protocol Ticking {
     /// value at server check
-    var current: Int
+    var current: Int {get set}
     /// increase in value for each interval
-    var increment: Int
+    var increment: Int {get set}
     /// time betweeen increments
-    var interval: Seconds
+    var interval: Seconds {get set}
     /// time to next increment since server check
-    var ticktime: Seconds
+    var ticktime: Seconds {get set}
     
-    var serverTime: Date
+//    @available(*, deprecated)
+//    var serverTime: Date {get set} // This is covered in UserState.stats.serverDate
     
+}
+
+extension Ticking {
     /// 0.0-1.0, clamped
     var tickProgressDecimal: Float {
         let decimal = ticktime / interval
         return Float(min(decimal, 1.0)) // clamp output max
     }
     
-    init(current: Int, increment: Int, interval: Seconds, ticktime: Seconds, server_time: UnixTime) {
-        self.current = current
-        self.increment = increment
-        self.interval = interval
-        self.ticktime = ticktime
-        self.serverTime = Date(timeIntervalSince1970: server_time)
-    }
-    
-    func whenAtValue(of value: Int) -> Date? {
+    func whenAtValue(of value: Int, since serverDate: Date) -> Date? {
         let ticksNeeded = (value - current) / increment
         let timeNeeded = ticktime + interval * Double((ticksNeeded - 1))
-        let date = Date(timeInterval: timeNeeded, since: serverTime)
+        let date = Date(timeInterval: timeNeeded, since: serverDate)
         return date
     }
     
@@ -50,27 +46,39 @@ class Ticking {
         print("Issue: whenAtMultiple is placeholder")
         return [Date(timeIntervalSinceNow: 10.0)]
     }
-
 }
 
-typealias JobPoints = TickDefinite
-class TickIndefinite: Ticking {
+//typealias JobPoints = TickDefinite // shouldn't this be Indefinite?
+
+/// A statistic that increases predictably with time and has no maximum
+protocol TickIndefinite: Ticking {
     
+}
+
+extension TickIndefinite {
     /// daily at close-of-busines 18:00 TCT
-    static func dailyCOB(current: Int, increment: Int, server_time: UnixTime) -> TickIndefinite {
-        let timeTo1800: Seconds = DateInterval(start: Date(), end: Date.next1800TCT).duration
-        let ticker = TickIndefinite(current: current, increment: increment, interval: 86_400, ticktime: timeTo1800, server_time: server_time)
-        return ticker
-    }
+//    static func dailyCOB(current: Int, increment: Int, server_time: UnixTime) -> TickIndefinite {
+//        let timeTo1800: Seconds = DateInterval(start: Date(), end: Date.next1800TCT).duration
+//        let ticker = TickIndefinite(current: current, increment: increment, interval: 86_400, ticktime: timeTo1800, server_time: server_time)
+//        return ticker
+//    }
 }
 
 typealias BarValue = TickDefinite
-class TickDefinite: Ticking {
+protocol TickDefinite: Ticking {
     /// largest normal value
-    var maximum: Int
-    /// time to full TODO what is it when over?
-    var fulltime: Seconds
+    var maximum: Int {get set}
+    /// time to full TODO does it return 0 when FULL or OVER?
+    var fulltime: Seconds {get set}
     
+//    init(current: Int, maximum: Int, increment: Int, interval: Seconds, ticktime: Seconds, fulltime: Seconds, server_time: UnixTime) {
+//        self.maximum = maximum
+//        self.fulltime = fulltime
+//        super.init(current: current, increment: increment, interval: interval, ticktime: ticktime, server_time: server_time)
+//    }
+}
+
+extension TickDefinite {
     var fullAt: Date? {
         return Date()
     }
@@ -81,23 +89,5 @@ class TickDefinite: Ticking {
     
     var isOverFull: Bool {
         current > maximum
-    }
-    
-    init(current: Int, maximum: Int, increment: Int, interval: Seconds, ticktime: Seconds, fulltime: Seconds, server_time: UnixTime) {
-        self.maximum = maximum
-        self.fulltime = fulltime
-        super.init(current: current, increment: increment, interval: interval, ticktime: ticktime, server_time: server_time)
-    }
-}
-
-extension Date {
-    static var next1800TCT: Date {
-        var calendar = Calendar(identifier: .gregorian)
-        let gmt = TimeZone(secondsFromGMT: 0)!
-        calendar.timeZone = gmt
-        let components = calendar.dateComponents(in: gmt, from: Date())
-        let day = components.hour! < 18 ? components.hour! : components.hour! + 1
-        let next = DateComponents(calendar: calendar, timeZone: gmt, year: components.year, month: components.month, day: day, hour: components.hour, minute: 0, second: 0)
-        return calendar.date(from: next)!
     }
 }

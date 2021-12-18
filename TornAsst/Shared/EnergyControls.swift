@@ -5,10 +5,11 @@
 //  Created by Bryan Costanza on 11/28/20.
 //
 
+// swiftlint:disable all
 import SwiftUI
 
 struct EnergyControls: View {
-    let response: TornResponse
+    let response: Stats
     @State private var selection = "Home"
     
     @State private var homePrefs = EnergyNotifyPrefs(notifyFull: true)
@@ -43,7 +44,7 @@ struct EnergyControls: View {
 
 struct EnergyOptionControls: View {
     @Binding var prefs: EnergyNotifyPrefs
-    let response: TornResponse
+    let response: Stats
     var body: some View {
         NotifyOptionRow(message: "Full", shouldNotify: $prefs.notifyFull)
         NotifyOptionRow(message: "A multiple of 25", shouldNotify: $prefs.notify25)
@@ -61,8 +62,8 @@ struct EnergyNotifyPrefs {
     var customLevel = 50
 }
 
-struct EnergyControls_Previews: PreviewProvider {
-    static var previews: some View {
-        EnergyControls(response: TornResponse())
-    }
-}
+//struct EnergyControls_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EnergyControls(response: TornResponse())
+//    }
+//}

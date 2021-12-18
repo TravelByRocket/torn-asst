@@ -7,8 +7,14 @@
 
 import Foundation
 
-/// Contains all flight information converted to Swift-convenient types, like `Date` instead of Unix timestamp. TODO Consider it could be `struct` but there can only be one Flight anyway and would using a custom init regardless.
-class Flight {
+/// Contains all flight information converted to Swift-convenient types, like `Date` instead of Unix timestamp.
+/// TODO Consider it could be `struct` but there can only be one Flight anyway and would using a custom init regardless.
+
+class Flight: Equatable {
+    static func == (lhs: Flight, rhs: Flight) -> Bool {
+        lhs.departure == rhs.departure
+    }
+    
     var destination: Location
     var arrival: Date
     var departure: Date
@@ -17,10 +23,13 @@ class Flight {
     /// - Parameters:
     ///   - destination: Matches the exact string return from the API. Contains current city if not flying.
     ///   - timestamp: Arrival time as UNIX timestamp (not server time, as might be assumed). Contains 0 if not flying.
-    ///   - departed: Departure time of curent flight as UNIX timestamp or most recent flight if not flying. *TODO Confirm that is it always departure time of the current/last flight. TODO What if user has never flown?*
-    ///   - time_left: Seconds remaining on flight at server time. *TODO consider removing since this is not used based on current understanding of API value but should perhaps retain it for completeness and to match class description*
-    init(destination: String, timestamp: UnixTime, departed: UnixTime, time_left: Seconds) {
-        self.destination = Location(rawValue: destination)! // current city even if not flying
+    ///   - departed: Departure time of curent flight as UNIX timestamp or most recent flight if not flying.
+    ///   *TODO Confirm that is it always departure time of the current/last flight.
+    ///   TODO What if user has never flown?*
+    ///   - time_left: Seconds remaining on flight at server time.
+    ///   *TODO consider removing since this is not used based on current understanding of API value but should perhaps retain it for completeness and to match class description*
+    init(destination: String, timestamp: UnixTime, departed: UnixTime, timeLeft: Seconds) {
+        self.destination = Location(rawValue: destination)! // current city if not flying
         self.arrival = Date(timeIntervalSince1970: timestamp)
         self.departure = Date(timeIntervalSince1970: departed)
     }
@@ -52,7 +61,7 @@ class Flight {
         return interval.duration
     }
     
-    var flightDuration: Seconds {
+    var duration: Seconds {
         let interval = DateInterval(start: departure, end: arrival)
         return interval.duration
     }

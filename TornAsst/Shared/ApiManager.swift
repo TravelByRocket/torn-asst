@@ -7,36 +7,11 @@
 
 import Foundation
 
-class ApiManager {
-    @available(*, deprecated)
-    let apikeytry: String
-    private let selections = "basic,bars,travel"
+struct ApiManager {
+    static private let selections = "basic,bars,travel"
     
-    var url: URL? {
-        URL(string: "https://api.torn.com/user/?selections=basic,bars,travel&key=\(apikeytry)")
-    }
-    
-    init() {
-        self.apikeytry = "7Im0qHgainf4Xy1A"
-    }
-    
-    @available(*, deprecated)
-    func loadData() {
-        guard let url = url else {
-            print("Invalid URL")
-            return
-        }
-        let request = URLRequest(url: url)
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let data = data {
-                UserDefaults.standard.set(data, forKey: "responsedata")
-                return
-            }
-            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
-        }.resume()
-    }
-    
-    func loadData(_ source: ApiKeySource) {
+    static func loadData(_ source: ApiKeySource) {
+        
         var apikey: String
         switch source {
         case .saved:
@@ -45,21 +20,25 @@ class ApiManager {
             apikey = key
         }
         
-        guard let url = getApiUrl(with: apikey) else {
+        guard let url = generateApiUrl(with: apikey) else {
             print("Invalid URL")
             return
         }
+        
         let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data {
                 UserDefaults.standard.set(data, forKey: "responsedata")
+                UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: "apicheckedat")
+                print("data saved to UserDefaults")
                 return
             }
             print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
         }.resume()
+        print("loaded from api")
     }
     
-    private func getApiUrl(with key: String) -> URL? {
+    static private func generateApiUrl(with key: String) -> URL? {
         URL(string: "https://api.torn.com/user/?selections=\(selections)&key=\(key)")
     }
     

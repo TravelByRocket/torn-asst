@@ -5,9 +5,10 @@
 //  Created by Bryan Costanza on 1/10/21.
 //
 
+// swiftlint:disable all
 import Foundation
 
-enum Location: String {
+enum Location: String, Equatable {
     case Torn = "Torn" // this raw value is confirmed
     case Mexico = "Mexico" // TODO confirm this API name
     case CaymanIslands = "Cayman Islands" // TODO confirm this API name

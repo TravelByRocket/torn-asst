@@ -9,18 +9,44 @@ import SwiftUI
 
 @main
 struct TornAsstApp: App {
-    @AppStorage("apikey") var apikey: String = ""
-    @AppStorage("apiresponse") var apiresponse: String = ""
+    @StateObject var dataController: DataController
+
+    @AppStorage("responsedata") var responsedata: Data?
+    @StateObject var us: UserState = UserState()
     
-    @State private var response = TornResponse.default
+    init() {
+        let dataController = DataController()
+        _dataController = StateObject(wrappedValue: dataController)
+    }
+
+    
     var body: some Scene {
         WindowGroup {
-            if (apikey == "") {
-                APIPrompt(apikey: $apikey, response: $response)
-            } else {
-                ContentView(apikey: $apikey, response: $response)
-            }
+            ContentView()
+                .environment(\.managedObjectContext, dataController.container.viewContext)
+                .environmentObject(dataController)
+                .onReceive(
+                    // Automatically save when no longer in the foreground. Use this over scene phase API for port to
+                    // macOS (as of macOS 11.1)
+                    NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification),
+                    perform: save
+                )
+//            switch us.activity {
+//            case .apiPrompt:
+//                ApiPromptPage().environmentObject(us)
+//                    .ignoresSafeArea(.keyboard)
+//                    .onChange(of: responsedata, perform: { _ in
+//                        us.refresh()
+//                        print("refreshed at App level")
+//                    }) // TODO can hang on API Prompt when key is manually cleared because server data won't change for several seconds
+//            default:
+//                DashboardView().environmentObject(us)
+//            }
         }
+    }
+
+    func save(note: Notification) {
+        dataController.save()
     }
 }
 

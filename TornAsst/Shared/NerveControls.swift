@@ -5,6 +5,7 @@
 //  Created by Bryan Costanza on 11/29/20.
 //
 
+// swiftlint:disable all
 import SwiftUI
 
 struct NerveControls: View {

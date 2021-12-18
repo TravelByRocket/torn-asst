@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BasicsSection: View {
-    let response: TornResponse
+    let response: Stats
     var body: some View {
         HStack {
             Text(response.name)
@@ -22,8 +22,8 @@ struct BasicsSection: View {
     }
 }
 
-struct BasicsSection_Previews: PreviewProvider {
-    static var previews: some View {
-        BasicsSection(response: TornResponse.default)
-    }
-}
+//struct BasicsSection_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BasicsSection(response: TornResponse.default)
+//    }
+//}

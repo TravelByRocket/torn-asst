@@ -5,6 +5,7 @@
 //  Created by Bryan Costanza on 1/22/21.
 //
 
+// swiftlint:disable all
 import Foundation
 
 struct Stats: Codable {
@@ -16,9 +17,12 @@ struct Stats: Codable {
     var gender: String
     var player_id: Int
     var name: String
-    private var server_time: Int
+    /// Server time should go private once everything is updated
+    @available(*, deprecated)
+    var server_time: Int
     var happy: BarResult
     var life: BarResult
     var energy: BarResult
     var nerve: BarResult
+    var travel: TravelResult
 }

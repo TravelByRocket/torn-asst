@@ -5,6 +5,7 @@
 //  Created by Bryan Costanza on 11/28/20.
 //
 
+// swiftlint:disable all
 import SwiftUI
 
 struct IndicatorRow: View {
@@ -38,7 +39,7 @@ struct IndicatorRow: View {
     }
     
     var dateFull: Date {
-        Date(timeIntervalSince1970: TimeInterval(server_time + barInfo.fulltime))
+        Date(timeIntervalSince1970: TimeInterval(Seconds(server_time) + Seconds(barInfo.fulltime)))
     }
     
     var body: some View {
@@ -47,7 +48,11 @@ struct IndicatorRow: View {
                 Text(name)
                 curValText+Text("/")+maxValText
                 Spacer()
-                Text("+\(barInfo.increment, specifier: "%2.d")\(String(name.prefix(1)).lowercased())/\(barInfo.interval/60, specifier: "%2.d")min").font(.system(.caption, design: .monospaced))
+                Text("+\(barInfo.increment, specifier: "%2.d")/\(barInfo.interval/60, specifier: "%2.f")min").font(.system(.caption, design: .monospaced))
+                    // \(String(name.prefix(1)).lowercased()) use this for first letter
+                    .onAppear{
+                        print(barInfo.interval)
+                    }
             }
             .font(.system(.body, design: .monospaced))
             .background(color.opacity(0.2))
@@ -74,12 +79,12 @@ struct IndicatorRow: View {
     }
 }
 
-struct IndicatorRow_Previews: PreviewProvider {
-    static var previews: some View {
-        IndicatorRow(
-            name: "Mana  ",
-            color: .purple,
-            barInfo: BarResult.default,
-            server_time: TornResponse.default.server_time)
-    }
-}
+//struct IndicatorRow_Previews: PreviewProvider {
+//    static var previews: some View {
+//        IndicatorRow(
+//            name: "Mana  ",
+//            color: .purple,
+//            barInfo: BarResult.default,
+//            server_time: TornResponse.default.server_time)
+//    }
+//}

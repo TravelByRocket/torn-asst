@@ -5,6 +5,7 @@
 //  Created by Bryan Costanza on 11/26/20.
 //
 
+// swiftlint:disable all
 import SwiftUI
 
 struct TravelSection: View {
@@ -12,18 +13,18 @@ struct TravelSection: View {
     let server_time: Int
     
     var localTime: DateFormatter {
-        let f = DateFormatter()
-        f.dateFormat = .none
-        f.timeStyle = .long
-        return f
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = .none
+        dateFormatter.timeStyle = .long
+        return dateFormatter
     }
     
     var tornTime: DateFormatter {
-        let f = DateFormatter()
-        f.timeZone = TimeZone(abbreviation: "UTC")
-        f.dateFormat = .none
-        f.timeStyle = .medium
-        return f
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        dateFormatter.dateFormat = .none
+        dateFormatter.timeStyle = .medium
+        return dateFormatter
     }
     
     var timeIntervalRemaining: TimeInterval {
@@ -48,7 +49,7 @@ struct TravelSection: View {
 //            Text(String(zone))
 //        }
         VStack {
-            if (travel.time_left > 0) {
+            if travel.time_left > 0 {
                 Text("Flying to \(travel.destination)")
                 Text("Arriving at \(dateArriving, formatter: localTime) / \(tornTime.string(from: dateArriving)) TCT")
                 Text("\(dateArriving, style: .timer) remaining")
@@ -62,8 +63,8 @@ struct TravelSection: View {
     }
 }
 
-struct Traveling_Previews: PreviewProvider {
-    static var previews: some View {
-        TravelSection(travel: TravelResult.default, server_time: TornResponse.default.server_time)
-    }
-}
+//struct Traveling_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TravelSection(travel: TravelResult.default, server_time: TornResponse.default.server_time)
+//    }
+//}

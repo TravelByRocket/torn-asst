@@ -5,27 +5,26 @@
 //  Created by Bryan Costanza on 11/27/20.
 //
 
+// swiftlint:disable all
 import SwiftUI
 
-struct APIPrompt: View {
-    @Binding var apikey: String
-    @Binding var response: TornResponse
-    @State private var apikeytry: String = ""
-    @State private var errorMessage = ""
-    @State private var showAPIErrorAlert = false
+struct ApiPromptPage: View {
+    @AppStorage("apikey") var apikey: String = ""
+    @State private var apifield: String = ""
     @State private var loading = false
+    
+    @EnvironmentObject var us: UserState
     
     let regex = try! NSRegularExpression(pattern: "[^a-zA-Z0-9]")
     
     var invalidCharacterFound: Bool {
-        let range = NSRange(location: 0, length: apikeytry.utf16.count)
-        return regex.firstMatch(in: apikeytry, options: [], range: range) != nil
+        let range = NSRange(location: 0, length: apifield.utf16.count)
+        return regex.firstMatch(in: apifield, options: [], range: range) != nil
     }
     
     var isWrongLength: Bool {
-        apikeytry.count != 16
+        apifield.count != 16
     }
-    
     
     var body: some View {
         VStack (alignment: .leading){
@@ -34,7 +33,7 @@ struct APIPrompt: View {
                 Text("Torn API Key Required")
                     .font(.title2)
                 HStack {
-                    TextField("API Key...", text: $apikeytry)
+                    TextField("API Key...", text: $apifield)
                         .font(.system(.title3, design: .monospaced))
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .foregroundColor(.primary)
@@ -46,26 +45,42 @@ struct APIPrompt: View {
                                 }
                             }
                         )
-                    if (apikeytry == "") {
+                    
+                    if (apifield == "") {
                         Button(action: {
                             let pasteboard = UIPasteboard.general
-                            apikeytry = pasteboard.string ?? ""
+                            apifield = pasteboard.string ?? ""
                         }) {
                             Label("Paste", systemImage: "doc.on.clipboard")
                                 .font(.title3)
                         }
                     } else {
                         Button(action: {
-                            apikeytry = ""
+                            apifield = ""
                         }) {
                             Label("Clear", systemImage: "clear")
                                 .font(.title3)
                         }
                     }
                 }
+                
+                if case .apiPrompt(problem: let problem) = us.activity {
+                    if let details = problem?.error {
+                        Text("API Code \(details.code): \(details.error)")
+                            .font(.footnote)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(
+                                Color.init(
+                                    red: 1.00,
+                                    green: 0.25,
+                                    blue: 0.00)
+                        )
+                    }
+                }
+                
                 Button(action: {
-                    loading = true
-                    loadData()
+                    ApiManager.loadData(.check(key: apifield))
+                    UserDefaults.standard.set(apifield, forKey: "apikey")
                 }) {
                     if (invalidCharacterFound || isWrongLength) {
                         Text("Invalid Entry").padding(8)
@@ -76,9 +91,6 @@ struct APIPrompt: View {
                 .background(Color.primary.opacity(0.1).cornerRadius(5.0))
                 .disabled(invalidCharacterFound || isWrongLength)
                 .animation(.default)
-                .alert(isPresented: $showAPIErrorAlert, content: {
-                    Alert(title: Text("API Error"), message: Text(errorMessage))
-                })
             }
             .padding(.horizontal)
             .padding(.bottom,50)
@@ -114,46 +126,10 @@ struct APIPrompt: View {
             Spacer()
         }
     }
-    
-    func loadData() {
-        guard let url = URL(string: "https://api.torn.com/user/?selections=basic,bars,travel&key=\(apikeytry)") else {
-            print("Invalid URL")
-            return
-        }
-        let request = URLRequest(url: url)
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let data = data {
-                if let decodedResponse = try? JSONDecoder().decode(TornResponse.self, from: data) {
-                    // we have good data – go back to the main thread
-                    DispatchQueue.main.async {
-                        // update our UI
-                        
-                        if (decodedResponse.error == nil) {
-                            self.response = decodedResponse
-                            withAnimation(.default) {
-                                apikey = apikeytry
-                            }
-                        } else {
-                            self.errorMessage = "placeholder"
-                            showAPIErrorAlert = true
-                            loading = false
-                        }
-                        
-                    }
-
-                    // everything is good, so we can exit
-                    return
-                }
-            }
-
-            // if we're still here it means there was a problem
-            print("Fetch failed: \(error?.localizedDescription ?? "Unknown error")")
-        }.resume()
-    }
 }
 
-struct APIPrompt_Previews: PreviewProvider {
-    static var previews: some View {
-        APIPrompt(apikey: .constant(""), response: .constant(TornResponse()))
-    }
-}
+//struct APIPrompt_Previews: PreviewProvider {
+//    static var previews: some View {
+//        APIPrompt(apikey: .constant(""), response: .constant(TornResponse()))
+//    }
+//}

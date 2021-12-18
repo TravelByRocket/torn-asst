@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EnergySection: View {
-    let response: TornResponse
+    let response: Stats
     
     var body: some View {
         VStack {
@@ -23,11 +23,11 @@ struct EnergySection: View {
     }
 }
 
-struct EnergySection_Previews: PreviewProvider {
-    static var previews: some View {
-        EnergySection(response: TornResponse.default)
-    }
-}
+//struct EnergySection_Previews: PreviewProvider {
+//    static var previews: some View {
+//        EnergySection(response: TornResponse.default)
+//    }
+//}
 
 struct NotifyOptionRow: View {
     let message: String

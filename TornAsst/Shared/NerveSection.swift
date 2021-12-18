@@ -22,8 +22,8 @@ struct NerveSection: View {
     }
 }
 
-struct NerveSection_Previews: PreviewProvider {
-    static var previews: some View {
-        NerveSection(nerve: BarResult.default, serverTime: TornResponse.default.server_time)
-    }
-}
+//struct NerveSection_Previews: PreviewProvider {
+//    static var previews: some View {
+//        NerveSection(nerve: BarResult.default, serverTime: TornResponse.default.server_time)
+//    }
+//}

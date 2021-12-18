@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Activity {
+enum Activity: Equatable {
     case flying(on: Flight)
     case onGround(at: Location)
     case hospital(at: Location, until: Date)
@@ -41,10 +41,14 @@ enum Activity {
         }
     }
     
-    struct ErrorResponse: Codable {
-        var code: Int
-        var error: String
+    struct ErrorResponse: Codable, Equatable {
+        let error: ErrorDetails
         
-        static var `default` = ErrorResponse(code: 13, error: "A Placeholder error message")
+        struct ErrorDetails: Codable, Equatable {
+            var code: Int
+            var error: String
+        }
+        
+//        static var `default` = ErrorResponse(code: 13, error: "A Placeholder error message")
     }
 }
