@@ -66,7 +66,6 @@ class DataController: ObservableObject {
 
         // add the needed loops here
 
-
         try viewContext.save()
     }
 

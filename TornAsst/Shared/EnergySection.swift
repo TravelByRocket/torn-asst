@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EnergySection: View {
     let response: Stats
-    
+
     var body: some View {
         VStack {
             IndicatorRow(name: "Energy",
@@ -32,7 +32,7 @@ struct EnergySection: View {
 struct NotifyOptionRow: View {
     let message: String
     @Binding var shouldNotify: Bool
-    
+
     var body: some View {
         HStack {
             Button(action: {
@@ -52,11 +52,11 @@ struct NotifyOptionRowStepper: View {
     @Binding var value: Int
     let max: Int
     let step: Int
-    
+
     var min: Int {
         step
     }
-    
+
     var body: some View {
         HStack {
             NotifyOptionRow(message: message, shouldNotify: $shouldNotify)

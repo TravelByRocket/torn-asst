@@ -11,17 +11,17 @@ import UserNotifications
 struct TravelControls: View {
     let travel: TravelResult
     @State private var selection = "inbound"
-    
+
     @State private var outboundPrefs = TravelNotifyPrefs(notifyTMinus0: true, notifyTMinus1: true)
     @State private var inboundPrefs = TravelNotifyPrefs(notifyTMinus0: true)
-    
+
     var timeIntervalToLand: TimeInterval {
         let rightNowDate = Date()
         let landingDate = Date(timeIntervalSince1970: TimeInterval(travel.timestamp))
         let timeIntervalToLand = rightNowDate.distance(to: landingDate)
         return timeIntervalToLand
     }
-    
+
     var body: some View {
         VStack {
             GroupBox {
@@ -35,7 +35,7 @@ struct TravelControls: View {
                     Spacer()
                 }
             }
-            if (selection == "inbound") {
+            if selection == "inbound" {
                 TravelOptionControls(prefs: $inboundPrefs)
             } else {
                 TravelOptionControls(prefs: $outboundPrefs)
@@ -43,9 +43,9 @@ struct TravelControls: View {
         }
         .onAppear(perform: setNotifications)
     }
-    
+
     func setNotifications() {
-        if (travel.time_left > 60) {
+        if travel.time_left > 60 {
             let content = UNMutableNotificationContent()
             content.title = "Landed at destination"
             content.subtitle = "You are now at \(travel.destination)"
@@ -55,7 +55,7 @@ struct TravelControls: View {
             let request = UNNotificationRequest(identifier: identifer, content: content, trigger: trigger)
             UNUserNotificationCenter.current().add(request)
             print("tminus0 notification is set")
-            
+
             let content2 = UNMutableNotificationContent()
             content2.title = "Landed at destination"
             content2.subtitle = "Landing at \(travel.destination) in 1 minute"

@@ -10,11 +10,11 @@ import SwiftUI
 struct SyncFooter: View {
     @EnvironmentObject var us: UserState
     @AppStorage("apicheckedat") var lastCheck: Double = Date().timeIntervalSince1970
-    
+
     var dateFromServerTime: Date {
         Date.init(timeIntervalSince1970: TimeInterval(us.stats.server_time))
     }
-    
+
     var body: some View {
         HStack {
             VStack {

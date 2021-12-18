@@ -13,7 +13,7 @@ enum Activity: Equatable {
     case hospital(at: Location, until: Date)
     case jail(at: Location, until: Date)
     case apiPrompt(problem: ErrorResponse?) // nil with fresh app install
-    
+
     func expected(at date: Date) -> Activity {
         switch self {
         case .flying(on: let flight):
@@ -40,15 +40,14 @@ enum Activity: Equatable {
             return self
         }
     }
-    
+
     struct ErrorResponse: Codable, Equatable {
         let error: ErrorDetails
-        
+
         struct ErrorDetails: Codable, Equatable {
             var code: Int
             var error: String
         }
-        
 //        static var `default` = ErrorResponse(code: 13, error: "A Placeholder error message")
     }
 }

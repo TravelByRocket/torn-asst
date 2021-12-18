@@ -13,7 +13,7 @@ struct DashboardView: View {
     @EnvironmentObject var us: UserState
 
     static let tag: String = "Dashboard"
-    
+
     var body: some View {
         VStack {
             BasicsSection(response: us.stats)
@@ -27,11 +27,12 @@ struct DashboardView: View {
             }
             SyncFooter()
         }
-        .onChange(of: responsedata, perform: { value in
+        .onChange(of: responsedata, perform: { _ in
             us.refresh()
         })
-        .onAppear{
-            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+        .onAppear {
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: [.alert, .badge, .sound]) { success, error in
                 if success {
                     print("All set!")
                 } else if let error = error {
@@ -51,7 +52,7 @@ struct DashboardView: View {
 struct HappySection: View {
     let happy: BarResult
     let serverTime: Int
-    
+
     var body: some View {
         IndicatorRow(
             name: "Happy ",
@@ -64,7 +65,7 @@ struct HappySection: View {
 struct LifeSection: View {
     let life: BarResult
     let serverTime: Int
-    
+
     var body: some View {
         IndicatorRow(
             name: "Life  ",

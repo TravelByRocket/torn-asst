@@ -10,7 +10,7 @@ import SwiftUI
 struct NerveSection: View {
     let nerve: BarResult
     let serverTime: Int
-    
+
     var body: some View {
         IndicatorRow(name: "Nerve ",
                      color: .red,

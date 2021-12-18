@@ -14,6 +14,6 @@ struct BarResult: Codable, TickDefinite {
     var interval: Seconds
     var ticktime: Seconds
     var fulltime: Seconds
-    
+
     static var `default` = BarResult(current: 75, maximum: 100, increment: 5, interval: 900, ticktime: 452, fulltime: 4952)
 }

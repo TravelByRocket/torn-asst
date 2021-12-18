@@ -11,19 +11,19 @@ struct IndicatorBar: View {
     let color: Color
     let curValue: Int
     let maxValue: Int
-    
+
     var ratio: CGFloat {
         let max: CGFloat = 1.00
         let val: CGFloat = CGFloat(curValue) / CGFloat(maxValue)
-        return min(val,max) // do not go past 1, even though it hasn't caused rendering issue
+        return min(val, max) // do not go past 1, even though it hasn't caused rendering issue
     }
-    
+
     var body: some View {
         Rectangle()
             .foregroundColor(.secondary)
             .overlay(
                 GeometryReader {geo in
-                    HStack (spacing: 0) {
+                    HStack(spacing: 0) {
                         Rectangle()
                             .foregroundColor(color)
                             .frame(width: geo.size.width * ratio)

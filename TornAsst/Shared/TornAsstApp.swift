@@ -19,7 +19,6 @@ struct TornAsstApp: App {
         _dataController = StateObject(wrappedValue: dataController)
     }
 
-    
     var body: some Scene {
         WindowGroup {
             ContentView()

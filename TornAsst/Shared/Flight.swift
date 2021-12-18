@@ -14,11 +14,11 @@ class Flight: Equatable {
     static func == (lhs: Flight, rhs: Flight) -> Bool {
         lhs.departure == rhs.departure
     }
-    
+
     var destination: Location
     var arrival: Date
     var departure: Date
-    
+
     /// Create a Flight object from Torn API results. Parameter names match API but property names vary slightly to be more succinct.
     /// - Parameters:
     ///   - destination: Matches the exact string return from the API. Contains current city if not flying.
@@ -33,34 +33,34 @@ class Flight: Equatable {
         self.arrival = Date(timeIntervalSince1970: timestamp)
         self.departure = Date(timeIntervalSince1970: departed)
     }
-    
+
     var isInbound: Bool {
         destination == .Torn && isFlying
     }
-    
+
     var isOutbound: Bool {
         destination != .Torn && isFlying
     }
-    
+
     var isFlying: Bool {
         arrival > Date()
     }
-    
+
     func isStillFlying(at date: Date) -> Bool {
         date < arrival
     }
-    
+
     /// Range of 0.0-1.0
     var progressDecimal: Float {
         let flightDuration = DateInterval(start: departure, end: arrival).duration
         return Float(timeRemaining / flightDuration)
     }
-    
+
     var timeRemaining: Seconds {
         let interval = DateInterval(start: Date(), end: arrival)
         return interval.duration
     }
-    
+
     var duration: Seconds {
         let interval = DateInterval(start: departure, end: arrival)
         return interval.duration
