@@ -8,30 +8,33 @@
 import SwiftUI
 
 struct PeriodicTaskRowView: View {
-    @Binding var completed: Bool
-    @ObservedObject var task: DatedResetItem
+    var highlighted: Bool
+    var task: DatedResetItem
 
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
 
+    var isInactive: Bool {
+        task.isHidden
+    }
+
     var body: some View {
         HStack {
             Button {
-                withAnimation(.easeInOut) {
-                    task.daily?.objectWillChange.send()
+                withAnimation {
                     task.isHidden.toggle()
                     dataController.save()
                 }
             } label: {
-                Label("Hide", systemImage: task.isHidden ? "arrow.up.circle" : "xmark.circle")
+                Label("Hide", systemImage: isInactive ? "arrow.up.circle" : "xmark.circle")
                     .labelStyle(.iconOnly)
             }
-            .foregroundColor(task.isHidden ? .green : .secondary)
+            .foregroundColor(isInactive ? .green : .secondary)
             .buttonStyle(BorderlessButtonStyle())
             VStack(alignment: .leading) {
                 Text(task.itemLabel)
-                    .foregroundColor(completed || task.isHidden ? .secondary : .primary)
-                    .underline(!completed && !task.isHidden, color: .orange)
+                    .foregroundColor(highlighted || isInactive ? .secondary : .primary)
+                    .underline(!highlighted && !isInactive, color: .orange)
                 if task.intervalDays != 1 {
                     Text("Every \(task.intervalDays) days")
                         .italic()
@@ -41,7 +44,7 @@ struct PeriodicTaskRowView: View {
             }
             Spacer()
         }
-        .animation(.default, value: completed)
+        .animation(.default, value: highlighted)
     }
 }
 
@@ -50,8 +53,9 @@ struct TaskRowView_Previews: PreviewProvider {
 
     static var previews: some View {
         Form {
-            PeriodicTaskRowView(completed: .constant(true), task: DatedResetItem.example)
-            PeriodicTaskRowView(completed: .constant(true), task: DatedResetItem.exampleWeekly)
+            PeriodicTaskRowView(highlighted: true, task: DatedResetItem.example)
+            PeriodicTaskRowView(highlighted: false, task: DatedResetItem.example)
+            PeriodicTaskRowView(highlighted: true, task: DatedResetItem.exampleWeekly)
         }
         .environment(\.managedObjectContext, dataController.container.viewContext)
         .environmentObject(dataController)

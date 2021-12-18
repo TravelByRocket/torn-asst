@@ -23,7 +23,11 @@ struct PeriodicSectionView: View {
                 date: date
             )
             ForEach(tasks) {task in
-                PeriodicTaskToggleView(task: task)
+                if !task.isHidden {
+                    PeriodicTaskToggleView(task: task)
+                } else {
+                    PeriodicTaskRowView(highlighted: false, task: task)
+                }
             }
         }
     }
