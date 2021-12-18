@@ -9,7 +9,6 @@ import SwiftUI
 
 struct DailiesView: View {
     static let tag: String = "Dailies"
-    @State private var refreshDate = Date.nextQuarterHour
 
     @FetchRequest(
         entity: DatedResetItem.entity(),
@@ -20,8 +19,6 @@ struct DailiesView: View {
 
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
-
-    let timer = Timer.publish(every: Date.nextQuarterHour.timeIntervalSinceNow, on: .main, in: .common).autoconnect()
 
     var tasksAlphabetical: [DatedResetItem] {
         tasks.sorted(by: \DatedResetItem.itemLabel)
