@@ -30,7 +30,7 @@
         <attribute name="medical" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Daily" representedClassName="Daily" syncable="YES" codeGenerationType="class">
-        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DatedResetItem" inverseName="daily" inverseEntity="DatedResetItem"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DatedResetItem" inverseName="daily" inverseEntity="DatedResetItem"/>
     </entity>
     <entity name="DatedResetItem" representedClassName="DatedResetItem" syncable="YES" codeGenerationType="class">
         <attribute name="dateCompleted" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

@@ -71,11 +71,13 @@ extension DatedResetItem {
 
         let task = DatedResetItem(context: viewContext)
         task.label = "Example Task"
-        task.dateCompleted = Date()
+        task.dateCompleted = nil
         task.intervalDays = 1
         task.isHidden = false
         task.section = "Spin the Wheel"
         task.triggerHourCode = midnightHourCode16
+        let daily = Daily(context: viewContext)
+        task.daily = daily
 
         return task
     }

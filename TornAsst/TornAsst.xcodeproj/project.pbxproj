@@ -61,6 +61,8 @@
 		2F631EFE276C542E0070D655 /* Sequence-Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F631EFC276C542E0070D655 /* Sequence-Sorting.swift */; };
 		2F631F00276C566F0070D655 /* DataController-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F631EFF276C566F0070D655 /* DataController-Extension.swift */; };
 		2F631F01276C566F0070D655 /* DataController-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F631EFF276C566F0070D655 /* DataController-Extension.swift */; };
+		2F66C786276D70EA00C236E4 /* PeriodicTaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F66C785276D70EA00C236E4 /* PeriodicTaskRowView.swift */; };
+		2F66C787276D70EA00C236E4 /* PeriodicTaskRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F66C785276D70EA00C236E4 /* PeriodicTaskRowView.swift */; };
 		2F70075525ABE8DC0084AE54 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70075425ABE8DC0084AE54 /* Activity.swift */; };
 		2F70075625ABE8DC0084AE54 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70075425ABE8DC0084AE54 /* Activity.swift */; };
 		2F70075A25ABFA290084AE54 /* UserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F70075925ABFA290084AE54 /* UserState.swift */; };
@@ -79,8 +81,8 @@
 		2FEBB30B2769AA270000C117 /* TravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEBB3092769AA270000C117 /* TravelView.swift */; };
 		2FEBB30D2769B1820000C117 /* NotificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEBB30C2769B1820000C117 /* NotificationRow.swift */; };
 		2FEBB30E2769B1820000C117 /* NotificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEBB30C2769B1820000C117 /* NotificationRow.swift */; };
-		2FEBB310276AA6230000C117 /* DailyToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEBB30F276AA6230000C117 /* DailyToggleView.swift */; };
-		2FEBB311276AA6230000C117 /* DailyToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEBB30F276AA6230000C117 /* DailyToggleView.swift */; };
+		2FEBB310276AA6230000C117 /* PeriodicTaskToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEBB30F276AA6230000C117 /* PeriodicTaskToggleView.swift */; };
+		2FEBB311276AA6230000C117 /* PeriodicTaskToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEBB30F276AA6230000C117 /* PeriodicTaskToggleView.swift */; };
 		2FEBDACA273CA6AA00DFB689 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2FEBDAC8273CA6AA00DFB689 /* Model.xcdatamodeld */; };
 		2FF1CD6725ABC2BB00B2A80E /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF1CD6625ABC2BA00B2A80E /* Flight.swift */; };
 		2FF1CD6825ABC2BB00B2A80E /* Flight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF1CD6625ABC2BA00B2A80E /* Flight.swift */; };
@@ -121,6 +123,7 @@
 		2F631EF9276C50010070D655 /* Daily-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Daily-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		2F631EFC276C542E0070D655 /* Sequence-Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence-Sorting.swift"; sourceTree = "<group>"; };
 		2F631EFF276C566F0070D655 /* DataController-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataController-Extension.swift"; sourceTree = "<group>"; };
+		2F66C785276D70EA00C236E4 /* PeriodicTaskRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicTaskRowView.swift; sourceTree = "<group>"; };
 		2F70075425ABE8DC0084AE54 /* Activity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		2F70075925ABFA290084AE54 /* UserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserState.swift; sourceTree = "<group>"; };
 		2F7E88EC25B94B420010BD60 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
@@ -130,7 +133,7 @@
 		2FEBB3062769AA1B0000C117 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2FEBB3092769AA270000C117 /* TravelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelView.swift; sourceTree = "<group>"; };
 		2FEBB30C2769B1820000C117 /* NotificationRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRow.swift; sourceTree = "<group>"; };
-		2FEBB30F276AA6230000C117 /* DailyToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyToggleView.swift; sourceTree = "<group>"; };
+		2FEBB30F276AA6230000C117 /* PeriodicTaskToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodicTaskToggleView.swift; sourceTree = "<group>"; };
 		2FEBDAC9273CA6AA00DFB689 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		2FF1CD6625ABC2BA00B2A80E /* Flight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flight.swift; sourceTree = "<group>"; };
 		2FF1CD6B25ABC33E00B2A80E /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -243,7 +246,8 @@
 			isa = PBXGroup;
 			children = (
 				2FD302192767E43C00A5D111 /* DailiesView.swift */,
-				2FEBB30F276AA6230000C117 /* DailyToggleView.swift */,
+				2FEBB30F276AA6230000C117 /* PeriodicTaskToggleView.swift */,
+				2F66C785276D70EA00C236E4 /* PeriodicTaskRowView.swift */,
 				2F631EF9276C50010070D655 /* Daily-CoreDataHelpers.swift */,
 				2F631EF3276C29640070D655 /* DatedResetItem-CoreDataHelpers.swift */,
 			);
@@ -398,6 +402,7 @@
 				2FF1CD6725ABC2BB00B2A80E /* Flight.swift in Sources */,
 				2FEBB30A2769AA270000C117 /* TravelView.swift in Sources */,
 				2F631EFA276C50010070D655 /* Daily-CoreDataHelpers.swift in Sources */,
+				2F66C786276D70EA00C236E4 /* PeriodicTaskRowView.swift in Sources */,
 				2F631EEA276AD8EE0070D655 /* BigSectionBarView.swift in Sources */,
 				2F173C222570111C00E904D4 /* DashboardView.swift in Sources */,
 				2F35113B257429E4002B96ED /* NerveControls.swift in Sources */,
@@ -426,7 +431,7 @@
 				2F24901525731B2E00830D26 /* IndicatorBar.swift in Sources */,
 				2FF1CD6C25ABC33E00B2A80E /* Location.swift in Sources */,
 				2F2490242573369A00830D26 /* BasicsSection.swift in Sources */,
-				2FEBB310276AA6230000C117 /* DailyToggleView.swift in Sources */,
+				2FEBB310276AA6230000C117 /* PeriodicTaskToggleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,7 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F631EF2276B090E0070D655 /* DateFormatter-Extension.swift in Sources */,
-				2FEBB311276AA6230000C117 /* DailyToggleView.swift in Sources */,
+				2FEBB311276AA6230000C117 /* PeriodicTaskToggleView.swift in Sources */,
 				2F631EEB276AD8EE0070D655 /* BigSectionBarView.swift in Sources */,
 				2F631EE3276ABB5F0070D655 /* CountdownWithLocalTime.swift in Sources */,
 				2F70075B25ABFA290084AE54 /* UserState.swift in Sources */,
@@ -444,6 +449,7 @@
 				2F249020257334A300830D26 /* IndicatorRow.swift in Sources */,
 				2F24902A25735D2800830D26 /* TravelControls.swift in Sources */,
 				2F631EF8276C2E9C0070D655 /* Calendar-Extension.swift in Sources */,
+				2F66C787276D70EA00C236E4 /* PeriodicTaskRowView.swift in Sources */,
 				2FF1CD6825ABC2BB00B2A80E /* Flight.swift in Sources */,
 				2F173C232570111C00E904D4 /* DashboardView.swift in Sources */,
 				2F35113C257429E4002B96ED /* NerveControls.swift in Sources */,
