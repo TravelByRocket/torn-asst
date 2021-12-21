@@ -29,22 +29,7 @@ struct EnergySection: View {
 //    }
 //}
 
-struct NotifyOptionRow: View {
-    let message: String
-    @Binding var shouldNotify: Bool
 
-    var body: some View {
-        HStack {
-            Button(action: {
-                shouldNotify.toggle()
-            }) {
-                Label(message, systemImage: shouldNotify ? "bell" : "bell.slash")
-                Spacer()
-            }.padding(.vertical,5)
-        }
-        .foregroundColor(shouldNotify ? .accentColor : .secondary)
-    }
-}
 
 struct NotifyOptionRowStepper: View {
     let message: String
@@ -59,7 +44,7 @@ struct NotifyOptionRowStepper: View {
 
     var body: some View {
         HStack {
-            NotifyOptionRow(message: message, shouldNotify: $shouldNotify)
+            NotifyQuickActionRow(message: message, isActive: $shouldNotify)
             Stepper("Custom Multiple", value: $value, in: min...max, step: step)
                 .labelsHidden()
         }

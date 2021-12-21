@@ -7,55 +7,55 @@
 
 import SwiftUI
 
-struct DailiesView: View {
+struct DatedView: View {
     static let tag: String = "Dailies"
 
     @FetchRequest(
-        entity: DatedResetItem.entity(),
+        entity: DatedTask.entity(),
         sortDescriptors: [
-            NSSortDescriptor(keyPath: \DatedResetItem.label, ascending: true)
+            NSSortDescriptor(keyPath: \DatedTask.label, ascending: true)
         ]
-    ) private var tasks: FetchedResults<DatedResetItem>
+    ) private var tasks: FetchedResults<DatedTask>
 
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
 
-    var tasksAlphabetical: [DatedResetItem] {
-        tasks.sorted(by: \DatedResetItem.itemLabel)
+    var tasksAlphabetical: [DatedTask] {
+        tasks.sorted(by: \DatedTask.itemLabel)
     }
 
-    var tasksMidnight: [DatedResetItem] {
+    var tasksMidnight: [DatedTask] {
         tasksAlphabetical.filter { task in
-            task.triggerHourCode == DatedResetItem.midnightHourCode16 &&
+            task.triggerHourCode == DatedTask.midnightHourCode16 &&
             task.intervalDays == 1 &&
             !task.isHidden
         }
     }
 
-    var tasksCOB: [DatedResetItem] {
+    var tasksCOB: [DatedTask] {
         tasksAlphabetical.filter { task in
-            task.triggerHourCode == DatedResetItem.closeOfBusinessHourCode16 &&
+            task.triggerHourCode == DatedTask.closeOfBusinessHourCode16 &&
             task.intervalDays == 1 &&
             !task.isHidden
         }
     }
 
-    var tasksOther: [DatedResetItem] {
+    var tasksOther: [DatedTask] {
         tasksAlphabetical.filter { task in
             (
-                task.triggerHourCode != DatedResetItem.midnightHourCode16 &&
-                task.triggerHourCode != DatedResetItem.closeOfBusinessHourCode16
+                task.triggerHourCode != DatedTask.midnightHourCode16 &&
+                task.triggerHourCode != DatedTask.closeOfBusinessHourCode16
             ) || task.intervalDays != 1 && !task.isHidden
         }
     }
 
-    var tasksInactive: [DatedResetItem] {
+    var tasksInactive: [DatedTask] {
         tasksAlphabetical.filter { task in
             task.isHidden
         }
     }
 
-    let labels = DatedResetItem.Labels.self // swiftling:ignore
+    let labels = DatedTask.Labels.self // swiftling:ignore
 
     var body: some View {
         Form {
@@ -92,11 +92,11 @@ struct DailiesView: View {
     }
 }
 
-struct DailiesView_Previews: PreviewProvider {
+struct DatedView_Previews: PreviewProvider {
     static var dataController = DataController.preview
 
     static var previews: some View {
-        DailiesView()
+        DatedView()
             .environment(\.managedObjectContext, dataController.container.viewContext)
             .environmentObject(dataController)
     }

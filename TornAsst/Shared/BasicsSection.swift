@@ -8,22 +8,34 @@
 import SwiftUI
 
 struct BasicsSection: View {
-    let response: Stats
+    //    let response: Stats
+
     var body: some View {
-        HStack {
-            Text(response.name)
-                .padding()
-                .frame(maxWidth: .infinity)
-            ProgressView("Level \(response.level) / 100", value: Float(response.level), total: 100)
-                .accentColor(.purple)
-                .frame(maxWidth: .infinity)
-                .padding(.trailing,5)
+        VStack(alignment: .leading) {
+            BigSectionBarView(
+                systemImage: "server.rack",
+                message: "API Status",
+                color: .accentColor
+            )
+            Text("Success \(Date().addingTimeInterval(-50), style: .relative) ago")
+                .foregroundColor(.green)
+                .fixedSize(horizontal: false, vertical: true)
+                .font(.title3)
+                .padding(1)
+                .monospacedDigit()
+            Group {
+                Text("TravelByRocket")
+                Text("Level 50")
+            }
+                .font(.body.monospaced())
         }
     }
 }
 
-//struct BasicsSection_Previews: PreviewProvider {
-//    static var previews: some View {
-//        BasicsSection(response: TornResponse.default)
-//    }
-//}
+struct BasicsSection_Previews: PreviewProvider {
+    static var previews: some View {
+        Form {
+            BasicsSection()
+        }
+    }
+}

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PeriodicTaskRowView: View {
     var highlighted: Bool
-    var task: DatedResetItem
+    var task: DatedTask
 
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -53,9 +53,9 @@ struct TaskRowView_Previews: PreviewProvider {
 
     static var previews: some View {
         Form {
-            PeriodicTaskRowView(highlighted: true, task: DatedResetItem.example)
-            PeriodicTaskRowView(highlighted: false, task: DatedResetItem.example)
-            PeriodicTaskRowView(highlighted: true, task: DatedResetItem.exampleWeekly)
+            PeriodicTaskRowView(highlighted: true, task: DatedTask.example)
+            PeriodicTaskRowView(highlighted: false, task: DatedTask.example)
+            PeriodicTaskRowView(highlighted: true, task: DatedTask.exampleWeekly)
         }
         .environment(\.managedObjectContext, dataController.container.viewContext)
         .environmentObject(dataController)

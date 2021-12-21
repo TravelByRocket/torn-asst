@@ -46,8 +46,8 @@ struct EnergyOptionControls: View {
     @Binding var prefs: EnergyNotifyPrefs
     let response: Stats
     var body: some View {
-        NotifyOptionRow(message: "Full", shouldNotify: $prefs.notifyFull)
-        NotifyOptionRow(message: "A multiple of 25", shouldNotify: $prefs.notify25)
+        NotifyQuickActionRow(message: "Full", isActive: $prefs.notifyFull)
+        NotifyQuickActionRow(message: "A multiple of 25", isActive: $prefs.notify25)
         NotifyOptionRowStepper(message: "Custom: At Level \(prefs.customLevel)", shouldNotify: $prefs.notifyCustomLevel, value: $prefs.customLevel, max: response.energy.maximum, step: response.energy.increment)
         NotifyOptionRowStepper(message: "Custom: Multiple of \(prefs.customMultiple)", shouldNotify: $prefs.notifyCustomMultiple, value: $prefs.customMultiple, max: response.energy.maximum, step: response.energy.increment)
     }

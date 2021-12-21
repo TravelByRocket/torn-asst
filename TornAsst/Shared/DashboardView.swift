@@ -16,7 +16,7 @@ struct DashboardView: View {
 
     var body: some View {
         VStack {
-            BasicsSection(response: us.stats)
+            BasicsSection()
             ScrollView {
                 EnergySection(response: us.stats)
                 NerveSection(nerve: us.stats.nerve, serverTime: us.stats.server_time)

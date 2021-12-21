@@ -6,41 +6,115 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct TravelView: View {
     static let tag: String = "Travel"
+    @State private var isLoading = false
 
-    static var imageName: String {
-        ["airplane.arrival", "airplane.arrival", "airplane"].randomElement() ?? "airplane"
+    @FetchRequest(
+        entity: TravelTrip.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \TravelTrip.departed, ascending: true)
+        ]
+    ) private var trips: FetchedResults<TravelTrip>
+
+    var trip: TravelTrip {
+        trips.first ?? TravelTrip.example
+    }
+
+    @EnvironmentObject var dataController: DataController
+    @Environment(\.managedObjectContext) var managedObjectContext
+
+    var currently: some View {
+        if trip.isOnGround {
+            return Label(
+                "You are in \(trip.destination ?? "Unknown")",
+                systemImage: trip.destination == "Torn" ? "mappin.and.ellipse" : "camera.viewfinder"
+            )
+        } else {
+            let msg = "Flying to \(trip.destination ?? "Unknown")"
+            if trip.destination == "Torn" {
+                return Label(msg, image: "airplane.left")
+            } else {
+                return Label(msg, systemImage: "airplane")
+            }
+        }
     }
 
     var body: some View {
         List {
-            Section(header: Text("Returning to Torn")) {
-                NotificationRow(enabled: .constant(true), message: "yeah")
-            }
-            Section(header: Text("Arriving Abroad")) {
+            Section {
+                BigSectionBarView(
+                    systemImage: "airplane.circle",
+                    message: "Travel Details",
+                    color: .orange,
+                    date: trip.isOnGround ? nil : trip.arrival)
+                HStack {
+                    currently
+                    Spacer()
+                    Button {
+                        Task.init {
+                            try? await fetchTravel()
+                        }
+                    } label: {
+                        HStack {
+                            if isLoading { ProgressView() }
+                            Text("Refresh")
+                        }
+                    }
+                }
 
             }
-            Section(header: Text("Tab")) {
-                Label("Travel", systemImage: TravelView.imageName)
-                Label("Travel", systemImage: TravelView.imageName)
-                Label("Travel", systemImage: TravelView.imageName)
-                Label("Travel", systemImage: TravelView.imageName)
-                Label("Travel", systemImage: TravelView.imageName)
+            TravelNotificationsView(isOutbound: true)
+            TravelNotificationsView(isOutbound: false)
+        }
+        .refreshable {
+            Task.init {
+                try? await fetchTravel()
             }
+        }
+        .onAppear {
+            if trips.isEmpty {
+                _ = TravelTrip(context: managedObjectContext)
+                dataController.save()
+            }
+        }
+    }
+
+    enum TravelFetchError: Error {
+        case invalidURL
+        case missingData
+    }
+
+    func fetchTravel() async throws {
+        isLoading = true
+        guard let url = URL(string: "https://api.torn.com/user/?selections=travel&key=7Im0qHgainf4Xy1A") else {
+            throw TravelFetchError.invalidURL
+        }
+
+        let (data, _) = try await URLSession.shared.data(from: url)
+
+        let travelResult = try JSONDecoder().decode(TravelResultNested.self, from: data).travel
+        let departure = Date(timeIntervalSince1970: TimeInterval(travelResult.departed))
+        let arrival = Date(timeIntervalSince1970: TimeInterval(travelResult.timestamp))
+
+        withAnimation {
+            trip.arrival = arrival
+            trip.departed = departure
+            trip.destination = travelResult.destination
+            dataController.save()
+            isLoading = false
         }
     }
 }
 
 struct TravelView_Previews: PreviewProvider {
+    static var dataController = DataController.preview
+
     static var previews: some View {
-        TabView(selection: .constant("travel")) {
-            TravelView()
-                .tag("travel")
-                .tabItem {
-                    Label("Travel", systemImage: TravelView.imageName)
-                }
-        }
+        TravelView()
+            .environment(\.managedObjectContext, dataController.container.viewContext)
+            .environmentObject(dataController)
     }
 }

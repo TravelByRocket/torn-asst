@@ -1,5 +1,5 @@
 //
-//  DatedResetItem-CoreDataHelpers.swift
+//  DatedTask-CoreDataHelpers.swift
 //  TornAsst
 //
 //  Created by Bryan Costanza on 16 Dec 2021.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension DatedResetItem {
+extension DatedTask {
     enum Labels: String {
         case refillEnergy = "Refill Energy"
         case refillNerve = "Refill Nerve"
@@ -65,36 +65,36 @@ extension DatedResetItem {
     static var closeOfBusinessHourCode = 1800
     static var closeOfBusinessHourCode16 = Int16(1800)
 
-    static var example: DatedResetItem {
+    static var example: DatedTask {
         let dataController = DataController.preview
         let viewContext = dataController.container.viewContext
 
-        let task = DatedResetItem(context: viewContext)
+        let task = DatedTask(context: viewContext)
         task.label = "Example Task"
         task.dateCompleted = nil
         task.intervalDays = 1
         task.isHidden = false
         task.section = "Spin the Wheel"
         task.triggerHourCode = midnightHourCode16
-        let daily = Daily(context: viewContext)
-        task.daily = daily
+        let daily = DatedConfig(context: viewContext)
+        task.config = daily
 
         return task
     }
 
-    static var exampleWeekly: DatedResetItem {
+    static var exampleWeekly: DatedTask {
         let dataController = DataController.preview
         let viewContext = dataController.container.viewContext
 
-        let task = DatedResetItem(context: viewContext)
+        let task = DatedTask(context: viewContext)
         task.label = "Example Task"
         task.dateCompleted = nil
         task.intervalDays = 7
         task.isHidden = false
         task.section = "Spin the Wheel"
         task.triggerHourCode = midnightHourCode16
-        let daily = Daily(context: viewContext)
-        task.daily = daily
+        let daily = DatedConfig(context: viewContext)
+        task.config = daily
 
         return task
     }

@@ -10,7 +10,7 @@ import Foundation
 class UserState: ObservableObject {
     @Published var activity: Activity!
     @Published var stats: Stats!
-    
+
     init() {
         print("UserState.init()")
         if let _ = UserDefaults.standard.object(forKey: "responsedata") as? Data {
@@ -19,7 +19,7 @@ class UserState: ObservableObject {
             activity = .apiPrompt(problem: nil)
         }
     }
-    
+
     func refresh() {
         if let data = UserDefaults.standard.object(forKey: "responsedata") as? Data {
             if let decodedResponse = try? JSONDecoder().decode(Stats.self, from: data) {

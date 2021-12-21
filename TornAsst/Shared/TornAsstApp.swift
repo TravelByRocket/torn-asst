@@ -13,7 +13,7 @@ struct TornAsstApp: App {
 
     @AppStorage("responsedata") var responsedata: Data?
     @StateObject var us: UserState = UserState()
-    
+
     init() {
         let dataController = DataController()
         _dataController = StateObject(wrappedValue: dataController)
@@ -30,17 +30,6 @@ struct TornAsstApp: App {
                     NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification),
                     perform: save
                 )
-//            switch us.activity {
-//            case .apiPrompt:
-//                ApiPromptPage().environmentObject(us)
-//                    .ignoresSafeArea(.keyboard)
-//                    .onChange(of: responsedata, perform: { _ in
-//                        us.refresh()
-//                        print("refreshed at App level")
-//                    }) // TODO can hang on API Prompt when key is manually cleared because server data won't change for several seconds
-//            default:
-//                DashboardView().environmentObject(us)
-//            }
         }
     }
 

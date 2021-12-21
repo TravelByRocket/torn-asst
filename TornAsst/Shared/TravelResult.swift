@@ -20,6 +20,10 @@ struct TravelResult: Codable {
     static var `default` = TravelResult(destination: "UAE", timestamp: 1606434011, departed: 1606422491, time_left: 10063)
 }
 
+struct TravelResultNested: Codable {
+    var travel: TravelResult
+}
+
 //{
 //    "travel": {
 //        "destination": "Torn",

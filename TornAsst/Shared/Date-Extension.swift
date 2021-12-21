@@ -8,6 +8,14 @@
 import Foundation
 
 extension Date {
+    func isBefore(_ date: Date) -> Bool {
+        self < date
+    }
+
+    func isAfter(_ date: Date) -> Bool {
+        self > date
+    }
+
     static var tornCalendar: Calendar {
         return Calendar.torn
     }

@@ -9,12 +9,12 @@ import SwiftUI
 
 struct PeriodicTaskToggleView: View {
     @State private var completed = false
-    var task: DatedResetItem
+    var task: DatedTask
 
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
 
-    init(task: DatedResetItem) {
+    init(task: DatedTask) {
         self.task = task
         _completed = State(wrappedValue: task.isCompletedThisPeriod)
     }
@@ -41,13 +41,13 @@ struct PeriodicTaskToggleView: View {
 }
 
 struct PeriodicToggleView_Previews: PreviewProvider {
-    static var task = DatedResetItem.example
+    static var task = DatedTask.example
     static var dataController = DataController.preview
 
     static var previews: some View {
         Form {
-            PeriodicTaskToggleView(task: DatedResetItem.example)
-            PeriodicTaskToggleView(task: DatedResetItem.exampleWeekly)
+            PeriodicTaskToggleView(task: DatedTask.example)
+            PeriodicTaskToggleView(task: DatedTask.exampleWeekly)
         }
         .environment(\.managedObjectContext, dataController.container.viewContext)
         .environmentObject(dataController)

@@ -2,67 +2,73 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Bar" representedClassName="Bar" syncable="YES" codeGenerationType="class">
         <attribute name="current" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="fulltime" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="increment" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="interval" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="label" optional="YES" attributeType="String"/>
         <attribute name="maximum" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="ticktime" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="bars" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bars"/>
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="bars" inverseEntity="Player"/>
     </entity>
-    <entity name="Bars" representedClassName="Bars" syncable="YES" codeGenerationType="class">
-        <attribute name="server_time" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="chain" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bar"/>
-        <relationship name="energy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bar"/>
-        <relationship name="happy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bar"/>
-        <relationship name="life" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bar"/>
-        <relationship name="nerve" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bar"/>
-    </entity>
-    <entity name="Basic" representedClassName="Basic" syncable="YES" codeGenerationType="class">
+    <entity name="Basics" representedClassName="Basics" syncable="YES" codeGenerationType="class">
         <attribute name="gender" optional="YES" attributeType="String"/>
         <attribute name="level" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="player_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="status" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Status"/>
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="basics" inverseEntity="Player"/>
     </entity>
-    <entity name="Cooldowns" representedClassName="Cooldowns" syncable="YES" codeGenerationType="class">
-        <attribute name="booster" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="drug" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="medical" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    <entity name="Cooldown" representedClassName="Cooldown" syncable="YES" codeGenerationType="class">
+        <attribute name="booster" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="drug" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="medical" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="cooldowns" inverseEntity="Player"/>
     </entity>
-    <entity name="Daily" representedClassName="Daily" syncable="YES" codeGenerationType="class">
-        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DatedResetItem" inverseName="daily" inverseEntity="DatedResetItem"/>
+    <entity name="DatedConfig" representedClassName="DatedConfig" syncable="YES" codeGenerationType="class">
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="datedTaskPrefs" inverseEntity="Player"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DatedTask" inverseName="config" inverseEntity="DatedTask"/>
     </entity>
-    <entity name="DatedResetItem" representedClassName="DatedResetItem" syncable="YES" codeGenerationType="class">
+    <entity name="DatedTask" representedClassName="DatedTask" syncable="YES" codeGenerationType="class">
         <attribute name="dateCompleted" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="intervalDays" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="isHidden" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="label" optional="YES" attributeType="String"/>
         <attribute name="section" optional="YES" attributeType="String"/>
         <attribute name="triggerHourCode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="daily" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Daily" inverseName="tasks" inverseEntity="Daily"/>
+        <relationship name="config" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DatedConfig" inverseName="tasks" inverseEntity="DatedConfig"/>
+    </entity>
+    <entity name="Player" representedClassName="Player" syncable="YES" codeGenerationType="class">
+        <attribute name="apiError" optional="YES" attributeType="String"/>
+        <attribute name="apiKey" optional="YES" attributeType="String"/>
+        <relationship name="bars" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bar" inverseName="player" inverseEntity="Bar"/>
+        <relationship name="basics" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Basics" inverseName="player" inverseEntity="Basics"/>
+        <relationship name="cooldowns" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cooldown" inverseName="player" inverseEntity="Cooldown"/>
+        <relationship name="datedTaskPrefs" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DatedConfig" inverseName="player" inverseEntity="DatedConfig"/>
+        <relationship name="status" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Status" inverseName="player" inverseEntity="Status"/>
+        <relationship name="travel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TravelTrip" inverseName="player" inverseEntity="TravelTrip"/>
     </entity>
     <entity name="Status" representedClassName="Status" syncable="YES" codeGenerationType="class">
         <attribute name="color" optional="YES" attributeType="String"/>
-        <attribute name="description_" optional="YES" attributeType="String"/>
         <attribute name="details" optional="YES" attributeType="String"/>
+        <attribute name="message" optional="YES" attributeType="String"/>
         <attribute name="state" optional="YES" attributeType="String"/>
-        <attribute name="until" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="until" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="status" inverseEntity="Player"/>
     </entity>
-    <entity name="Travel" representedClassName="Travel" syncable="YES" codeGenerationType="class">
-        <attribute name="departed" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+    <entity name="TravelTrip" representedClassName="TravelTrip" syncable="YES" codeGenerationType="class">
+        <attribute name="arrival" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="departed" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="destination" optional="YES" attributeType="String"/>
-        <attribute name="method" optional="YES" attributeType="String"/>
-        <attribute name="time_left" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="timestamp" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="travel" inverseEntity="Player"/>
     </entity>
     <elements>
-        <element name="Bar" positionX="18" positionY="99" width="128" height="134"/>
-        <element name="Bars" positionX="0" positionY="90" width="128" height="119"/>
-        <element name="Basic" positionX="-54" positionY="27" width="128" height="104"/>
-        <element name="Cooldowns" positionX="-18" positionY="81" width="128" height="74"/>
-        <element name="Daily" positionX="-18" positionY="99" width="128" height="44"/>
-        <element name="DatedResetItem" positionX="-18" positionY="108" width="128" height="134"/>
-        <element name="Status" positionX="-36" positionY="54" width="128" height="104"/>
-        <element name="Travel" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="Bar" positionX="-343.61328125" positionY="243.1953125" width="128" height="178"/>
+        <element name="Basics" positionX="-361.89453125" positionY="-159.96875" width="128" height="118"/>
+        <element name="Cooldown" positionX="-205.85546875" positionY="130.12890625" width="128" height="103"/>
+        <element name="DatedConfig" positionX="-82.65234375" positionY="-75.32421875" width="128" height="73"/>
+        <element name="DatedTask" positionX="166.234375" positionY="-117.5" width="128" height="148"/>
+        <element name="Status" positionX="-77.015625" positionY="287.24609375" width="128" height="133"/>
+        <element name="TravelTrip" positionX="-334.73828125" positionY="16.1171875" width="128" height="103"/>
+        <element name="Player" positionX="-552.96484375" positionY="-100.1171875" width="128" height="163"/>
     </elements>
 </model>

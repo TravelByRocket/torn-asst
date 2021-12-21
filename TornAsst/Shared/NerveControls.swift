@@ -46,7 +46,7 @@ struct NerveOptionControls: View {
     @Binding var prefs: NerveNotifyPrefs
     let nerve: BarResult
     var body: some View {
-        NotifyOptionRow(message: "Full", shouldNotify: $prefs.notifyFull)
+        NotifyQuickActionRow(message: "Full", isActive: $prefs.notifyFull)
         NotifyOptionRowStepper(message: "Custom: At Level \(prefs.customLevel)", shouldNotify: $prefs.notifyCustomLevel, value: $prefs.customLevel, max: nerve.maximum, step: nerve.increment)
         NotifyOptionRowStepper(message: "Custom: Multiple of \(prefs.customMultiple)", shouldNotify: $prefs.notifyCustomMultiple, value: $prefs.customMultiple, max: nerve.maximum, step: nerve.increment)
     }

@@ -12,7 +12,7 @@ struct PeriodicSectionView: View {
     let message: String
     let color: Color
     let date: Date?
-    let tasks: [DatedResetItem]
+    let tasks: [DatedTask]
 
     var body: some View {
         Section {
@@ -41,7 +41,7 @@ struct PeriodicSectionView_Previews: PreviewProvider {
                 message: "Some Message",
                 color: .purple,
                 date: Date.nextMidnight,
-            tasks: [DatedResetItem.example, DatedResetItem.example])
+            tasks: [DatedTask.example, DatedTask.example])
         }
     }
 }

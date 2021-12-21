@@ -7,48 +7,48 @@
 
 import Foundation
 
-extension Daily { // maybe `Dated` or `Periodic`
-    var dailyTasks: [DatedResetItem] {
-        tasks?.allObjects as? [DatedResetItem] ?? []
+extension DatedConfig { // maybe `Dated` or `Periodic`
+    var dailyTasks: [DatedTask] {
+        tasks?.allObjects as? [DatedTask] ?? []
     }
 
-    var dailyTasksAlphabetical: [DatedResetItem] {
-        dailyTasks.sorted(by: \DatedResetItem.itemLabel)
+    var dailyTasksAlphabetical: [DatedTask] {
+        dailyTasks.sorted(by: \DatedTask.itemLabel)
     }
 
-    var dailySpinTheWheel: [DatedResetItem] {
+    var dailySpinTheWheel: [DatedTask] {
         dailyTasks.filter { $0.section == "Spin the Wheel"}
     }
 
-    var dailyRefills: [DatedResetItem] {
+    var dailyRefills: [DatedTask] {
         dailyTasks.filter { $0.section == "Refills"}
     }
 
-    var dailyActions: [DatedResetItem] {
+    var dailyActions: [DatedTask] {
         dailyTasks.filter { $0.section == "Actions"}
     }
 
-    var dailyJob: [DatedResetItem] {
+    var dailyJob: [DatedTask] {
         dailyTasks.filter { $0.section == "Job"}
     }
 
-    var dailyTasksMidnight: [DatedResetItem] {
+    var dailyTasksMidnight: [DatedTask] {
         dailyTasksAlphabetical.filter {
-            $0.triggerHourCode == DatedResetItem.midnightHourCode16 &&
+            $0.triggerHourCode == DatedTask.midnightHourCode16 &&
             $0.intervalDays == 1 &&
             !$0.isHidden
         }
     }
 
-    var dailyTasksCOB: [DatedResetItem] {
+    var dailyTasksCOB: [DatedTask] {
         dailyTasksAlphabetical.filter {
-            $0.triggerHourCode == DatedResetItem.closeOfBusinessHourCode16 &&
+            $0.triggerHourCode == DatedTask.closeOfBusinessHourCode16 &&
             $0.intervalDays == 1 &&
             !$0.isHidden
         }
     }
 
-    var otherTasks: [DatedResetItem] {
+    var otherTasks: [DatedTask] {
         var tasksConsidered = dailyTasksAlphabetical
         for midnightly in dailyTasksMidnight {
             if let index = tasksConsidered.firstIndex(of: midnightly) {
@@ -63,30 +63,30 @@ extension Daily { // maybe `Dated` or `Periodic`
         return tasksConsidered.filter { !$0.isHidden }
     }
 
-    var inactiveTasks: [DatedResetItem] {
+    var inactiveTasks: [DatedTask] {
         dailyTasksAlphabetical.filter { $0.isHidden }
     }
 
-    func getTask(labeled label: String) -> DatedResetItem? {
+    func getTask(labeled label: String) -> DatedTask? {
         dailyTasks.first { item in
             item.label == label
         }
     }
 
-    static var example: Daily {
+    static var example: DatedConfig {
         let dataController = DataController.preview
         let viewContext = dataController.container.viewContext
 
-        let daily = Daily(context: viewContext)
+        let datedConfig = DatedConfig(context: viewContext)
 
-        let task = DatedResetItem(context: viewContext)
+        let task = DatedTask(context: viewContext)
         task.label = "Energy"
         task.section = "Refills"
-        task.triggerHourCode = DatedResetItem.midnightHourCode16
+        task.triggerHourCode = DatedTask.midnightHourCode16
         task.intervalDays = Int16(1)
         task.isHidden = false
-        task.daily = daily
+        task.config = datedConfig
 
-        return daily
+        return datedConfig
     }
 }

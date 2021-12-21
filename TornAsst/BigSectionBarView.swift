@@ -41,12 +41,19 @@ struct BigSectionBarView: View {
 struct BigSectionBarView_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            BigSectionBarView(
-                systemImage: "moon.stars",
-                message: "Section Name",
-                color: .purple,
-                date: Date().addingTimeInterval(20_000))
-            BigSectionBarView(systemImage: "clock", message: "Section Name", color: .orange)
+            Section {
+                BigSectionBarView(
+                    systemImage: "moon.stars",
+                    message: "Section Name",
+                    color: .purple,
+                    date: Date().addingTimeInterval(20_000))
+            }
+            Section {
+                BigSectionBarView(
+                    systemImage: "clock",
+                    message: "Section Name",
+                    color: .orange)
+            }
         }
     }
 }

@@ -72,9 +72,9 @@ struct TravelControls: View {
 struct TravelOptionControls: View {
     @Binding var prefs: TravelNotifyPrefs
     var body: some View {
-        NotifyOptionRow(message: "When I Land", shouldNotify: $prefs.notifyTMinus0)
-        NotifyOptionRow(message: "1 Minute Before Landing", shouldNotify: $prefs.notifyTMinus1)
-        NotifyOptionRow(message: "5 Minutes Before Landing", shouldNotify: $prefs.notifyTMinus5)
+        NotifyQuickActionRow(message: "When I Land", isActive: $prefs.notifyTMinus0)
+        NotifyQuickActionRow(message: "1 Minute Before Landing", isActive: $prefs.notifyTMinus1)
+        NotifyQuickActionRow(message: "5 Minutes Before Landing", isActive: $prefs.notifyTMinus5)
     }
 }
 
