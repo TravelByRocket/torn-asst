@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct TravelSection: View {
-    let travel: TravelResult
+    let travel: TravelDetailsJSON
     let server_time: Int
     
     var localTime: DateFormatter {

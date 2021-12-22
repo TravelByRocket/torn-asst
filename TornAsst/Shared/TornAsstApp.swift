@@ -11,9 +11,6 @@ import SwiftUI
 struct TornAsstApp: App {
     @StateObject var dataController: DataController
 
-    @AppStorage("responsedata") var responsedata: Data?
-    @StateObject var us: UserState = UserState()
-
     init() {
         let dataController = DataController()
         _dataController = StateObject(wrappedValue: dataController)

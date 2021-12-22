@@ -54,8 +54,8 @@ extension Player {
         let dataController = DataController.preview
         let viewContext = dataController.container.viewContext
 
-        let user = Player(context: viewContext)
-        return user
+        let player = Player(context: viewContext)
+        return player
     }
 
 //    static func getFirstAndOnlyUser(context: NSManagedObjectContext) -> User {

@@ -8,7 +8,7 @@
 // swiftlint:disable all
 import Foundation
 
-struct Stats: Codable {
+struct StatsREMOVE: Codable {
     var serverDate: Date {
         Date(timeIntervalSince1970: Seconds(server_time))
     }
@@ -20,9 +20,9 @@ struct Stats: Codable {
     /// Server time should go private once everything is updated
     @available(*, deprecated)
     var server_time: Int
-    var happy: BarResult
-    var life: BarResult
-    var energy: BarResult
-    var nerve: BarResult
-    var travel: TravelResult
+    var happy: BarResultREMOVE
+    var life: BarResultREMOVE
+    var energy: BarResultREMOVE
+    var nerve: BarResultREMOVE
+    var travel: TravelDetailsJSON
 }

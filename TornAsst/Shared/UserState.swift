@@ -9,7 +9,7 @@ import Foundation
 
 class UserState: ObservableObject {
     @Published var activity: Activity!
-    @Published var stats: Stats!
+    @Published var stats: StatsREMOVE!
 
     init() {
         print("UserState.init()")
@@ -22,7 +22,7 @@ class UserState: ObservableObject {
 
     func refresh() {
         if let data = UserDefaults.standard.object(forKey: "responsedata") as? Data {
-            if let decodedResponse = try? JSONDecoder().decode(Stats.self, from: data) {
+            if let decodedResponse = try? JSONDecoder().decode(StatsREMOVE.self, from: data) {
                 let travel = decodedResponse.travel
                 if travel.time_left > 0 {
                     let flight = Flight(

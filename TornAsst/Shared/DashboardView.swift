@@ -50,7 +50,7 @@ struct DashboardView: View {
 //}
 
 struct HappySection: View {
-    let happy: BarResult
+    let happy: BarResultREMOVE
     let serverTime: Int
 
     var body: some View {
@@ -63,7 +63,7 @@ struct HappySection: View {
 }
 
 struct LifeSection: View {
-    let life: BarResult
+    let life: BarResultREMOVE
     let serverTime: Int
 
     var body: some View {

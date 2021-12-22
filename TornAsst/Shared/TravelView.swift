@@ -44,6 +44,12 @@ struct TravelView: View {
 
     var body: some View {
         List {
+            Button {
+                dataController.deleteAll()
+            } label: {
+                Text("Delete All")
+            }
+
             Section {
                 BigSectionBarView(
                     systemImage: "airplane.circle",
@@ -95,7 +101,7 @@ struct TravelView: View {
 
         let (data, _) = try await URLSession.shared.data(from: url)
 
-        let travelResult = try JSONDecoder().decode(TravelResultNested.self, from: data).travel
+        let travelResult = try JSONDecoder().decode(TravelJSON.self, from: data).travel
         let departure = Date(timeIntervalSince1970: TimeInterval(travelResult.departed))
         let arrival = Date(timeIntervalSince1970: TimeInterval(travelResult.timestamp))
 

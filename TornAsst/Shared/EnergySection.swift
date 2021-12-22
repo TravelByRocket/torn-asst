@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EnergySection: View {
-    let response: Stats
+    let response: StatsREMOVE
 
     var body: some View {
         VStack {

@@ -8,8 +8,21 @@
 // swiftlint:disable all
 import Foundation
 
-struct TravelResult: Codable {
+
+struct TravelJSON: DirectlyMatchedAPI {
+    static var apiFields = ["travel", "timestamp"]
+    
+    var travel: TravelDetailsJSON
+//    /// Unix time on server at time of request
+//    let timestamp: Int
+}
+
+struct TravelDetailsJSON: InternallyMatchedAPI {
+    
+    /// Tends to be (or always?) country name
     var destination: String
+    /// Not currently used
+    let method: String
     /// Arrival UNIX Epoch time
     var timestamp: Int
     /// Departure UNIX Epoch time
@@ -17,11 +30,7 @@ struct TravelResult: Codable {
     /// Seconds until landing since server refresh. Discourage use because server time is not included with 'travel' query in the API.
     var time_left: Int
     
-    static var `default` = TravelResult(destination: "UAE", timestamp: 1606434011, departed: 1606422491, time_left: 10063)
-}
-
-struct TravelResultNested: Codable {
-    var travel: TravelResult
+    static var `default` = TravelDetailsJSON(destination: "UAE", method: "Airstrip", timestamp: 1606434011, departed: 1606422491, time_left: 10063)
 }
 
 //{

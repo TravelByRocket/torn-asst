@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct NerveControls: View {
-    let nerve: BarResult
+    let nerve: BarResultREMOVE
     @State private var selection = "Home"
     
     @State private var homePrefs = NerveNotifyPrefs(notifyFull: true, notifyCustomMultiple: true, customMultiple: 7)
@@ -44,7 +44,7 @@ struct NerveControls: View {
 
 struct NerveOptionControls: View {
     @Binding var prefs: NerveNotifyPrefs
-    let nerve: BarResult
+    let nerve: BarResultREMOVE
     var body: some View {
         NotifyQuickActionRow(message: "Full", isActive: $prefs.notifyFull)
         NotifyOptionRowStepper(message: "Custom: At Level \(prefs.customLevel)", shouldNotify: $prefs.notifyCustomLevel, value: $prefs.customLevel, max: nerve.maximum, step: nerve.increment)
@@ -62,6 +62,6 @@ struct NerveNotifyPrefs {
 
 struct NerveControls_Previews: PreviewProvider {
     static var previews: some View {
-        NerveControls(nerve: BarResult.default)
+        NerveControls(nerve: BarResultREMOVE.default)
     }
 }

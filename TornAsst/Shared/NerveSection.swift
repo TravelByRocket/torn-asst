@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NerveSection: View {
-    let nerve: BarResult
+    let nerve: BarResultREMOVE
     let serverTime: Int
 
     var body: some View {

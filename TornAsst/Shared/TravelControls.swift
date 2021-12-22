@@ -9,7 +9,7 @@ import SwiftUI
 import UserNotifications
 
 struct TravelControls: View {
-    let travel: TravelResult
+    let travel: TravelDetailsJSON
     @State private var selection = "inbound"
 
     @State private var outboundPrefs = TravelNotifyPrefs(notifyTMinus0: true, notifyTMinus1: true)
@@ -86,6 +86,6 @@ struct TravelNotifyPrefs {
 
 struct TravelControls_Previews: PreviewProvider {
     static var previews: some View {
-        TravelControls(travel: TravelResult.default)
+        TravelControls(travel: TravelDetailsJSON.default)
     }
 }

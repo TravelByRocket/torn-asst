@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct EnergyControls: View {
-    let response: Stats
+    let response: StatsREMOVE
     @State private var selection = "Home"
     
     @State private var homePrefs = EnergyNotifyPrefs(notifyFull: true)
@@ -44,7 +44,7 @@ struct EnergyControls: View {
 
 struct EnergyOptionControls: View {
     @Binding var prefs: EnergyNotifyPrefs
-    let response: Stats
+    let response: StatsREMOVE
     var body: some View {
         NotifyQuickActionRow(message: "Full", isActive: $prefs.notifyFull)
         NotifyQuickActionRow(message: "A multiple of 25", isActive: $prefs.notify25)

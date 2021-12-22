@@ -11,7 +11,7 @@ import SwiftUI
 struct IndicatorRow: View {
     let name: String
     let color: Color
-    let barInfo: BarResult
+    let barInfo: BarResultREMOVE
     let server_time: Int
     
     var curValue: Int {
