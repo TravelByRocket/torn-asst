@@ -8,6 +8,4 @@
 import Foundation
 
 /// Epoch Time to use with `Date(timeIntervalSince1970: TimeInterval)`
-typealias UnixTime = Double
-
-typealias Seconds = Double
+typealias UnixTime = TimeInterval

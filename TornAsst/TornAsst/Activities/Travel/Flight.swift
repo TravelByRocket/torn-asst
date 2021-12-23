@@ -28,7 +28,7 @@ class Flight: Equatable {
     ///   TODO What if user has never flown?*
     ///   - time_left: Seconds remaining on flight at server time.
     ///   *TODO consider removing since this is not used based on current understanding of API value but should perhaps retain it for completeness and to match class description*
-    init(destination: String, timestamp: UnixTime, departed: UnixTime, timeLeft: Seconds) {
+    init(destination: String, timestamp: UnixTime, departed: UnixTime, timeLeft: TimeInterval) {
         self.destination = Location(rawValue: destination)! // current city if not flying
         self.arrival = Date(timeIntervalSince1970: timestamp)
         self.departure = Date(timeIntervalSince1970: departed)
@@ -56,12 +56,12 @@ class Flight: Equatable {
         return Float(timeRemaining / flightDuration)
     }
 
-    var timeRemaining: Seconds {
+    var timeRemaining: TimeInterval {
         let interval = DateInterval(start: Date(), end: arrival)
         return interval.duration
     }
 
-    var duration: Seconds {
+    var duration: TimeInterval {
         let interval = DateInterval(start: departure, end: arrival)
         return interval.duration
     }

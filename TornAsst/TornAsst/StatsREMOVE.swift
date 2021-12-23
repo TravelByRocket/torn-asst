@@ -10,7 +10,7 @@ import Foundation
 
 struct StatsREMOVE: Codable {
     var serverDate: Date {
-        Date(timeIntervalSince1970: Seconds(server_time))
+        Date(timeIntervalSince1970: TimeInterval(server_time))
     }
     
     var level: Int

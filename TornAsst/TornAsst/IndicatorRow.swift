@@ -39,7 +39,7 @@ struct IndicatorRow: View {
     }
     
     var dateFull: Date {
-        Date(timeIntervalSince1970: TimeInterval(Seconds(server_time) + Seconds(barInfo.fulltime)))
+        Date(timeIntervalSince1970: TimeInterval(TimeInterval(server_time) + TimeInterval(barInfo.fulltime)))
     }
     
     var body: some View {
