@@ -8,14 +8,40 @@
 import Foundation
 
 extension Travel {
-    /// Returns true if unsure
+    /// When the flight arrives, otherwise distant past
+    var flightArrival: Date {
+        arrival ?? Date.distantPast
+    }
+
+    /// When the flight departed, otherwise distant past
+    var flightDeparture: Date {
+        departed ?? Date.distantPast
+    }
+
+    /// Usually (always?) the country
+    var flightDestination: String {
+        destination ?? "Unknown"
+    }
+
+    /// Based on departure and arrival
+    var flightDuration: TimeInterval {
+        DateInterval(start: flightDeparture, end: flightArrival).duration
+    }
+
+    /// Compared to now
+    var flightTimeRemaining: TimeInterval {
+        flightArrival.distance(to: Date())
+    }
+
+    /// Range of 0.0-1.0, returning 1.0 if there is no flight duration available
+    var flightProgress: TimeInterval {
+        guard flightDuration > 0.0 else { return 1.0 } // guard div by 0
+        return flightTimeRemaining / flightDuration
+    }
+
+    /// True if now is after arrival (or if arrival is nil)
     var isOnGround: Bool {
-        if let date = arrival {
-            if date > Date() {
-                return false
-            }
-        }
-        return true
+        Date().isAfter(flightArrival)
     }
 
     static var example: Travel {
