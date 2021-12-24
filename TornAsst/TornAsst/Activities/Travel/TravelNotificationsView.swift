@@ -10,6 +10,9 @@ import SwiftUI
 struct TravelNotificationsView: View {
     let isOutbound: Bool
 
+    @EnvironmentObject var dataController: DataController
+    @Environment(\.managedObjectContext) var managedObjectContext
+
     var label: some View {
         let msg = isOutbound ? "Going Abroad" : "Returning to Torn"
         if isOutbound {
@@ -53,10 +56,14 @@ struct TravelNotificationsView: View {
 }
 
 struct TravelNotificationsView_Previews: PreviewProvider {
+    static var dataController = DataController.preview
+
     static var previews: some View {
         List {
             TravelNotificationsView(isOutbound: true)
             TravelNotificationsView(isOutbound: false)
         }
+        .environment(\.managedObjectContext, dataController.container.viewContext)
+        .environmentObject(dataController)
     }
 }

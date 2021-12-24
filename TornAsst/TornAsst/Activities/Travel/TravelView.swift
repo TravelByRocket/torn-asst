@@ -17,24 +17,24 @@ struct TravelView: View {
         sortDescriptors: [
             NSSortDescriptor(keyPath: \Travel.departed, ascending: true)
         ]
-    ) private var trips: FetchedResults<Travel>
+    ) private var travelJustOne: FetchedResults<Travel>
 
-    var trip: Travel {
-        trips.first ?? Travel.example
+    var travel: Travel {
+        travelJustOne.first ?? Travel.example
     }
 
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
 
     var currently: some View {
-        if trip.isOnGround {
+        if travel.isOnGround {
             return Label(
-                "You are in \(trip.destination ?? "Unknown")",
-                systemImage: trip.destination == "Torn" ? "mappin.and.ellipse" : "camera.viewfinder"
+                "You are in \(travel.destination ?? "Unknown")",
+                systemImage: travel.destination == "Torn" ? "mappin.and.ellipse" : "camera.viewfinder"
             )
         } else {
-            let msg = "Flying to \(trip.destination ?? "Unknown")"
-            if trip.destination == "Torn" {
+            let msg = "Flying to \(travel.destination ?? "Unknown")"
+            if travel.destination == "Torn" {
                 return Label(msg, image: "airplane.left")
             } else {
                 return Label(msg, systemImage: "airplane")
@@ -55,7 +55,7 @@ struct TravelView: View {
                     systemImage: "airplane.circle",
                     message: "Travel Details",
                     color: .orange,
-                    date: trip.isOnGround ? nil : trip.arrival)
+                    date: travel.isOnGround ? nil : travel.arrival)
                 HStack {
                     currently
                     Spacer()
@@ -81,7 +81,7 @@ struct TravelView: View {
             }
         }
         .onAppear {
-            if trips.isEmpty {
+            if travelJustOne.isEmpty {
                 _ = Travel(context: managedObjectContext)
                 dataController.save()
             }
@@ -106,9 +106,9 @@ struct TravelView: View {
         let arrival = Date(timeIntervalSince1970: TimeInterval(travelResult.timestamp))
 
         withAnimation {
-            trip.arrival = arrival
-            trip.departed = departure
-            trip.destination = travelResult.destination
+            travel.arrival = arrival
+            travel.departed = departure
+            travel.destination = travelResult.destination
             dataController.save()
             isLoading = false
         }

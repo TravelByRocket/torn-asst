@@ -86,6 +86,6 @@ struct TravelNotifyPrefs {
 
 struct TravelControls_Previews: PreviewProvider {
     static var previews: some View {
-        TravelControls(travel: TravelDetailsJSON.default)
+        TravelControls(travel: TravelDetailsJSON.example)
     }
 }
