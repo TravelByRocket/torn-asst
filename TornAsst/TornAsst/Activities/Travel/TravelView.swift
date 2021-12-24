@@ -72,8 +72,8 @@ struct TravelView: View {
                 }
 
             }
-            TravelNotificationsView(isOutbound: true)
-            TravelNotificationsView(isOutbound: false)
+            TravelNotificationsView(isOutbound: true, travel: travel)
+            TravelNotificationsView(isOutbound: false, travel: travel)
         }
         .refreshable {
             Task.init {
@@ -95,7 +95,7 @@ struct TravelView: View {
 
     func fetchTravel() async throws {
         isLoading = true
-        guard let url = URL(string: "https://api.torn.com/user/?selections=travel&key=7Im0qHgainf4Xy1A") else {
+        guard let url = URL(string: "https://api.torn.com/user/?selections=travel,timestamp&key=7Im0qHgainf4Xy1A") else {
             throw TravelFetchError.invalidURL
         }
 

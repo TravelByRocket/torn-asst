@@ -9,25 +9,42 @@ import SwiftUI
 
 struct NotifyQuickActionRow: View {
     let message: String
-    @Binding var isActive: Bool
+    @ObservedObject var notice: Notice
+
+    @EnvironmentObject var dataController: DataController
+    @Environment(\.managedObjectContext) var managedObjectContext
 
     var body: some View {
         HStack {
             Button {
-                isActive.toggle()
+                notice.isActive.toggle()
+                dataController.save()
+                if notice.isActive {
+                    // create or activate notification; perhaps watch from TravelView to manage through ObservedObject
+                } else {
+                    // delete or deactiate notifications
+                }
             } label: {
-                Label(message, systemImage: isActive ? "bell" : "bell.slash")
+                Label(message, systemImage: notice.isActive ? "bell" : "bell.slash")
             }
         }
-        .foregroundColor(isActive ? .accentColor : .secondary)
+        .foregroundColor(notice.isActive ? .accentColor : .secondary)
     }
 }
 
 struct NotifyQuickActionRow_Previews: PreviewProvider {
+    static var dataController = DataController.preview
+
     static var previews: some View {
         List {
-            NotifyQuickActionRow(message: "Summary text", isActive: .constant(true))
-            NotifyQuickActionRow(message: "Summary text", isActive: .constant(false))
+            NotifyQuickActionRow(
+                message: "\(Notice.exampleActive.offset) seconds before whatever",
+                notice: Notice.exampleActive)
+            NotifyQuickActionRow(
+                message: "\(Notice.exampleInactive.offset) seconds before whatever",
+                notice: Notice.exampleInactive)
         }
+        .environment(\.managedObjectContext, dataController.container.viewContext)
+        .environmentObject(dataController)
     }
 }

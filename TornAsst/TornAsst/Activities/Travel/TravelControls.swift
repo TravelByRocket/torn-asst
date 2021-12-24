@@ -35,11 +35,11 @@ struct TravelControls: View {
                     Spacer()
                 }
             }
-            if selection == "inbound" {
-                TravelOptionControls(prefs: $inboundPrefs)
-            } else {
-                TravelOptionControls(prefs: $outboundPrefs)
-            }
+//            if selection == "inbound" {
+//                TravelOptionControls(prefs: $inboundPrefs)
+//            } else {
+//                TravelOptionControls(prefs: $outboundPrefs)
+//            }
         }
         .onAppear(perform: setNotifications)
     }
@@ -66,15 +66,6 @@ struct TravelControls: View {
             UNUserNotificationCenter.current().add(request2)
             print("tminus1 notification is set")
         }
-    }
-}
-
-struct TravelOptionControls: View {
-    @Binding var prefs: TravelNotifyPrefs
-    var body: some View {
-        NotifyQuickActionRow(message: "When I Land", isActive: $prefs.notifyTMinus0)
-        NotifyQuickActionRow(message: "1 Minute Before Landing", isActive: $prefs.notifyTMinus1)
-        NotifyQuickActionRow(message: "5 Minutes Before Landing", isActive: $prefs.notifyTMinus5)
     }
 }
 

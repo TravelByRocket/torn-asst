@@ -30,27 +30,16 @@ struct EnergyControls: View {
                     Spacer()
                 }
             }
-            if (selection == "Home") {
-                EnergyOptionControls(prefs: $homePrefs, response: response)
-            } else if (selection == "Flying") {
-                EnergyOptionControls(prefs: $flyingPrefs, response: response)
-            } else {
-                EnergyOptionControls(prefs: $abroadPrefs, response: response)
-            }
+//            if (selection == "Home") {
+//                EnergyOptionControls(prefs: $homePrefs, response: response)
+//            } else if (selection == "Flying") {
+//                EnergyOptionControls(prefs: $flyingPrefs, response: response)
+//            } else {
+//                EnergyOptionControls(prefs: $abroadPrefs, response: response)
+//            }
         }
     }
     
-}
-
-struct EnergyOptionControls: View {
-    @Binding var prefs: EnergyNotifyPrefs
-    let response: StatsREMOVE
-    var body: some View {
-        NotifyQuickActionRow(message: "Full", isActive: $prefs.notifyFull)
-        NotifyQuickActionRow(message: "A multiple of 25", isActive: $prefs.notify25)
-        NotifyOptionRowStepper(message: "Custom: At Level \(prefs.customLevel)", shouldNotify: $prefs.notifyCustomLevel, value: $prefs.customLevel, max: response.energy.maximum, step: response.energy.increment)
-        NotifyOptionRowStepper(message: "Custom: Multiple of \(prefs.customMultiple)", shouldNotify: $prefs.notifyCustomMultiple, value: $prefs.customMultiple, max: response.energy.maximum, step: response.energy.increment)
-    }
 }
 
 struct EnergyNotifyPrefs {

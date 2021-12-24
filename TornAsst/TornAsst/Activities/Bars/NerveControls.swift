@@ -30,27 +30,27 @@ struct NerveControls: View {
                     Spacer()
                 }
             }
-            if (selection == "Home") {
-                NerveOptionControls(prefs: $homePrefs, nerve: nerve)
-            } else if (selection == "Flying") {
-                NerveOptionControls(prefs: $flyingPrefs, nerve: nerve)
-            } else {
-                NerveOptionControls(prefs: $abroadPrefs, nerve: nerve)
-            }
+//            if (selection == "Home") {
+//                NerveOptionControls(prefs: $homePrefs, nerve: nerve)
+//            } else if (selection == "Flying") {
+//                NerveOptionControls(prefs: $flyingPrefs, nerve: nerve)
+//            } else {
+//                NerveOptionControls(prefs: $abroadPrefs, nerve: nerve)
+//            }
         }
     }
     
 }
 
-struct NerveOptionControls: View {
-    @Binding var prefs: NerveNotifyPrefs
-    let nerve: BarResultREMOVE
-    var body: some View {
-        NotifyQuickActionRow(message: "Full", isActive: $prefs.notifyFull)
-        NotifyOptionRowStepper(message: "Custom: At Level \(prefs.customLevel)", shouldNotify: $prefs.notifyCustomLevel, value: $prefs.customLevel, max: nerve.maximum, step: nerve.increment)
-        NotifyOptionRowStepper(message: "Custom: Multiple of \(prefs.customMultiple)", shouldNotify: $prefs.notifyCustomMultiple, value: $prefs.customMultiple, max: nerve.maximum, step: nerve.increment)
-    }
-}
+//struct NerveOptionControls: View {
+//    @Binding var prefs: NerveNotifyPrefs
+//    let nerve: BarResultREMOVE
+//    var body: some View {
+//        NotifyQuickActionRow(message: "Full", isActive: $prefs.notifyFull)
+//        NotifyOptionRowStepper(message: "Custom: At Level \(prefs.customLevel)", shouldNotify: $prefs.notifyCustomLevel, value: $prefs.customLevel, max: nerve.maximum, step: nerve.increment)
+//        NotifyOptionRowStepper(message: "Custom: Multiple of \(prefs.customMultiple)", shouldNotify: $prefs.notifyCustomMultiple, value: $prefs.customMultiple, max: nerve.maximum, step: nerve.increment)
+//    }
+//}
 
 struct NerveNotifyPrefs {
     var notifyFull = false

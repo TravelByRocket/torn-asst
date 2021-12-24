@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2F3A25612774F8320048145F /* BarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A25602774F8320048145F /* BarsView.swift */; };
 		2FD49FEC2775683E009B1B12 /* Notice-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD49FEB2775683E009B1B12 /* Notice-CoreDataHelpers.swift */; };
+		2FD49FEE277569E2009B1B12 /* MarketplaceTicksRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD49FED277569E2009B1B12 /* MarketplaceTicksRow.swift */; };
+		2FD49FF027757A9D009B1B12 /* Binding-OnChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD49FEF27757A9D009B1B12 /* Binding-OnChange.swift */; };
+		2FD49FF2277582C3009B1B12 /* AddAdjustItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD49FF1277582C3009B1B12 /* AddAdjustItemRow.swift */; };
 		2FF7AE4D2773B1C00043ECC1 /* TornAsstApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AE4C2773B1C00043ECC1 /* TornAsstApp.swift */; };
 		2FF7AE4F2773B1C00043ECC1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AE4E2773B1C00043ECC1 /* ContentView.swift */; };
 		2FF7AE542773B1C10043ECC1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FF7AE532773B1C10043ECC1 /* Preview Assets.xcassets */; };
@@ -70,6 +73,9 @@
 /* Begin PBXFileReference section */
 		2F3A25602774F8320048145F /* BarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarsView.swift; sourceTree = "<group>"; };
 		2FD49FEB2775683E009B1B12 /* Notice-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notice-CoreDataHelpers.swift"; sourceTree = "<group>"; };
+		2FD49FED277569E2009B1B12 /* MarketplaceTicksRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketplaceTicksRow.swift; sourceTree = "<group>"; };
+		2FD49FEF27757A9D009B1B12 /* Binding-OnChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding-OnChange.swift"; sourceTree = "<group>"; };
+		2FD49FF1277582C3009B1B12 /* AddAdjustItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdjustItemRow.swift; sourceTree = "<group>"; };
 		2FF7AE492773B1C00043ECC1 /* TornAsst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TornAsst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FF7AE4C2773B1C00043ECC1 /* TornAsstApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TornAsstApp.swift; sourceTree = "<group>"; };
 		2FF7AE4E2773B1C00043ECC1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -221,6 +227,7 @@
 				2FF7AE8E277451A30043ECC1 /* Calendar-Extension.swift */,
 				2FF7AEB3277453280043ECC1 /* MatchedAPI-Protocols.swift */,
 				2FF7AECB277455880043ECC1 /* Time-Typealiases.swift */,
+				2FD49FEF27757A9D009B1B12 /* Binding-OnChange.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -229,10 +236,12 @@
 			isa = PBXGroup;
 			children = (
 				2FF7AE95277452130043ECC1 /* TravelView.swift */,
+				2FF7AE93277452130043ECC1 /* TravelNotificationsView.swift */,
+				2FD49FF1277582C3009B1B12 /* AddAdjustItemRow.swift */,
+				2FD49FED277569E2009B1B12 /* MarketplaceTicksRow.swift */,
 				2FF7AEC5277454210043ECC1 /* Travel-CoreDataHelpers.swift */,
 				2FF7AE96277452130043ECC1 /* TravelControls.swift */,
 				2FF7AE91277452130043ECC1 /* TravelJSON.swift */,
-				2FF7AE93277452130043ECC1 /* TravelNotificationsView.swift */,
 				2FF7AE92277452130043ECC1 /* TravelSection.swift */,
 				2FF7AE94277452130043ECC1 /* TravelSummaryView.swift */,
 				2FF7AEB1277453080043ECC1 /* Location.swift */,
@@ -383,6 +392,7 @@
 				2FF7AED7277458C80043ECC1 /* RemindersView.swift in Sources */,
 				2FF7AE9A277452130043ECC1 /* TravelSummaryView.swift in Sources */,
 				2FF7AEBB277453480043ECC1 /* PeriodicTaskRowView.swift in Sources */,
+				2FD49FEE277569E2009B1B12 /* MarketplaceTicksRow.swift in Sources */,
 				2F3A25612774F8320048145F /* BarsView.swift in Sources */,
 				2FF7AEC3277453C50043ECC1 /* BoosterView.swift in Sources */,
 				2FF7AE9C277452130043ECC1 /* TravelControls.swift in Sources */,
@@ -420,6 +430,7 @@
 				2FF7AEC4277453C50043ECC1 /* DrugView.swift in Sources */,
 				2FF7AE99277452130043ECC1 /* TravelNotificationsView.swift in Sources */,
 				2FF7AE7C2773C1B20043ECC1 /* Model.xcdatamodeld in Sources */,
+				2FD49FF027757A9D009B1B12 /* Binding-OnChange.swift in Sources */,
 				2FF7AEAA277452BD0043ECC1 /* NerveControls.swift in Sources */,
 				2FF7AE8F277451A30043ECC1 /* Calendar-Extension.swift in Sources */,
 				2FF7AE8A277450D70043ECC1 /* Bar-Examples.swift in Sources */,
@@ -429,6 +440,7 @@
 				2FF7AEDF2774599B0043ECC1 /* EducationView.swift in Sources */,
 				2FF7AEAE277452BD0043ECC1 /* BarsJSON.swift in Sources */,
 				2FF7AEF327745A400043ECC1 /* StatsREMOVE.swift in Sources */,
+				2FD49FF2277582C3009B1B12 /* AddAdjustItemRow.swift in Sources */,
 				2FF7AED3277457220043ECC1 /* ClockOffsetView.swift in Sources */,
 				2FF7AEE3277459A60043ECC1 /* DataController-CreateDefaults.swift in Sources */,
 				2FF7AECC277455880043ECC1 /* Time-Typealiases.swift in Sources */,

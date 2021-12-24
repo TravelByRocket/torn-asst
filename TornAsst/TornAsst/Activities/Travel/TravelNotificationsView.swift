@@ -10,6 +10,11 @@ import SwiftUI
 struct TravelNotificationsView: View {
     let isOutbound: Bool
 
+    @ObservedObject var travel: Travel
+
+    @State private var isAddingItem = false
+    @State private var offset = 1.0
+
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
 
@@ -30,27 +35,23 @@ struct TravelNotificationsView: View {
         }
     }
 
+    var notices: [Notice] {
+        isOutbound
+        ? travel.flightNoticesOutbound
+        : travel.flightNoticesInbound
+    }
+
     var body: some View {
         Section(header: header) {
             if isOutbound {
-                Toggle(isOn: .constant(false)) {
-                    VStack(alignment: .leading) {
-                        Text("Marketplace Tick Notices")
-                        Text("Every 15 minutes on the hour")
-                            .italic()
-                            .foregroundColor(.secondary)
-                            .font(.caption)
-                    }
-                }
+                MarketplaceTicksRow()
             }
-            NotifyQuickActionRow(message: "When I Land", isActive: .constant(true))
-            NotifyQuickActionRow(message: "1 Minute Before Landing", isActive: .constant(false))
-            NotifyQuickActionRow(message: "5 Minutes Before Landing", isActive: .constant(false))
-            Button {
-                // add item magic
-            } label: {
-                Label("Add Item", systemImage: "plus")
+            ForEach(notices) { notice in
+                NotifyQuickActionRow(
+                    message: "\(notice.offset) seconds before landing",
+                    notice: notice)
             }
+            AddAdjustItemRow(isOutbound: isOutbound, travel: travel)
         }
     }
 }
@@ -60,8 +61,8 @@ struct TravelNotificationsView_Previews: PreviewProvider {
 
     static var previews: some View {
         List {
-            TravelNotificationsView(isOutbound: true)
-            TravelNotificationsView(isOutbound: false)
+            TravelNotificationsView(isOutbound: true, travel: Travel.example)
+            TravelNotificationsView(isOutbound: false, travel: Travel.example)
         }
         .environment(\.managedObjectContext, dataController.container.viewContext)
         .environmentObject(dataController)

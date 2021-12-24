@@ -39,6 +39,24 @@ extension Travel {
         return flightTimeRemaining / flightDuration
     }
 
+    var flightNotices: [Notice] {
+        notices?.allObjects as? [Notice] ?? []
+    }
+
+    var flightNoticesAscending: [Notice] {
+        flightNotices.sorted { first, second in
+            return first.offset < second.offset
+        }
+    }
+
+    var flightNoticesOutbound: [Notice] {
+        flightNoticesAscending.filter { $0.note == "outbound" }
+    }
+
+    var flightNoticesInbound: [Notice] {
+        flightNoticesAscending.filter { $0.note == "inbound" }
+    }
+
     /// True if now is after arrival (or if arrival is nil)
     var isOnGround: Bool {
         Date().isAfter(flightArrival)

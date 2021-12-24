@@ -8,6 +8,7 @@
 // swiftlint:disable all
 import Foundation
 
+@available(*, deprecated)
 struct StatsREMOVE: Codable {
     var serverDate: Date {
         Date(timeIntervalSince1970: TimeInterval(server_time))
