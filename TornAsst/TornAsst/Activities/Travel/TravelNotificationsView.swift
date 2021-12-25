@@ -27,14 +27,6 @@ struct TravelNotificationsView: View {
         }
     }
 
-    var header: some View {
-        HStack {
-            label
-            Spacer()
-            EditButton()
-        }
-    }
-
     var notices: [Notice] {
         isOutbound
         ? travel.flightNoticesOutbound
@@ -42,14 +34,12 @@ struct TravelNotificationsView: View {
     }
 
     var body: some View {
-        Section(header: header) {
+        Section(header: label) {
             if isOutbound {
                 MarketplaceTicksRow()
             }
             ForEach(notices) { notice in
-                NotifyQuickActionRow(
-                    message: "\(notice.offset) seconds before landing",
-                    notice: notice)
+                AddAdjustItemRow(isOutbound: isOutbound, notice: notice)
             }
             AddAdjustItemRow(isOutbound: isOutbound, travel: travel)
         }

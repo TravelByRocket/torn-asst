@@ -8,6 +8,7 @@
 import Foundation
 
 extension Notice {
+    /// Seconds offset from a point in time
     var noticeOffset: Int {
         get {
             Int(offset)
@@ -15,6 +16,14 @@ extension Notice {
         set (newValue) {
             offset = Int32(newValue)
         }
+    }
+
+    var noticeOffsetSecondsOnly: Int {
+        noticeOffset % 60
+    }
+
+    var noticeOffsetMinutesOnly: Int {
+        (noticeOffset - noticeOffsetSecondsOnly) / 60
     }
 
     static var exampleActive: Notice {

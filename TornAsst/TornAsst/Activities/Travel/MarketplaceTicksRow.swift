@@ -23,6 +23,8 @@ struct MarketplaceTicksRow: View {
 
 struct MarketplaceTicksRow_Previews: PreviewProvider {
     static var previews: some View {
-        MarketplaceTicksRow()
+        List {
+            MarketplaceTicksRow()
+        }
     }
 }

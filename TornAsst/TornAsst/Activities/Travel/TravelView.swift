@@ -29,11 +29,11 @@ struct TravelView: View {
     var currently: some View {
         if travel.isOnGround {
             return Label(
-                "You are in \(travel.destination ?? "Unknown")",
-                systemImage: travel.destination == "Torn" ? "mappin.and.ellipse" : "camera.viewfinder"
+                "You are in \(travel.flightDestination)",
+                systemImage: travel.flightDestination == "Torn" ? "mappin.and.ellipse" : "camera.viewfinder"
             )
         } else {
-            let msg = "Flying to \(travel.destination ?? "Unknown")"
+            let msg = "Flying to \(travel.flightDestination)"
             if travel.destination == "Torn" {
                 return Label(msg, image: "airplane.left")
             } else {
@@ -86,6 +86,13 @@ struct TravelView: View {
                 dataController.save()
             }
         }
+        .onChange(of: isLoading) { changeIsToTrue in
+            // This was previously done within the fetch but produced a warning "Publishing changes from background
+            // threads is not allowed" so moved to main by attaching to view.
+            if !changeIsToTrue { // has just finished fetching when it turns to false
+                dataController.save()
+            }
+        }
     }
 
     enum TravelFetchError: Error {
@@ -95,7 +102,7 @@ struct TravelView: View {
 
     func fetchTravel() async throws {
         isLoading = true
-        guard let url = URL(string: "https://api.torn.com/user/?selections=travel,timestamp&key=7Im0qHgainf4Xy1A") else {
+        guard let url = URL(string: "https://api.torn.com/user/?selections=travel,timestamp&key=7Im0qHgainf4Xy1A") else { // swiftlint:disable:this line_length
             throw TravelFetchError.invalidURL
         }
 
@@ -109,7 +116,6 @@ struct TravelView: View {
             travel.arrival = arrival
             travel.departed = departure
             travel.destination = travelResult.destination
-            dataController.save()
             isLoading = false
         }
     }
