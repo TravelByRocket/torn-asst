@@ -23,16 +23,10 @@
 		2FF7AE8C277450FD0043ECC1 /* Date-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AE8B277450FD0043ECC1 /* Date-Extension.swift */; };
 		2FF7AE8F277451A30043ECC1 /* Calendar-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AE8E277451A30043ECC1 /* Calendar-Extension.swift */; };
 		2FF7AE97277452130043ECC1 /* TravelJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AE91277452130043ECC1 /* TravelJSON.swift */; };
-		2FF7AE98277452130043ECC1 /* TravelSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AE92277452130043ECC1 /* TravelSection.swift */; };
 		2FF7AE99277452130043ECC1 /* TravelNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AE93277452130043ECC1 /* TravelNotificationsView.swift */; };
 		2FF7AE9A277452130043ECC1 /* TravelSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AE94277452130043ECC1 /* TravelSummaryView.swift */; };
 		2FF7AE9B277452130043ECC1 /* TravelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AE95277452130043ECC1 /* TravelView.swift */; };
-		2FF7AE9C277452130043ECC1 /* TravelControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AE96277452130043ECC1 /* TravelControls.swift */; };
 		2FF7AE9E2774523F0043ECC1 /* BigSectionBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AE9D2774523F0043ECC1 /* BigSectionBarView.swift */; };
-		2FF7AEA9277452BD0043ECC1 /* NerveSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEA3277452BD0043ECC1 /* NerveSection.swift */; };
-		2FF7AEAA277452BD0043ECC1 /* NerveControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEA4277452BD0043ECC1 /* NerveControls.swift */; };
-		2FF7AEAB277452BD0043ECC1 /* BarResultREMOVE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEA5277452BD0043ECC1 /* BarResultREMOVE.swift */; };
-		2FF7AEAC277452BD0043ECC1 /* EnergyControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEA6277452BD0043ECC1 /* EnergyControls.swift */; };
 		2FF7AEAD277452BD0043ECC1 /* NotifyOptionRowStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEA7277452BD0043ECC1 /* NotifyOptionRowStepper.swift */; };
 		2FF7AEAE277452BD0043ECC1 /* BarsJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEA8277452BD0043ECC1 /* BarsJSON.swift */; };
 		2FF7AEB2277453080043ECC1 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEB1277453080043ECC1 /* Location.swift */; };
@@ -61,10 +55,8 @@
 		2FF7AEE3277459A60043ECC1 /* DataController-CreateDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEE2277459A60043ECC1 /* DataController-CreateDefaults.swift */; };
 		2FF7AEED27745A400043ECC1 /* TimedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEE427745A3F0043ECC1 /* TimedView.swift */; };
 		2FF7AEEE27745A400043ECC1 /* IndicatorRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEE527745A3F0043ECC1 /* IndicatorRow.swift */; };
-		2FF7AEF027745A400043ECC1 /* SyncFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEE727745A3F0043ECC1 /* SyncFooter.swift */; };
 		2FF7AEF127745A400043ECC1 /* IndicatorBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEE827745A3F0043ECC1 /* IndicatorBar.swift */; };
 		2FF7AEF227745A400043ECC1 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEE927745A400043ECC1 /* Activity.swift */; };
-		2FF7AEF327745A400043ECC1 /* StatsREMOVE.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEEA27745A400043ECC1 /* StatsREMOVE.swift */; };
 		2FF7AEF427745A400043ECC1 /* NotificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEEB27745A400043ECC1 /* NotificationRow.swift */; };
 		2FF7AEF527745A400043ECC1 /* NotifyQuickActionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEEC27745A400043ECC1 /* NotifyQuickActionRow.swift */; };
 		2FF7AEF8277463470043ECC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FF7AE502773B1C10043ECC1 /* Assets.xcassets */; };
@@ -89,16 +81,10 @@
 		2FF7AE8B277450FD0043ECC1 /* Date-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date-Extension.swift"; sourceTree = "<group>"; };
 		2FF7AE8E277451A30043ECC1 /* Calendar-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Calendar-Extension.swift"; sourceTree = "<group>"; };
 		2FF7AE91277452130043ECC1 /* TravelJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelJSON.swift; sourceTree = "<group>"; };
-		2FF7AE92277452130043ECC1 /* TravelSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelSection.swift; sourceTree = "<group>"; };
 		2FF7AE93277452130043ECC1 /* TravelNotificationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelNotificationsView.swift; sourceTree = "<group>"; };
 		2FF7AE94277452130043ECC1 /* TravelSummaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelSummaryView.swift; sourceTree = "<group>"; };
 		2FF7AE95277452130043ECC1 /* TravelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelView.swift; sourceTree = "<group>"; };
-		2FF7AE96277452130043ECC1 /* TravelControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TravelControls.swift; sourceTree = "<group>"; };
 		2FF7AE9D2774523F0043ECC1 /* BigSectionBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigSectionBarView.swift; sourceTree = "<group>"; };
-		2FF7AEA3277452BD0043ECC1 /* NerveSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NerveSection.swift; sourceTree = "<group>"; };
-		2FF7AEA4277452BD0043ECC1 /* NerveControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NerveControls.swift; sourceTree = "<group>"; };
-		2FF7AEA5277452BD0043ECC1 /* BarResultREMOVE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarResultREMOVE.swift; sourceTree = "<group>"; };
-		2FF7AEA6277452BD0043ECC1 /* EnergyControls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnergyControls.swift; sourceTree = "<group>"; };
 		2FF7AEA7277452BD0043ECC1 /* NotifyOptionRowStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyOptionRowStepper.swift; sourceTree = "<group>"; };
 		2FF7AEA8277452BD0043ECC1 /* BarsJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarsJSON.swift; sourceTree = "<group>"; };
 		2FF7AEB1277453080043ECC1 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -127,10 +113,8 @@
 		2FF7AEE2277459A60043ECC1 /* DataController-CreateDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataController-CreateDefaults.swift"; sourceTree = "<group>"; };
 		2FF7AEE427745A3F0043ECC1 /* TimedView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimedView.swift; sourceTree = "<group>"; };
 		2FF7AEE527745A3F0043ECC1 /* IndicatorRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorRow.swift; sourceTree = "<group>"; };
-		2FF7AEE727745A3F0043ECC1 /* SyncFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncFooter.swift; sourceTree = "<group>"; };
 		2FF7AEE827745A3F0043ECC1 /* IndicatorBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorBar.swift; sourceTree = "<group>"; };
 		2FF7AEE927745A400043ECC1 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
-		2FF7AEEA27745A400043ECC1 /* StatsREMOVE.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsREMOVE.swift; sourceTree = "<group>"; };
 		2FF7AEEB27745A400043ECC1 /* NotificationRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRow.swift; sourceTree = "<group>"; };
 		2FF7AEEC27745A400043ECC1 /* NotifyQuickActionRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyQuickActionRow.swift; sourceTree = "<group>"; };
 		2FF7AEF72774629D0043ECC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -181,8 +165,6 @@
 				2FF7AEE527745A3F0043ECC1 /* IndicatorRow.swift */,
 				2FF7AEEB27745A400043ECC1 /* NotificationRow.swift */,
 				2FF7AEEC27745A400043ECC1 /* NotifyQuickActionRow.swift */,
-				2FF7AEEA27745A400043ECC1 /* StatsREMOVE.swift */,
-				2FF7AEE727745A3F0043ECC1 /* SyncFooter.swift */,
 				2FF7AEE427745A3F0043ECC1 /* TimedView.swift */,
 				2FF7AE7A2773C1B20043ECC1 /* Model.xcdatamodeld */,
 				2FF7AE502773B1C10043ECC1 /* Assets.xcassets */,
@@ -240,9 +222,7 @@
 				2FD49FF1277582C3009B1B12 /* AddAdjustItemRow.swift */,
 				2FD49FED277569E2009B1B12 /* MarketplaceTicksRow.swift */,
 				2FF7AEC5277454210043ECC1 /* Travel-CoreDataHelpers.swift */,
-				2FF7AE96277452130043ECC1 /* TravelControls.swift */,
 				2FF7AE91277452130043ECC1 /* TravelJSON.swift */,
-				2FF7AE92277452130043ECC1 /* TravelSection.swift */,
 				2FF7AE94277452130043ECC1 /* TravelSummaryView.swift */,
 				2FF7AEB1277453080043ECC1 /* Location.swift */,
 			);
@@ -255,11 +235,7 @@
 				2F3A25602774F8320048145F /* BarsView.swift */,
 				2FF7AE89277450D70043ECC1 /* Bar-Examples.swift */,
 				2FF7AE87277450200043ECC1 /* Bar-CoreDataHelpers.swift */,
-				2FF7AEA5277452BD0043ECC1 /* BarResultREMOVE.swift */,
 				2FF7AEA8277452BD0043ECC1 /* BarsJSON.swift */,
-				2FF7AEA6277452BD0043ECC1 /* EnergyControls.swift */,
-				2FF7AEA4277452BD0043ECC1 /* NerveControls.swift */,
-				2FF7AEA3277452BD0043ECC1 /* NerveSection.swift */,
 			);
 			path = Bars;
 			sourceTree = "<group>";
@@ -395,7 +371,6 @@
 				2FD49FEE277569E2009B1B12 /* MarketplaceTicksRow.swift in Sources */,
 				2F3A25612774F8320048145F /* BarsView.swift in Sources */,
 				2FF7AEC3277453C50043ECC1 /* BoosterView.swift in Sources */,
-				2FF7AE9C277452130043ECC1 /* TravelControls.swift in Sources */,
 				2FF7AEC6277454210043ECC1 /* Travel-CoreDataHelpers.swift in Sources */,
 				2FF7AEE02774599B0043ECC1 /* BankView.swift in Sources */,
 				2FF7AEED27745A400043ECC1 /* TimedView.swift in Sources */,
@@ -406,13 +381,10 @@
 				2FF7AE9B277452130043ECC1 /* TravelView.swift in Sources */,
 				2FF7AECA2774548E0043ECC1 /* Reminder-CoreDataHelpers.swift in Sources */,
 				2FF7AE97277452130043ECC1 /* TravelJSON.swift in Sources */,
-				2FF7AEA9277452BD0043ECC1 /* NerveSection.swift in Sources */,
 				2FF7AEF227745A400043ECC1 /* Activity.swift in Sources */,
 				2FF7AEBA277453480043ECC1 /* PeriodicSectionView.swift in Sources */,
 				2FF7AE8627744F7C0043ECC1 /* Player-CoreDataHelpers.swift in Sources */,
-				2FF7AE98277452130043ECC1 /* TravelSection.swift in Sources */,
 				2FF7AE4F2773B1C00043ECC1 /* ContentView.swift in Sources */,
-				2FF7AEAC277452BD0043ECC1 /* EnergyControls.swift in Sources */,
 				2FF7AED9277459840043ECC1 /* CountdownWithLocalTime.swift in Sources */,
 				2FF7AEB2277453080043ECC1 /* Location.swift in Sources */,
 				2FF7AEEE27745A400043ECC1 /* IndicatorRow.swift in Sources */,
@@ -426,12 +398,10 @@
 				2FF7AED5277457220043ECC1 /* SettingsView.swift in Sources */,
 				2FF7AE4D2773B1C00043ECC1 /* TornAsstApp.swift in Sources */,
 				2FF7AEF127745A400043ECC1 /* IndicatorBar.swift in Sources */,
-				2FF7AEF027745A400043ECC1 /* SyncFooter.swift in Sources */,
 				2FF7AEC4277453C50043ECC1 /* DrugView.swift in Sources */,
 				2FF7AE99277452130043ECC1 /* TravelNotificationsView.swift in Sources */,
 				2FF7AE7C2773C1B20043ECC1 /* Model.xcdatamodeld in Sources */,
 				2FD49FF027757A9D009B1B12 /* Binding-OnChange.swift in Sources */,
-				2FF7AEAA277452BD0043ECC1 /* NerveControls.swift in Sources */,
 				2FF7AE8F277451A30043ECC1 /* Calendar-Extension.swift in Sources */,
 				2FF7AE8A277450D70043ECC1 /* Bar-Examples.swift in Sources */,
 				2FD49FEC2775683E009B1B12 /* Notice-CoreDataHelpers.swift in Sources */,
@@ -439,14 +409,12 @@
 				2FF7AEF427745A400043ECC1 /* NotificationRow.swift in Sources */,
 				2FF7AEDF2774599B0043ECC1 /* EducationView.swift in Sources */,
 				2FF7AEAE277452BD0043ECC1 /* BarsJSON.swift in Sources */,
-				2FF7AEF327745A400043ECC1 /* StatsREMOVE.swift in Sources */,
 				2FD49FF2277582C3009B1B12 /* AddAdjustItemRow.swift in Sources */,
 				2FF7AED3277457220043ECC1 /* ClockOffsetView.swift in Sources */,
 				2FF7AEE3277459A60043ECC1 /* DataController-CreateDefaults.swift in Sources */,
 				2FF7AECC277455880043ECC1 /* Time-Typealiases.swift in Sources */,
 				2FF7AED4277457220043ECC1 /* ApiPromptPage.swift in Sources */,
 				2FF7AE8C277450FD0043ECC1 /* Date-Extension.swift in Sources */,
-				2FF7AEAB277452BD0043ECC1 /* BarResultREMOVE.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

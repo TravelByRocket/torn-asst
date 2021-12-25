@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct AddAdjustItemRow: View {
     let isOutbound: Bool
@@ -60,6 +61,14 @@ struct AddAdjustItemRow: View {
                         Text("\(Int(minutes), specifier: "% 2d") min")
                         Slider(value: $minutes, in: 0 ... 59, step: 1.0)
                     }
+                    #if DEBUG
+                    HStack {
+                        Text("\(Int(minutes), specifier: "% 2d") min")
+                        Slider(value: $minutes, in: 0 ... 3*60, step: 1.0)
+                    }
+                    .foregroundColor(.mint)
+                    .accentColor(.indigo)
+                    #endif
                 }
                 .font(.body.monospaced())
                 HStack {
@@ -85,7 +94,9 @@ struct AddAdjustItemRow: View {
                             .multilineTextAlignment(.trailing)
                             .fixedSize(horizontal: false, vertical: true)
                     }
-                    .disabled(seconds == 0.0 && minutes == 0.0)
+//                    .disabled(seconds == 0.0 && minutes == 0.0) // need to be able to make "when I land"
+                    // reminder, but still would prefer to have a check to make sure nothing
+                    // else identical already exists, even if this is small beans
                     .buttonStyle(.bordered)
                     if let notice = notice {
                         Spacer()
@@ -103,6 +114,8 @@ struct AddAdjustItemRow: View {
                                 Text("Cancel")
                             }
                             Button(role: .destructive) {
+                                UNUserNotificationCenter.current().removeDeliveredNotifications(
+                                    withIdentifiers: [notice.id?.uuidString ?? "invalid ID"])
                                 withAnimation {
                                     dataController.delete(notice)
                                 }
@@ -115,7 +128,6 @@ struct AddAdjustItemRow: View {
 
                 }
             }
-
         } label: {
             if let notice = notice {
                 NotifyQuickActionRow(message: "\(notice.noticeOffset) seconds before landing", notice: notice)

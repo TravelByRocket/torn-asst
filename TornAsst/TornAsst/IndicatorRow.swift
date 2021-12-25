@@ -11,15 +11,14 @@ import SwiftUI
 struct IndicatorRow: View {
     let name: String
     let color: Color
-    let barInfo: BarResultREMOVE
     let server_time: Int
     
     var curValue: Int {
-        barInfo.current
+        50
     }
     
     var maxValue: Int {
-        barInfo.maximum
+        100
     }
     
     var curValText: Text {
@@ -39,7 +38,7 @@ struct IndicatorRow: View {
     }
     
     var dateFull: Date {
-        Date(timeIntervalSince1970: TimeInterval(TimeInterval(server_time) + TimeInterval(barInfo.fulltime)))
+        Date(timeIntervalSince1970: TimeInterval(TimeInterval(server_time) + TimeInterval(1000)))
     }
     
     var body: some View {
@@ -48,11 +47,8 @@ struct IndicatorRow: View {
                 Text(name)
                 curValText+Text("/")+maxValText
                 Spacer()
-                Text("+\(barInfo.increment, specifier: "%2.d")/\(barInfo.interval/60, specifier: "%2.f")min").font(.system(.caption, design: .monospaced))
+                Text("+\(215, specifier: "%2.d")/\(350.0/60, specifier: "%2.f")min").font(.system(.caption, design: .monospaced))
                     // \(String(name.prefix(1)).lowercased()) use this for first letter
-                    .onAppear{
-                        print(barInfo.interval)
-                    }
             }
             .font(.system(.body, design: .monospaced))
             .background(color.opacity(0.2))
@@ -79,12 +75,13 @@ struct IndicatorRow: View {
     }
 }
 
-//struct IndicatorRow_Previews: PreviewProvider {
-//    static var previews: some View {
-//        IndicatorRow(
-//            name: "Mana  ",
-//            color: .purple,
-//            barInfo: BarResult.default,
-//            server_time: TornResponse.default.server_time)
-//    }
-//}
+struct IndicatorRow_Previews: PreviewProvider {
+    static var previews: some View {
+        IndicatorRow(
+            name: "Mana  ",
+            color: .purple,
+            server_time: Int(Date().timeIntervalSince1970) - 20
+        )
+            .previewLayout(.sizeThatFits)
+    }
+}

@@ -11,10 +11,10 @@ struct CountdownWithLocalTime: View {
     let date: Date
 
     var dateFormatter: DateFormatter {
-        let df = DateFormatter()
-        df.timeStyle = .short
-        df.timeZone = .autoupdatingCurrent
-        return df
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        formatter.timeZone = .autoupdatingCurrent
+        return formatter
     }
 
     var body: some View {

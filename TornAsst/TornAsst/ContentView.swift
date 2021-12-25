@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UserNotifications
 
 struct ContentView: View {
     @SceneStorage("selectedView") var selectedView: String?
@@ -19,8 +20,7 @@ struct ContentView: View {
         if let justOne = playersOnlyOne.wrappedValue.first {
             return justOne
         } else {
-            let justOne = Player(context: managedObjectContext)
-            dataController.save()
+            let justOne = Player(context: managedObjectContext) // saves with onAppear to not update view while loading
             return justOne
         }
     }
@@ -72,6 +72,19 @@ struct ContentView: View {
                 }
         }
         .environmentObject(player)
+        .onAppear {
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: [.alert, .badge, .sound]) { success, error in
+                    if success {
+                        print("All set!")
+                    } else if let error = error {
+                        print(error.localizedDescription)
+                    }
+                }
+        }
+        .onAppear {
+            dataController.save() // do not save within computed property or it will produce a warning about updating view
+        }
     }
 }
 

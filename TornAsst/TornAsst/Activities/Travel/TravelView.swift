@@ -44,12 +44,6 @@ struct TravelView: View {
 
     var body: some View {
         List {
-            Button {
-                dataController.deleteAll()
-            } label: {
-                Text("Delete All")
-            }
-
             Section {
                 BigSectionBarView(
                     systemImage: "airplane.circle",
