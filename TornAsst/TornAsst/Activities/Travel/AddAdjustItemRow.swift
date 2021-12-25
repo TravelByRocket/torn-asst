@@ -16,6 +16,7 @@ struct AddAdjustItemRow: View {
     // Workaround for not being able to have an optional ObservedObject for notice
     // Can mostly be avoided with notice.travel?.objectWillChange.send() but had issues
     @State private var isNoticeActive = false
+    @State private var showAlert = false
     @State private var minutes: Double
     @State private var seconds: Double
 
@@ -61,30 +62,58 @@ struct AddAdjustItemRow: View {
                     }
                 }
                 .font(.body.monospaced())
-                Button {
-                    withAnimation {
-                        if let notice = notice {
-                            notice.travel?.objectWillChange.send()
-                            notice.noticeOffset = Int(minutes * 60 + seconds)
-                        } else {
-                            let notice = Notice(context: managedObjectContext)
-                            notice.noticeOffset = Int(minutes * 60 + seconds)
-                            notice.id = UUID()
-                            notice.isActive = true
-                            notice.note = isOutbound ? "outbound" : "inbound"
-                            notice.travel = travel
+                HStack {
+                    Button {
+                        withAnimation {
+                            if let notice = notice {
+                                notice.travel?.objectWillChange.send()
+                                notice.noticeOffset = Int(minutes * 60 + seconds)
+                            } else {
+                                let notice = Notice(context: managedObjectContext)
+                                notice.noticeOffset = Int(minutes * 60 + seconds)
+                                notice.id = UUID()
+                                notice.isActive = true
+                                notice.note = isOutbound ? "outbound" : "inbound"
+                                notice.travel = travel
+                            }
+                            dataController.save()
+                            isExpanded = false
                         }
-                        dataController.save()
-                        isExpanded = false
+                    } label: {
+                        Label("\(notice == nil ? "Remind" : "Change to") \(Int(minutes), specifier: "%02d"):\(Int(seconds), specifier: "%02d") before", systemImage: "rectangle.stack.badge.plus") // swiftlint:disable:this line_length
+                            .monospacedDigit()
+                            .multilineTextAlignment(.trailing)
+                            .fixedSize(horizontal: false, vertical: true)
                     }
-                } label: {
-                    Label("\(notice == nil ? "Create Reminder for" : "Change reminder to")\n\(Int(minutes), specifier: "%02d"):\(Int(seconds), specifier: "%02d") before landing", systemImage: "rectangle.stack.badge.plus") // swiftlint:disable:this line_length
-                        .monospacedDigit()
-                        .multilineTextAlignment(.trailing)
-                        .fixedSize(horizontal: false, vertical: true)
+                    .disabled(seconds == 0.0 && minutes == 0.0)
+                    .buttonStyle(.bordered)
+                    if let notice = notice {
+                        Spacer()
+                        Button(role: .destructive) {
+                            showAlert = true
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                                .labelStyle(.iconOnly)
+                        }
+                        .buttonStyle(.borderless)
+                        .alert("Delete this reminder?", isPresented: $showAlert) {
+                            Button(role: .cancel) {
+                                showAlert = false
+                            } label: {
+                                Text("Cancel")
+                            }
+                            Button(role: .destructive) {
+                                withAnimation {
+                                    dataController.delete(notice)
+                                }
+                            } label: {
+                                Text("Delete")
+                            }
+
+                        }
+                    }
+
                 }
-                .disabled(seconds == 0.0 && minutes == 0.0)
-                .buttonStyle(.bordered)
             }
 
         } label: {
