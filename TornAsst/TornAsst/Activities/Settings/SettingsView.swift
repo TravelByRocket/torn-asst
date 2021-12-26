@@ -27,7 +27,12 @@ struct SettingsView: View {
 }
 
 struct SettingsView_Previews: PreviewProvider {
+    static var dataController = DataController.preview
+
     static var previews: some View {
         SettingsView()
+            .environment(\.managedObjectContext, dataController.container.viewContext)
+            .environmentObject(dataController)
+            .environmentObject(Player.example)
     }
 }

@@ -9,22 +9,26 @@
 import SwiftUI
 
 struct ApiPromptPage: View {
-    @AppStorage("apikey") var apikey: String = ""
-    @State private var apifield: String = ""
+    @State private var keyText: String = ""
     @State private var loading = false
 
+    @EnvironmentObject var player: Player
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
     
     let regex = try! NSRegularExpression(pattern: "[^a-zA-Z0-9]")
-    
+
+    var api: API {
+        player.playerAPI
+    }
+
     var invalidCharacterFound: Bool {
-        let range = NSRange(location: 0, length: apifield.utf16.count)
-        return regex.firstMatch(in: apifield, options: [], range: range) != nil
+        let range = NSRange(location: 0, length: keyText.utf16.count)
+        return regex.firstMatch(in: keyText, options: [], range: range) != nil
     }
     
     var isWrongLength: Bool {
-        apifield.count != 16
+        keyText.count != 16
     }
 
     static var footer: some View {
@@ -36,18 +40,20 @@ struct ApiPromptPage: View {
     
     var body: some View {
         VStack (alignment: .leading){
-            Spacer()
             VStack {
                 BigSectionBarView(
                     systemImage: "key",
                     message: "Torn API Key",
                     color: .accentColor)
                 HStack {
-                    TextField("API Key", text: $apifield)
+                    TextField("API Key", text: $keyText)
                         .textInputAutocapitalization(.never)
                         .font(.body.monospaced())
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .foregroundColor(.primary)
+                        .onAppear(perform: {
+                            keyText = api.apiKey
+                        })
                         .overlay(
                             HStack{
                                 Spacer()
@@ -57,29 +63,44 @@ struct ApiPromptPage: View {
                             }
                         )
                     Button(action: {
-                        if apifield == "" {
+                        if keyText == "" {
                             let pasteboard = UIPasteboard.general
-                            apifield = pasteboard.string ?? ""
+                            keyText = pasteboard.string ?? ""
                         } else {
-                            apifield = ""
+                            keyText = ""
                         }
                     }) {
                         Label(
-                            apifield == "" ? "Paste" : "Clear",
-                            systemImage: apifield == "" ? "doc.on.clipboard" : "clear"
+                            keyText == "" ? "Paste" : "Clear",
+                            systemImage: keyText == "" ? "doc.on.clipboard" : "clear"
                         )
                             .labelStyle(.iconOnly)
-                            .animation(.easeInOut, value: apifield == "")
+                            .animation(.easeInOut, value: keyText == "")
                     }
                     .buttonStyle(BorderlessButtonStyle())
                 }
-                Text("problem text")
+                Text(api.error ?? " ")
                     .font(.footnote)
                     .foregroundColor(.orange)
                     .multilineTextAlignment(.center)
                 Button(
                     action: {
-                        // API fetch
+                        loading = true
+                        api.key = keyText
+                        Task.init {
+                            let basics = try? await api.getNew(BasicsJSON.self)
+                            if basics != nil {
+                                player.objectWillChange.send()
+                                api.lastChecked = Date()
+                                api.error = nil
+                                api.player?.playerBasics.level = Int16(basics!.level)
+                                api.player?.playerBasics.name = basics!.name
+                                api.player?.playerBasics.gender = basics!.gender
+                                api.player?.playerBasics.userID = Int32(basics!.player_id)
+                            }
+                        }
+                        loading = false
+                        dataController.save()
                     }
                 ) {
                     Text(invalidCharacterFound || isWrongLength ? "Invalid Entry" : "Submit")
@@ -128,6 +149,7 @@ struct ApiPromptPage_Previews: PreviewProvider {
                 ApiPromptPage()
                     .environment(\.managedObjectContext, dataController.container.viewContext)
                     .environmentObject(dataController)
+                    .environmentObject(Player.example)
             }
         }
     }

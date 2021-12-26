@@ -9,6 +9,46 @@ import Foundation
 import CoreData
 
 extension Player {
+    var playerAPI: API {
+        if let api = api {
+            return api
+        } else if let context = managedObjectContext {
+            let api = API(context: context)
+            api.player = self
+            api.key = "wruaSWbBvFqNYXTV"
+            return api
+        } else {
+            let api = API()
+            api.player = self
+            return api
+        }
+    }
+
+    var playerBasics: Basics {
+        if let basics = basics {
+            return basics
+        } else if let context = managedObjectContext {
+            let basics = Basics(context: context)
+            basics.player = self
+            return basics
+        } else {
+            let basics = Basics()
+            basics.player = self
+            return basics
+        }
+    }
+
+    var playerTravel: Travel {
+        if let travel = travel {
+            return travel
+        } else if let moc = managedObjectContext {
+            let travel = Travel(context: moc)
+            travel.player = self
+            return travel
+        } else {
+            return Travel.example
+        }
+    }
 
     var playerBars: [Bar] {
         bars?.allObjects as? [Bar] ?? []
@@ -28,18 +68,6 @@ extension Player {
 
     var playerLife: Bar {
         playerBars.first { $0.barName == "life" } ?? Bar.exampleLife
-    }
-
-    var playerTravel: Travel {
-        if let travel = travel {
-            return travel
-        } else if let moc = managedObjectContext {
-            let travel = Travel(context: moc)
-            try? moc.save()
-            return travel
-        } else {
-            return Travel.example
-        }
     }
 
     static var example: Player {

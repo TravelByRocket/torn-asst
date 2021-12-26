@@ -12,17 +12,11 @@ struct TravelView: View {
     static let tag: String = "Travel"
     @State private var isLoading = false
 
-    @FetchRequest(
-        entity: Travel.entity(),
-        sortDescriptors: [
-            NSSortDescriptor(keyPath: \Travel.departed, ascending: true)
-        ]
-    ) private var travelJustOne: FetchedResults<Travel>
-
     var travel: Travel {
-        travelJustOne.first ?? Travel.example
+        player.playerTravel
     }
 
+    @EnvironmentObject var player: Player
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
 
@@ -74,12 +68,6 @@ struct TravelView: View {
                 try? await fetchTravel()
             }
         }
-        .onAppear {
-            if travelJustOne.isEmpty {
-                _ = Travel(context: managedObjectContext)
-                dataController.save()
-            }
-        }
         .onChange(of: isLoading) { changeIsToTrue in
             // This was previously done within the fetch but produced a warning "Publishing changes from background
             // threads is not allowed" so moved to main by attaching to view.
@@ -96,13 +84,8 @@ struct TravelView: View {
 
     func fetchTravel() async throws {
         isLoading = true
-        guard let url = URL(string: "https://api.torn.com/user/?selections=travel,timestamp&key=7Im0qHgainf4Xy1A") else { // swiftlint:disable:this line_length
-            throw TravelFetchError.invalidURL
-        }
 
-        let (data, _) = try await URLSession.shared.data(from: url)
-
-        let travelResult = try JSONDecoder().decode(TravelJSON.self, from: data).travel
+        let travelResult = try await player.playerAPI.getNew(TravelJSON.self).travel
         let departure = Date(timeIntervalSince1970: TimeInterval(travelResult.departed))
         let arrival = Date(timeIntervalSince1970: TimeInterval(travelResult.timestamp))
 
@@ -122,5 +105,6 @@ struct TravelView_Previews: PreviewProvider {
         TravelView()
             .environment(\.managedObjectContext, dataController.container.viewContext)
             .environmentObject(dataController)
+            .environmentObject(Player.example)
     }
 }
