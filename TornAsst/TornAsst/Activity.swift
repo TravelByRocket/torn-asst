@@ -4,7 +4,7 @@
 //
 //  Created by Bryan Costanza on 1/10/21.
 //
-
+// swiftlint:disable all
 //import Foundation
 
 //enum Activity: Equatable {

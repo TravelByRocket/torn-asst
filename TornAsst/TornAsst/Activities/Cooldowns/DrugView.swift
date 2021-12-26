@@ -19,12 +19,10 @@ struct DrugView: View {
     var player: Player {
         print(players.count)
         if let user = players.first {
-            print("existing user")
             return user
         } else {
             print("making user")
             let user = Player(context: managedObjectContext)
-            dataController.save()
             return user
         }
     }

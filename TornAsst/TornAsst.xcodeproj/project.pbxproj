@@ -48,7 +48,6 @@
 		2FF7AED5277457220043ECC1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AED2277457220043ECC1 /* SettingsView.swift */; };
 		2FF7AED7277458C80043ECC1 /* RemindersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AED6277458C80043ECC1 /* RemindersView.swift */; };
 		2FF7AED9277459840043ECC1 /* CountdownWithLocalTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AED8277459840043ECC1 /* CountdownWithLocalTime.swift */; };
-		2FF7AEDE2774599B0043ECC1 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEDA2774599B0043ECC1 /* DashboardView.swift */; };
 		2FF7AEDF2774599B0043ECC1 /* EducationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEDB2774599B0043ECC1 /* EducationView.swift */; };
 		2FF7AEE02774599B0043ECC1 /* BankView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEDC2774599B0043ECC1 /* BankView.swift */; };
 		2FF7AEE12774599B0043ECC1 /* BasicsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEDD2774599B0043ECC1 /* BasicsSection.swift */; };
@@ -106,7 +105,6 @@
 		2FF7AED2277457220043ECC1 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2FF7AED6277458C80043ECC1 /* RemindersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemindersView.swift; sourceTree = "<group>"; };
 		2FF7AED8277459840043ECC1 /* CountdownWithLocalTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CountdownWithLocalTime.swift; sourceTree = "<group>"; };
-		2FF7AEDA2774599B0043ECC1 /* DashboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		2FF7AEDB2774599B0043ECC1 /* EducationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EducationView.swift; sourceTree = "<group>"; };
 		2FF7AEDC2774599B0043ECC1 /* BankView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BankView.swift; sourceTree = "<group>"; };
 		2FF7AEDD2774599B0043ECC1 /* BasicsSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicsSection.swift; sourceTree = "<group>"; };
@@ -186,7 +184,6 @@
 			children = (
 				2FF7AEDC2774599B0043ECC1 /* BankView.swift */,
 				2FF7AEDD2774599B0043ECC1 /* BasicsSection.swift */,
-				2FF7AEDA2774599B0043ECC1 /* DashboardView.swift */,
 				2FF7AEDB2774599B0043ECC1 /* EducationView.swift */,
 				2FF7AE8527744F7C0043ECC1 /* Player-CoreDataHelpers.swift */,
 				2FF7AECD277455B90043ECC1 /* Player-ReminderHelpers.swift */,
@@ -391,7 +388,6 @@
 				2FF7AE84277446D60043ECC1 /* DataController.swift in Sources */,
 				2FF7AEB9277453480043ECC1 /* PeriodicTaskToggleView.swift in Sources */,
 				2FF7AE9E2774523F0043ECC1 /* BigSectionBarView.swift in Sources */,
-				2FF7AEDE2774599B0043ECC1 /* DashboardView.swift in Sources */,
 				2FF7AEAD277452BD0043ECC1 /* NotifyOptionRowStepper.swift in Sources */,
 				2FF7AECE277455B90043ECC1 /* Player-ReminderHelpers.swift in Sources */,
 				2FF7AEBF2774536A0043ECC1 /* DateFormatter-Extension.swift in Sources */,

@@ -43,6 +43,11 @@ struct TravelNotificationsView: View {
             }
             AddAdjustItemRow(isOutbound: isOutbound, travel: travel)
         }
+        .onReceive(travel.objectWillChange) { _ in
+            for notice in travel.flightNotices {
+                notice.processFlightNoticeChange()
+            }
+        }
     }
 }
 

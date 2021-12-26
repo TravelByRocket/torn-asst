@@ -77,6 +77,7 @@ struct AddAdjustItemRow: View {
                             if let notice = notice {
                                 notice.travel?.objectWillChange.send()
                                 notice.noticeOffset = Int(minutes * 60 + seconds)
+                                notice.processFlightNoticeChange()
                             } else {
                                 let notice = Notice(context: managedObjectContext)
                                 notice.noticeOffset = Int(minutes * 60 + seconds)
@@ -84,6 +85,7 @@ struct AddAdjustItemRow: View {
                                 notice.isActive = true
                                 notice.note = isOutbound ? "outbound" : "inbound"
                                 notice.travel = travel
+                                notice.processFlightNoticeChange()
                             }
                             dataController.save()
                             isExpanded = false
@@ -94,9 +96,6 @@ struct AddAdjustItemRow: View {
                             .multilineTextAlignment(.trailing)
                             .fixedSize(horizontal: false, vertical: true)
                     }
-//                    .disabled(seconds == 0.0 && minutes == 0.0) // need to be able to make "when I land"
-                    // reminder, but still would prefer to have a check to make sure nothing
-                    // else identical already exists, even if this is small beans
                     .buttonStyle(.bordered)
                     if let notice = notice {
                         Spacer()
@@ -114,8 +113,7 @@ struct AddAdjustItemRow: View {
                                 Text("Cancel")
                             }
                             Button(role: .destructive) {
-                                UNUserNotificationCenter.current().removeDeliveredNotifications(
-                                    withIdentifiers: [notice.id?.uuidString ?? "invalid ID"])
+                                notice.removeAssociatedNotification()
                                 withAnimation {
                                     dataController.delete(notice)
                                 }

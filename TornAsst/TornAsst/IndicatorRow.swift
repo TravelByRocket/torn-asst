@@ -66,7 +66,6 @@ struct IndicatorRow: View {
                         .multilineTextAlignment(.trailing)
                 }
             }
-//            .foregroundColor(color).colorInvert()
             .padding(.horizontal)
             .background(
                 IndicatorBar(color: color, curValue: curValue, maxValue: maxValue)

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UserNotifications
 
 struct ContentView: View {
     @SceneStorage("selectedView") var selectedView: String?
@@ -83,7 +82,8 @@ struct ContentView: View {
                 }
         }
         .onAppear {
-            dataController.save() // do not save within computed property or it will produce a warning about updating view
+            // do not save within computed property or it will produce a warning about updating view
+            dataController.save()
         }
     }
 }
