@@ -44,7 +44,7 @@ extension Notice {
         : "Landing in \(noticeOffset) seconds"
         content.subtitle =
         noticeOffset == 0
-        ? "Stay safe out there"
+        ? "Don't get mugged"
         : "Destination: \(travel.flightDestination)"
         content.sound = UNNotificationSound.default
         let trigger = UNTimeIntervalNotificationTrigger(
