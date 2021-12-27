@@ -88,15 +88,12 @@ struct ApiPromptPage: View {
                         loading = true
                         api.key = keyText
                         Task.init {
-                            let basics = try? await api.getNew(BasicsJSON.self)
-                            if basics != nil {
+                            let basics = try? await api.getNew(Basics.JSON.self)
+                            if let basics = basics {
                                 player.objectWillChange.send()
                                 api.lastChecked = Date()
                                 api.error = nil
-                                api.player?.playerBasics.level = Int16(basics!.level)
-                                api.player?.playerBasics.name = basics!.name
-                                api.player?.playerBasics.gender = basics!.gender
-                                api.player?.playerBasics.userID = Int32(basics!.player_id)
+                                api.player?.playerBasics.setFromJSON(basics)
                             }
                         }
                         loading = false

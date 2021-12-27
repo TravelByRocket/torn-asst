@@ -84,17 +84,11 @@ struct TravelView: View {
 
     func fetchTravel() async throws {
         isLoading = true
-
-        let travelResult = try await player.playerAPI.getNew(TravelJSON.self).travel
-        let departure = Date(timeIntervalSince1970: TimeInterval(travelResult.departed))
-        let arrival = Date(timeIntervalSince1970: TimeInterval(travelResult.timestamp))
-
+        let travelResult = try await player.playerAPI.getNew(Travel.JSON.self)
         withAnimation {
-            travel.arrival = arrival
-            travel.departed = departure
-            travel.destination = travelResult.destination
-            isLoading = false
+            travel.setFromJSON(travelResult)
         }
+        isLoading = false
     }
 }
 
