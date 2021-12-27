@@ -19,7 +19,7 @@ struct ContentView: View {
         if let justOne = playersOnlyOne.wrappedValue.first {
             return justOne
         } else {
-            let justOne = Player(context: managedObjectContext) // saves with onAppear to not update view while loading
+            let justOne = Player(context: managedObjectContext)
             return justOne
         }
     }
@@ -80,10 +80,6 @@ struct ContentView: View {
                         print(error.localizedDescription)
                     }
                 }
-        }
-        .onAppear {
-            // do not save within computed property or it will produce a warning about updating view
-            dataController.save()
         }
     }
 }

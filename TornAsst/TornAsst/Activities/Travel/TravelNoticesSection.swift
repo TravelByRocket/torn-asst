@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TravelNotificationsView: View {
+struct TravelNoticesSection: View {
     let isOutbound: Bool
 
     @ObservedObject var travel: Travel
@@ -15,17 +15,9 @@ struct TravelNotificationsView: View {
     @State private var isAddingItem = false
     @State private var offset = 1.0
 
+    @EnvironmentObject var player: Player
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
-
-    var label: some View {
-        let msg = isOutbound ? "Going Abroad" : "Returning to Torn"
-        if isOutbound {
-            return Label(msg, systemImage: "airplane.arrival")
-        } else {
-            return Label(msg, image: "airplane.arrival.left")
-        }
-    }
 
     var notices: [Notice] {
         isOutbound
@@ -34,7 +26,7 @@ struct TravelNotificationsView: View {
     }
 
     var body: some View {
-        Section(header: label) {
+        Section(header: TravelNoticesSectionHeader(isOutbound: isOutbound)) {
             if isOutbound {
                 MarketplaceTicksRow()
             }
@@ -43,7 +35,7 @@ struct TravelNotificationsView: View {
             }
             AddAdjustItemRow(isOutbound: isOutbound, travel: travel)
         }
-        .onReceive(travel.objectWillChange) { _ in
+        .onReceive(player.objectWillChange) { _ in
             for notice in travel.flightNotices {
                 notice.processFlightNoticeChange()
             }
@@ -51,15 +43,16 @@ struct TravelNotificationsView: View {
     }
 }
 
-struct TravelNotificationsView_Previews: PreviewProvider {
+struct TravelNoticesSection_Previews: PreviewProvider {
     static var dataController = DataController.preview
 
     static var previews: some View {
         List {
-            TravelNotificationsView(isOutbound: true, travel: Travel.example)
-            TravelNotificationsView(isOutbound: false, travel: Travel.example)
+            TravelNoticesSection(isOutbound: true, travel: Travel.example)
+            TravelNoticesSection(isOutbound: false, travel: Travel.example)
         }
         .environment(\.managedObjectContext, dataController.container.viewContext)
         .environmentObject(dataController)
+        .environmentObject(Player.example)
     }
 }
