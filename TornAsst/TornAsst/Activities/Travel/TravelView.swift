@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct TravelView: View {
     static let tag: String = "Travel"

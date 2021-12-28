@@ -51,9 +51,12 @@ extension Notice {
         ? "Don't get mugged"
         : "Destination: \(travel.flightDestination)"
         content.sound = UNNotificationSound.default
-        let trigger = UNTimeIntervalNotificationTrigger(
-            timeInterval: travel.flightArrival.timeIntervalSinceNow - Double(noticeOffset),
-            repeats: false)
+        let triggerDate = travel.flightArrival.addingTimeInterval(-Double(noticeOffset))
+        let components = Calendar.torn.dateComponents([.hour, .minute, .second], from: triggerDate)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+//        let trigger = UNTimeIntervalNotificationTrigger(
+//            timeInterval: travel.flightArrival.timeIntervalSinceNow - Double(noticeOffset),
+//            repeats: false)
         let identifer = id?.uuidString ?? "invalid ID"
         let request = UNNotificationRequest(identifier: identifer, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)
