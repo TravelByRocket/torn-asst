@@ -66,6 +66,7 @@
         <attribute name="arrival" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="departed" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="destination" optional="YES" attributeType="String"/>
+        <attribute name="enabledMarketTicks" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="notices" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Notice" inverseName="travel" inverseEntity="Notice"/>
         <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="travel" inverseEntity="Player"/>
     </entity>
@@ -74,10 +75,10 @@
         <element name="Bar" positionX="-63" positionY="-18" width="128" height="164"/>
         <element name="Basics" positionX="-54" positionY="-9" width="128" height="104"/>
         <element name="Cooldowns" positionX="18" positionY="63" width="128" height="89"/>
+        <element name="Notice" positionX="-9" positionY="90" width="128" height="104"/>
         <element name="Player" positionX="36" positionY="81" width="128" height="134"/>
         <element name="Reminder" positionX="0" positionY="90" width="128" height="119"/>
         <element name="Status" positionX="-36" positionY="9" width="128" height="119"/>
-        <element name="Travel" positionX="-18" positionY="27" width="128" height="104"/>
-        <element name="Notice" positionX="-9" positionY="90" width="128" height="104"/>
+        <element name="Travel" positionX="-18" positionY="27" width="128" height="119"/>
     </elements>
 </model>
