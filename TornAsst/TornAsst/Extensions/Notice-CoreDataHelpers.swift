@@ -44,12 +44,12 @@ extension Notice {
         let content = UNMutableNotificationContent()
         content.title =
         noticeOffset == 0
-        ? "Landed in \(travel.flightDestination)"
-        : "Landing in \(noticeOffset) seconds"
+            ? "Landed in \(travel.flightDestination)"
+            : "Landing in \(noticeOffset) seconds"
         content.subtitle =
         noticeOffset == 0
-        ? "Don't get mugged"
-        : "Destination: \(travel.flightDestination)"
+            ? "Don't get mugged"
+            : "Destination: \(travel.flightDestination)"
         content.sound = UNNotificationSound.default
         let triggerDate = travel.flightArrival.addingTimeInterval(-Double(noticeOffset))
         let components = Calendar.torn.dateComponents([.hour, .minute, .second], from: triggerDate)
