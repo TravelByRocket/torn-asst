@@ -8,11 +8,7 @@
 import SwiftUI
 
 struct TravelSummaryLabel: View {
-    @EnvironmentObject var player: Player
-
-    var travel: Travel {
-        player.playerTravel
-    }
+    @ObservedObject var travel: Travel
 
     var body: some View {
         if travel.isOnGround {
@@ -33,7 +29,6 @@ struct TravelSummaryLabel: View {
 
 struct TravelSummaryLabel_Previews: PreviewProvider {
     static var previews: some View {
-        TravelSummaryLabel()
-            .environmentObject(Player.example)
+        TravelSummaryLabel(travel: Travel.example)
     }
 }

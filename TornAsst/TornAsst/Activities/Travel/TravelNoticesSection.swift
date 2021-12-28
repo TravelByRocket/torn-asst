@@ -10,14 +10,15 @@ import SwiftUI
 struct TravelNoticesSection: View {
     let isOutbound: Bool
 
-    @ObservedObject var travel: Travel
-
     @State private var isAddingItem = false
-    @State private var offset = 1.0
 
     @EnvironmentObject var player: Player
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
+
+    var travel: Travel {
+        player.playerTravel
+    }
 
     var notices: [Notice] {
         isOutbound
@@ -48,8 +49,8 @@ struct TravelNoticesSection_Previews: PreviewProvider {
 
     static var previews: some View {
         List {
-            TravelNoticesSection(isOutbound: true, travel: Travel.example)
-            TravelNoticesSection(isOutbound: false, travel: Travel.example)
+            TravelNoticesSection(isOutbound: true)
+            TravelNoticesSection(isOutbound: false)
         }
         .environment(\.managedObjectContext, dataController.container.viewContext)
         .environmentObject(dataController)

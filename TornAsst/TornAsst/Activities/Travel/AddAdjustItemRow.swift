@@ -17,10 +17,11 @@ struct AddAdjustItemRow: View {
     // Workaround for not being able to have an optional ObservedObject for notice
     // Can mostly be avoided with notice.travel?.objectWillChange.send() but had issues
     @State private var isNoticeActive = false
-    @State private var showAlert = false
+    @State private var hours: Double
     @State private var minutes: Double
     @State private var seconds: Double
 
+    @EnvironmentObject var player: Player
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
 
@@ -33,6 +34,7 @@ struct AddAdjustItemRow: View {
         self.travel = travel
         seconds = 0.0
         minutes = 0.0
+        hours = 0.0
         notice = nil // created when saved
     }
 
@@ -45,6 +47,7 @@ struct AddAdjustItemRow: View {
         self.travel = notice.travel
         _seconds = State(wrappedValue: TimeInterval(notice.noticeOffsetSecondsOnly))
         _minutes = State(wrappedValue: TimeInterval(notice.noticeOffsetMinutesOnly))
+        _hours = State(wrappedValue: TimeInterval(notice.noticeOffsetHoursOnly))
         self.notice = notice
         _isNoticeActive = State(wrappedValue: notice.isActive)
     }
@@ -52,78 +55,22 @@ struct AddAdjustItemRow: View {
     var body: some View {
         DisclosureGroup(isExpanded: $isExpanded) {
             VStack(alignment: .leading) {
-                Group {
-                    HStack {
-                        Text("\(Int(seconds), specifier: "% 2d") sec")
-                        Slider(value: $seconds, in: 0 ... 59, step: 1.0)
-                    }
-                    HStack {
-                        Text("\(Int(minutes), specifier: "% 2d") min")
-                        Slider(value: $minutes, in: 0 ... 59, step: 1.0)
-                    }
-                    #if DEBUG
-                    HStack {
-                        Text("\(Int(minutes), specifier: "% 2d") min")
-                        Slider(value: $minutes, in: 0 ... 3*60, step: 1.0)
-                    }
-                    .foregroundColor(.mint)
-                    .accentColor(.indigo)
-                    #endif
-                }
-                .font(.body.monospaced())
+                OffsetChangingView(seconds: $seconds, minutes: $minutes, hours: $hours)
                 HStack {
                     Button {
                         withAnimation {
-                            if let notice = notice {
-                                notice.travel?.objectWillChange.send()
-                                notice.noticeOffset = Int(minutes * 60 + seconds)
-                                notice.processFlightNoticeChange()
-                            } else {
-                                let notice = Notice(context: managedObjectContext)
-                                notice.noticeOffset = Int(minutes * 60 + seconds)
-                                notice.id = UUID()
-                                notice.isActive = true
-                                notice.note = isOutbound ? "outbound" : "inbound"
-                                notice.travel = travel
-                                notice.processFlightNoticeChange()
-                            }
-                            dataController.save()
-                            isExpanded = false
+                            setNoticeOffset()
                         }
                     } label: {
-                        Label("\(notice == nil ? "Remind" : "Change to") \(Int(minutes), specifier: "%02d"):\(Int(seconds), specifier: "%02d") before", systemImage: "rectangle.stack.badge.plus") // swiftlint:disable:this line_length
-                            .monospacedDigit()
-                            .multilineTextAlignment(.trailing)
-                            .fixedSize(horizontal: false, vertical: true)
+                        LandingNoticeLabel(
+                            hours: hours, minutes: minutes, seconds: seconds,
+                            variant: notice == nil ? .creating : .updating)
                     }
                     .buttonStyle(.bordered)
                     if let notice = notice {
                         Spacer()
-                        Button(role: .destructive) {
-                            showAlert = true
-                        } label: {
-                            Label("Delete", systemImage: "trash")
-                                .labelStyle(.iconOnly)
-                        }
-                        .buttonStyle(.borderless)
-                        .alert("Delete this reminder?", isPresented: $showAlert) {
-                            Button(role: .cancel) {
-                                showAlert = false
-                            } label: {
-                                Text("Cancel")
-                            }
-                            Button(role: .destructive) {
-                                notice.removeAssociatedNotification()
-                                withAnimation {
-                                    dataController.delete(notice)
-                                }
-                            } label: {
-                                Text("Delete")
-                            }
-
-                        }
+                        DeleteNoticeButton(notice: notice)
                     }
-
                 }
             }
         } label: {
@@ -140,6 +87,26 @@ struct AddAdjustItemRow: View {
             }
         }
     }
+
+    func setNoticeOffset() {
+        let notice = notice ?? makeNewNotice()
+        player.objectWillChange.send()
+        notice.noticeOffset = Int(minutes * 60 + seconds)
+        notice.processFlightNoticeChange()
+
+        isExpanded = false
+        dataController.save()
+    }
+
+    func makeNewNotice() -> Notice {
+        let notice = Notice(context: managedObjectContext)
+        notice.id = UUID()
+        notice.isActive = true
+        notice.note = isOutbound ? "outbound" : "inbound"
+        notice.travel = travel
+
+        return notice
+    }
 }
 
 struct AddAdjustItemRow_Previews: PreviewProvider {
@@ -152,5 +119,6 @@ struct AddAdjustItemRow_Previews: PreviewProvider {
         }
         .environment(\.managedObjectContext, dataController.container.viewContext)
         .environmentObject(dataController)
+        .environmentObject(Player.example)
     }
 }

@@ -27,6 +27,10 @@ extension Notice {
         (noticeOffset - noticeOffsetSecondsOnly) / 60
     }
 
+    var noticeOffsetHoursOnly: Int {
+        (noticeOffset - noticeOffsetSecondsOnly - noticeOffsetMinutesOnly * 60) / 3600
+    }
+
     func processFlightNoticeChange() {
         removeAssociatedNotification()
         guard isActive else { return }

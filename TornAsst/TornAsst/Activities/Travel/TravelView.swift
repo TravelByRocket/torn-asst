@@ -22,9 +22,7 @@ struct TravelView: View {
 
     var refreshButton: some View {
         Button {
-            Task.init {
-                try? await fetchTravel()
-            }
+            fetchTravel()
         } label: {
             HStack {
                 Text("Refresh")
@@ -43,28 +41,30 @@ struct TravelView: View {
                     systemImage: "airplane.circle",
                     message: "Travel Details",
                     color: .orange,
-                    date: travel.isOnGround ? nil : travel.arrival)
-                TravelSummaryLabel()
+                    date: travel.isOnGround ? nil : travel.flightArrival)
+                TravelSummaryLabel(travel: travel)
                 #if DEBUG
                 refreshButton
                 #endif
             }
-            TravelNoticesSection(isOutbound: true, travel: travel)
-            TravelNoticesSection(isOutbound: false, travel: travel)
+            TravelNoticesSection(isOutbound: true)
+            TravelNoticesSection(isOutbound: false)
         }
         .refreshable {
-            player.objectWillChange.send()
-            Task.init { try? await fetchTravel() }
+            fetchTravel()
         }
     }
 
-    func fetchTravel() async throws {
+    func fetchTravel() {
         isLoading = true
-        let result = try await player.playerAPI.getNew(Travel.JSON.self)
-        withAnimation {
-            travel.setFromJSON(result)
+        Task.init {
+            let result = try await player.playerAPI.getNew(Travel.JSON.self)
+            withAnimation {
+                travel.setFromJSON(result)
+            }
         }
         isLoading = false
+        dataController.save()
     }
 }
 
