@@ -50,12 +50,33 @@ extension Player {
         }
     }
 
+    var playerCooldowns: Cooldowns {
+        if let cooldowns = cooldowns {
+            return cooldowns
+        } else if let moc = managedObjectContext {
+            let cooldowns = Cooldowns(context: moc)
+            cooldowns.player = self
+            return cooldowns
+        } else {
+            return Cooldowns.example
+        }
+    }
+
     var playerBars: [Bar] {
         bars?.allObjects as? [Bar] ?? []
     }
 
     var playerEnergy: Bar {
-        playerBars.first { $0.barName == "energy" } ?? Bar.exampleEnergy
+        if let bar = playerBars.first(where: { $0.barName == "energy" }) {
+            return bar
+        } else if let moc = managedObjectContext {
+            let bar = Bar(context: moc)
+            bar.name = "energy"
+            bar.player = self
+            return bar
+        } else {
+            return Bar.exampleEnergy
+        }
     }
 
     var playerNerve: Bar {

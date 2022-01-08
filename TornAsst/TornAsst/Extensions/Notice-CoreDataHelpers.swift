@@ -52,11 +52,11 @@ extension Notice {
             : "Destination: \(travel.flightDestination)"
         content.sound = UNNotificationSound.default
         let triggerDate = travel.flightArrival.addingTimeInterval(-Double(noticeOffset))
-        let components = Calendar.torn.dateComponents([.hour, .minute, .second], from: triggerDate)
+        // Use Torn calendar and then convert to current if I want to use clock offset in the future
+//        let components = Calendar.torn.dateComponents([.hour, .minute, .second], from: triggerDate)
+        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: triggerDate)
+        print(components)
         let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
-//        let trigger = UNTimeIntervalNotificationTrigger(
-//            timeInterval: travel.flightArrival.timeIntervalSinceNow - Double(noticeOffset),
-//            repeats: false)
         let identifer = id?.uuidString ?? "invalid ID"
         let request = UNNotificationRequest(identifier: identifer, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request)

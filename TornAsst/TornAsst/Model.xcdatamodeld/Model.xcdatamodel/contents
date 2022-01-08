@@ -24,10 +24,18 @@
         <attribute name="userID" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="basics" inverseEntity="Player"/>
     </entity>
+    <entity name="Cooldown" representedClassName="Cooldown" syncable="YES" codeGenerationType="class">
+        <attribute name="completion" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="boosterFor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cooldowns" inverseName="cdBooster" inverseEntity="Cooldowns"/>
+        <relationship name="drugFor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cooldowns" inverseName="cdDrug" inverseEntity="Cooldowns"/>
+        <relationship name="medicalFor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cooldowns" inverseName="cdMedical" inverseEntity="Cooldowns"/>
+        <relationship name="noticeHandling" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NoticeHandling" inverseName="cooldown" inverseEntity="NoticeHandling"/>
+        <relationship name="notices" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Notice" inverseName="cooldown" inverseEntity="Notice"/>
+    </entity>
     <entity name="Cooldowns" representedClassName="Cooldowns" syncable="YES" codeGenerationType="class">
-        <attribute name="booster" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="drug" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="medical" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="cdBooster" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cooldown" inverseName="boosterFor" inverseEntity="Cooldown"/>
+        <relationship name="cdDrug" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cooldown" inverseName="drugFor" inverseEntity="Cooldown"/>
+        <relationship name="cdMedical" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cooldown" inverseName="medicalFor" inverseEntity="Cooldown"/>
         <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="cooldowns" inverseEntity="Player"/>
     </entity>
     <entity name="Notice" representedClassName="Notice" syncable="YES" codeGenerationType="class">
@@ -35,7 +43,14 @@
         <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="offset" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="cooldown" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cooldown" inverseName="notices" inverseEntity="Cooldown"/>
         <relationship name="travel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Travel" inverseName="notices" inverseEntity="Travel"/>
+    </entity>
+    <entity name="NoticeHandling" representedClassName="NoticeHandling" syncable="YES" codeGenerationType="class">
+        <attribute name="whileHospitalized" optional="YES" attributeType="String"/>
+        <attribute name="whileJailed" optional="YES" attributeType="String"/>
+        <attribute name="whileTraveling" optional="YES" attributeType="String"/>
+        <relationship name="cooldown" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cooldown" inverseName="noticeHandling" inverseEntity="Cooldown"/>
     </entity>
     <entity name="Player" representedClassName="Player" syncable="YES" codeGenerationType="class">
         <relationship name="api" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="API" inverseName="player" inverseEntity="API"/>
@@ -74,11 +89,13 @@
         <element name="API" positionX="-9" positionY="117" width="128" height="89"/>
         <element name="Bar" positionX="-63" positionY="-18" width="128" height="164"/>
         <element name="Basics" positionX="-54" positionY="-9" width="128" height="104"/>
+        <element name="Cooldown" positionX="-9" positionY="90" width="128" height="119"/>
         <element name="Cooldowns" positionX="18" positionY="63" width="128" height="89"/>
-        <element name="Notice" positionX="-9" positionY="90" width="128" height="104"/>
+        <element name="Notice" positionX="-9" positionY="90" width="128" height="119"/>
         <element name="Player" positionX="36" positionY="81" width="128" height="134"/>
         <element name="Reminder" positionX="0" positionY="90" width="128" height="119"/>
         <element name="Status" positionX="-36" positionY="9" width="128" height="119"/>
         <element name="Travel" positionX="-18" positionY="27" width="128" height="119"/>
+        <element name="NoticeHandling" positionX="0" positionY="117" width="128" height="89"/>
     </elements>
 </model>

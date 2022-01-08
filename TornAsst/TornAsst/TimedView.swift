@@ -1,5 +1,5 @@
 //
-//  CooldownsView.swift
+//  TimedView.swift
 //  TornAsst (iOS)
 //
 //  Created by Bryan Costanza on 19 Dec 2021.

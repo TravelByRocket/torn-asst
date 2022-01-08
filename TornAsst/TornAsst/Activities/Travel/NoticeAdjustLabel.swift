@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LandingNoticeLabel: View {
+struct NoticeAdjustLabel: View {
     let hours: Double
     let minutes: Double
     let seconds: Double
@@ -47,8 +47,8 @@ struct LandingNoticeLabel: View {
 struct LandingNoticeLabel_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            LandingNoticeLabel(hours: 1, minutes: 2, seconds: 3, variant: .creating)
-            LandingNoticeLabel(hours: 2, minutes: 3, seconds: 4, variant: .updating)
+            NoticeAdjustLabel(hours: 1, minutes: 2, seconds: 3, variant: .creating)
+            NoticeAdjustLabel(hours: 2, minutes: 3, seconds: 4, variant: .updating)
         }
     }
 }

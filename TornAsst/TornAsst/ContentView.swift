@@ -45,17 +45,17 @@ struct ContentView: View {
                     Image(systemName: "calendar")
                     Text("Dated")
                 }
-            TimedView()
+            CooldownsView()
                 .tag("cooldowns")
                 .tabItem {
-                    Image(systemName: "timer")
-                    Text("TImed")
+                    Image(systemName: "thermometer")
+                    Text("Cooldowns")
                 }
-            Text("Nerve")
-                .tag("nerve")
+            BarsView()
+                .tag(BarsView.tag)
                 .tabItem {
                     Image(systemName: "flame")
-                    Text("Nerve")
+                    Text("Bars")
                 }
             Text("Energy")
                 .tag("energy")

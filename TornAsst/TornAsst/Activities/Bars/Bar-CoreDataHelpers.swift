@@ -69,6 +69,7 @@ extension Bar {
         Int(ticktime)
     }
 
+    /// Seconds between ticks
     var barInterval: Int {
         Int(interval)
     }
@@ -80,10 +81,20 @@ extension Bar {
 
     var ticksToFill: Int {
         let increaseNeeded = barMaximum - barCurrent
+        guard barIncrement > 0 else { return 0 }
         let ticksMinimum = increaseNeeded / barIncrement
         let remainder = increaseNeeded % barIncrement
         let partialTickNeeded = remainder > 0
         return ticksMinimum + (partialTickNeeded ? 1 : 0)
+    }
+
+    func timeNeededFor(_ ticks: Int) -> TimeInterval {
+        var dateOfNextTick = barDate.addingTimeInterval(TimeInterval(barTicktime))
+//        while dateOfNextTick.isBefore(Date()) {
+//            dateOfNextTick.addTimeInterval(TimeInterval(barInterval))
+//        }
+        let interval = dateOfNextTick.timeIntervalSinceNow + TimeInterval(barInterval * (ticks - 1))
+        return interval
     }
 
     var timeToFill: Int {

@@ -8,15 +8,12 @@
 import SwiftUI
 import UserNotifications
 
-struct AddAdjustItemRow: View {
-    let isOutbound: Bool
-    let travel: Travel?
+struct NoticeAdjustRow: View {
+    let tag: String?
+    let parent: Notifying?
     let notice: Notice?
 
     @State private var isExpanded = false
-    // Workaround for not being able to have an optional ObservedObject for notice
-    // Can mostly be avoided with notice.travel?.objectWillChange.send() but had issues
-    @State private var isNoticeActive = false
     @State private var hours: Double
     @State private var minutes: Double
     @State private var seconds: Double
@@ -27,29 +24,27 @@ struct AddAdjustItemRow: View {
 
     /// This initializer is used when the view should create a new Notice if saved
     /// - Parameters:
-    ///   - isOutbound: For inbound or outbound flights?
-    ///   - travel: The parent object that will gain the Notice
-    init(isOutbound: Bool, travel: Travel) {
-        self.isOutbound = isOutbound
-        self.travel = travel
-        seconds = 0.0
-        minutes = 0.0
-        hours = 0.0
-        notice = nil // created when saved
+    ///   - parent: The object that will contain this notice
+    ///   - tag: Will be saved in the `note` property
+    init(parent: Notifying, tag: String? = nil) {
+        self.parent = parent
+        self.tag = tag
+        self.notice = nil
+        _seconds = State(initialValue: 0.0)
+        _minutes = State(initialValue: 0.0)
+        _hours = State(initialValue: 0.0)
     }
 
     /// This initializer uses an existing Notice for initial conditions and then updates that Notice if saved
     /// - Parameters:
-    ///   - isOutbound: For inbound or outbound flights?
     ///   - notice: The existing object that will be updated if saved
-    init(isOutbound: Bool, notice: Notice) {
-        self.isOutbound = isOutbound
-        self.travel = notice.travel
-        _seconds = State(wrappedValue: TimeInterval(notice.noticeOffsetSecondsOnly))
-        _minutes = State(wrappedValue: TimeInterval(notice.noticeOffsetMinutesOnly))
-        _hours = State(wrappedValue: TimeInterval(notice.noticeOffsetHoursOnly))
+    init(notice: Notice) {
+        self.parent = nil
+        self.tag = nil
         self.notice = notice
-        _isNoticeActive = State(wrappedValue: notice.isActive)
+        _seconds = State(initialValue: Double(notice.noticeOffsetSecondsOnly))
+        _minutes = State(initialValue: Double(notice.noticeOffsetMinutesOnly))
+        _hours = State(initialValue: Double(notice.noticeOffsetHoursOnly))
     }
 
     var body: some View {
@@ -62,7 +57,7 @@ struct AddAdjustItemRow: View {
                             setNoticeOffset()
                         }
                     } label: {
-                        LandingNoticeLabel(
+                        NoticeAdjustLabel(
                             hours: hours, minutes: minutes, seconds: seconds,
                             variant: notice == nil ? .creating : .updating)
                     }
@@ -75,7 +70,7 @@ struct AddAdjustItemRow: View {
             }
         } label: {
             if let notice = notice {
-                NotifyQuickActionRow(message: "\(notice.noticeOffset) seconds before landing", notice: notice)
+                NotifyQuickActionRow(message: "\(notice.noticeOffset) seconds before", notice: notice)
             } else {
                 Button {
                     withAnimation {
@@ -91,7 +86,7 @@ struct AddAdjustItemRow: View {
     func setNoticeOffset() {
         let notice = notice ?? makeNewNotice()
         player.objectWillChange.send()
-        notice.noticeOffset = Int(minutes * 60 + seconds)
+        notice.noticeOffset = Int((hours * 3600) + (minutes * 60) + seconds)
         notice.processFlightNoticeChange()
 
         isExpanded = false
@@ -102,8 +97,8 @@ struct AddAdjustItemRow: View {
         let notice = Notice(context: managedObjectContext)
         notice.id = UUID()
         notice.isActive = true
-        notice.note = isOutbound ? "outbound" : "inbound"
-        notice.travel = travel
+        notice.note = tag
+        parent?.addToNotices(notice)
 
         return notice
     }
@@ -114,8 +109,9 @@ struct AddAdjustItemRow_Previews: PreviewProvider {
 
     static var previews: some View {
         Form {
-            AddAdjustItemRow(isOutbound: true, travel: Travel.example)
-            AddAdjustItemRow(isOutbound: true, notice: Notice.exampleActive)
+            NoticeAdjustRow(notice: Notice.exampleActive)
+            NoticeAdjustRow(notice: Notice.exampleInactive)
+            NoticeAdjustRow(parent: Travel.example, tag: "outbound")
         }
         .environment(\.managedObjectContext, dataController.container.viewContext)
         .environmentObject(dataController)

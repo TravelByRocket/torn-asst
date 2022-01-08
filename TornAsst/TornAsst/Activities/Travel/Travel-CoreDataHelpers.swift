@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Travel {
+extension Travel: Notifying {
     /// When the flight arrives, otherwise distant past
     var flightArrival: Date {
         arrival ?? Date.distantPast

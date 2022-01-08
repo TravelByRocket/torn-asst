@@ -32,9 +32,9 @@ struct TravelNoticesSection: View {
                 MarketplaceTicksRow()
             }
             ForEach(notices) { notice in
-                AddAdjustItemRow(isOutbound: isOutbound, notice: notice)
+                NoticeAdjustRow(notice: notice)
             }
-            AddAdjustItemRow(isOutbound: isOutbound, travel: travel)
+            NoticeAdjustRow(parent: travel, tag: isOutbound ? "outbound" : "inbound")
         }
         .onReceive(player.objectWillChange) { _ in
             for notice in travel.flightNotices {
