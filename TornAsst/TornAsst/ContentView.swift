@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @SceneStorage("selectedView") var selectedView: String?
+    @SceneStorage("selectedView") var selectedView: String = TravelView.tag
 
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
@@ -46,7 +46,7 @@ struct ContentView: View {
                     Text("Reminders")
                 }
             CooldownsView()
-                .tag("cooldowns")
+                .tag(CooldownsView.tag)
                 .tabItem {
                     Image(systemName: "thermometer")
                     Text("Cooldowns")

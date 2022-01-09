@@ -131,6 +131,14 @@ extension Player {
 //        }
 //    }
 
+    var playerClockOffset: Int {
+        get {
+            Int(clockOffset)
+        } set {
+            clockOffset = Int16(newValue)
+        }
+    }
+
     static var example: Player {
         let dataController = DataController.preview
         let viewContext = dataController.container.viewContext

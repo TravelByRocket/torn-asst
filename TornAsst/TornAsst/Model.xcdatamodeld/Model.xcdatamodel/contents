@@ -66,6 +66,7 @@
         <relationship name="cooldown" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Cooldown" inverseName="noticeHandling" inverseEntity="Cooldown"/>
     </entity>
     <entity name="Player" representedClassName="Player" syncable="YES" codeGenerationType="class">
+        <attribute name="clockOffset" optional="YES" attributeType="Integer 16" defaultValueString="2" usesScalarValueType="YES"/>
         <relationship name="api" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="API" inverseName="player" inverseEntity="API"/>
         <relationship name="bars" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Bar" inverseName="player" inverseEntity="Bar"/>
         <relationship name="basics" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Basics" inverseName="player" inverseEntity="Basics"/>
@@ -101,15 +102,15 @@
     <elements>
         <element name="API" positionX="-9" positionY="117" width="128" height="89"/>
         <element name="Bar" positionX="-63" positionY="-18" width="128" height="209"/>
+        <element name="BarSettings" positionX="-9" positionY="99" width="128" height="119"/>
         <element name="Basics" positionX="-54" positionY="-9" width="128" height="104"/>
         <element name="Cooldown" positionX="-9" positionY="90" width="128" height="119"/>
         <element name="Cooldowns" positionX="18" positionY="63" width="128" height="89"/>
         <element name="Notice" positionX="-9" positionY="90" width="128" height="134"/>
         <element name="NoticeHandling" positionX="0" positionY="117" width="128" height="104"/>
-        <element name="Player" positionX="36" positionY="81" width="128" height="134"/>
+        <element name="Player" positionX="36" positionY="81" width="128" height="149"/>
         <element name="Reminder" positionX="0" positionY="90" width="128" height="119"/>
         <element name="Status" positionX="-36" positionY="9" width="128" height="119"/>
         <element name="Travel" positionX="-18" positionY="27" width="128" height="119"/>
-        <element name="BarSettings" positionX="-9" positionY="99" width="128" height="119"/>
     </elements>
 </model>

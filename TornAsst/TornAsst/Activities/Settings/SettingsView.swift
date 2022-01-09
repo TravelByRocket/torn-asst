@@ -10,6 +10,10 @@ import SwiftUI
 struct SettingsView: View {
     static let tag: String = "Settings"
 
+    @EnvironmentObject var player: Player
+    @EnvironmentObject var dataController: DataController
+    @Environment(\.managedObjectContext) var managedObjectContext
+
     var body: some View {
         Form {
             Section {
@@ -19,9 +23,8 @@ struct SettingsView: View {
                 ApiPromptPage()
             }
             Section(footer: ClockOffsetView.offsetNote) {
-                ClockOffsetView()
+                ClockOffsetView(player: player)
             }
-            .disabled(true)
         }
     }
 }
