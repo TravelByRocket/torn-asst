@@ -17,9 +17,9 @@ extension Reminder {
         case cityPurchases = "City Purchases"
         case missionAccepted = "Mission Accepted"
         case missionCompleted = "Mission Completed"
-        case trains = "Trains"
-        case stock = "Stock"
-        case points = "Points"
+        case trains = "Company Trains"
+        case stock = "Company Stock"
+        case points = "Job Points"
         case missionRewards = "Mission Rewards"
     }
 

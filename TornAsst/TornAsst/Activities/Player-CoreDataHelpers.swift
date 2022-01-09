@@ -118,6 +118,19 @@ extension Player {
         }
     }
 
+//    var playerReminders: [Reminder] {
+//        if let reminders = reminders {
+//            return reminders.allObjects as? [Reminder] ?? []
+//        } else if let moc = managedObjectContext {
+//            let bar = Bar(context: moc)
+//            bar.name = "life"
+//            bar.player = self
+//            return bar
+//        } else {
+//            return Bar.exampleLife
+//        }
+//    }
+
     static var example: Player {
         let dataController = DataController.preview
         let viewContext = dataController.container.viewContext

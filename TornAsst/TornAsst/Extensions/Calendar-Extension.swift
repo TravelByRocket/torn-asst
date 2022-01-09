@@ -14,4 +14,11 @@ extension Calendar {
         calendar.timeZone = gmt
         return calendar
     }
+
+    static func torn(clockOffsetPreference: Int) -> Calendar{
+        var calendar = Calendar(identifier: .gregorian)
+        let gmt = TimeZone(secondsFromGMT: clockOffsetPreference)!
+        calendar.timeZone = gmt
+        return calendar
+    }
 }

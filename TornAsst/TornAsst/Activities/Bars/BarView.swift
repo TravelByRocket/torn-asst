@@ -38,15 +38,7 @@ struct BarView: View {
         IndicatorRow(color: color, bar: bar)
         NotificationHandlingPreferenceView(color: color, handling: bar.barNoticeHandling)
         HStack {
-            Button {
-                notifyForValue.toggle()
-                dataController.save()
-            } label: {
-                Label(
-                    "Value of \(valueOf)",
-                    systemImage: notifyForValue ? "bell" : "bell.slash")
-                    .foregroundColor(notifyForValue ? .accentColor : .secondary)
-            }
+            NotificationRow(enabled: $notifyForValue.onChange(update), message: "Value of \(valueOf)")
             Spacer()
             Stepper(
                 "Value of \(valueOf)",
@@ -83,15 +75,7 @@ struct BarView: View {
                 step: bar.barIncrement)
                 .labelsHidden()
         }
-        Button {
-            notifyWhenFull.toggle()
-            dataController.save()
-        } label: {
-            Label(
-                "When Full",
-                systemImage: notifyWhenFull ? "bell" : "bell.slash")
-                .foregroundColor(notifyWhenFull ? .accentColor : .secondary)
-        }
+        NotificationRow(enabled: $notifyForValue.onChange(update), message: "When full")
     }
 
     func update() {

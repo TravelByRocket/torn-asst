@@ -43,7 +43,7 @@ struct ContentView: View {
                 .tag(RemindersView.tag)
                 .tabItem {
                     Image(systemName: "calendar")
-                    Text("Dated")
+                    Text("Reminders")
                 }
             CooldownsView()
                 .tag("cooldowns")
@@ -56,12 +56,6 @@ struct ContentView: View {
                 .tabItem {
                     Image(systemName: "flame")
                     Text("Bars")
-                }
-            Text("Energy")
-                .tag("energy")
-                .tabItem {
-                    Image(systemName: "bolt")
-                    Text("Energy")
                 }
             SettingsView()
                 .tag(SettingsView.tag)

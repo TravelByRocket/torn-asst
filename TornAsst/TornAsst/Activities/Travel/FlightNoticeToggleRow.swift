@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoticeToggleRow: View {
+struct FlightNoticeToggleRow: View {
     let message: String
     @ObservedObject var notice: Notice
 
@@ -30,15 +30,15 @@ struct NoticeToggleRow: View {
     }
 }
 
-struct NoticeToggleRow_Previews: PreviewProvider {
+struct FlightNoticeToggleRow_Previews: PreviewProvider {
     static var dataController = DataController.preview
 
     static var previews: some View {
         List {
-            NoticeToggleRow(
+            FlightNoticeToggleRow(
                 message: "\(Notice.exampleActive.offset) seconds before whatever",
                 notice: Notice.exampleActive)
-            NoticeToggleRow(
+            FlightNoticeToggleRow(
                 message: "\(Notice.exampleInactive.offset) seconds before whatever",
                 notice: Notice.exampleInactive)
         }

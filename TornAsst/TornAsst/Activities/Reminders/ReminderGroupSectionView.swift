@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PeriodicSectionView: View {
+struct ReminderGroupSectionView: View {
     let systemImage: String
     let message: String
     let color: Color
@@ -29,6 +29,8 @@ struct PeriodicSectionView: View {
                     PeriodicTaskRowView(highlighted: false, task: task)
                 }
             }
+            NotificationHandlingPreferenceView(color: .orange, handling: NoticeHandling.exampleAllNormal)
+            NoticeAdjustRow(parent: Travel.example)
         }
     }
 }
@@ -36,7 +38,7 @@ struct PeriodicSectionView: View {
 struct PeriodicSectionView_Previews: PreviewProvider {
     static var previews: some View {
         Form {
-            PeriodicSectionView(
+            ReminderGroupSectionView(
                 systemImage: "moon.stars",
                 message: "Some Message",
                 color: .purple,

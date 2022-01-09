@@ -8,7 +8,7 @@
 import Foundation
 
 struct ErrorJSON: DirectlyMatchedAPI {
-    static var apiFields: [String] = [] // not valid for this type but want to keep protocol consistency
+    static var apiFields: [String] = [] // unused; keep protocol consistency
 
     struct error { // swiftlint:disable:this type_name
         let code: Int

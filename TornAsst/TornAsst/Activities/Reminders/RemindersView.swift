@@ -17,6 +17,14 @@ struct RemindersView: View {
         ]
     ) private var tasks: FetchedResults<Reminder>
 
+//    var tasks: [Reminder] {
+//        let tasks = player.reminders?.allObjects as? [Reminder] ?? []
+//        if tasks.isEmpty {
+//        print(tasks.count)
+//        return tasks
+//    }
+
+    @EnvironmentObject var player: Player
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
 
@@ -59,25 +67,26 @@ struct RemindersView: View {
 
     var body: some View {
         Form {
-            PeriodicSectionView(
+            MarketplaceTicksRow()
+            ReminderGroupSectionView(
                 systemImage: "moon.stars",
                 message: "Reset at Midnight",
                 color: .purple,
                 date: Date.nextMidnight,
                 tasks: tasksMidnight)
-            PeriodicSectionView(
+            ReminderGroupSectionView(
                 systemImage: "sunset",
                 message: "Reset at C.O.B.",
                 color: .cyan,
                 date: Date.nextCloseOfBusiness,
                 tasks: tasksCOB)
-            PeriodicSectionView(
+            ReminderGroupSectionView(
                 systemImage: "scribble.variable",
                 message: "Other",
                 color: .indigo,
                 date: nil,
                 tasks: tasksOther)
-            PeriodicSectionView(
+            ReminderGroupSectionView(
                 systemImage: "xmark.circle",
                 message: "Inactive",
                 color: .gray,
@@ -86,7 +95,9 @@ struct RemindersView: View {
         }
         .onAppear {
             if tasks.isEmpty {
-                try? dataController.createDailyDefaults()
+                player.objectWillChange.send()
+                try? dataController.createDailyDefaults(player: player)
+                dataController.save()
             }
         }
     }
@@ -99,5 +110,6 @@ struct RemindersView_Previews: PreviewProvider {
         RemindersView()
             .environment(\.managedObjectContext, dataController.container.viewContext)
             .environmentObject(dataController)
+            .environmentObject(Player.example)
     }
 }
