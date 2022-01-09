@@ -11,6 +11,8 @@
 		2F51037327855DDC00D0AE3F /* NoticeHandling-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F51037227855DDC00D0AE3F /* NoticeHandling-CoreDataHelpers.swift */; };
 		2F510375278561AF00D0AE3F /* Cooldown-DoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F510374278561AF00D0AE3F /* Cooldown-DoreDataHelpers.swift */; };
 		2F5103792785731100D0AE3F /* Notifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5103782785731100D0AE3F /* Notifying.swift */; };
+		2FCFE626278A45B900BEC167 /* BarSettings-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCFE625278A45B900BEC167 /* BarSettings-CoreDataHelpers.swift */; };
+		2FCFE628278A6EBA00BEC167 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCFE627278A6EBA00BEC167 /* BarView.swift */; };
 		2FD0B3F62782A7400039DBC7 /* CooldownsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD0B3F52782A7400039DBC7 /* CooldownsView.swift */; };
 		2FD0B3F82782A8A10039DBC7 /* Cooldowns-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD0B3F72782A8A10039DBC7 /* Cooldowns-CoreDataHelpers.swift */; };
 		2FD0B3FA2782BEF20039DBC7 /* NotificationHandlingPreferenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD0B3F92782BEF20039DBC7 /* NotificationHandlingPreferenceView.swift */; };
@@ -72,7 +74,7 @@
 		2FF7AEF127745A400043ECC1 /* IndicatorBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEE827745A3F0043ECC1 /* IndicatorBar.swift */; };
 		2FF7AEF227745A400043ECC1 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEE927745A400043ECC1 /* Activity.swift */; };
 		2FF7AEF427745A400043ECC1 /* NotificationRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEEB27745A400043ECC1 /* NotificationRow.swift */; };
-		2FF7AEF527745A400043ECC1 /* NotifyQuickActionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEEC27745A400043ECC1 /* NotifyQuickActionRow.swift */; };
+		2FF7AEF527745A400043ECC1 /* NoticeToggleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF7AEEC27745A400043ECC1 /* NoticeToggleRow.swift */; };
 		2FF7AEF8277463470043ECC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2FF7AE502773B1C10043ECC1 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +83,8 @@
 		2F51037227855DDC00D0AE3F /* NoticeHandling-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeHandling-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		2F510374278561AF00D0AE3F /* Cooldown-DoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cooldown-DoreDataHelpers.swift"; sourceTree = "<group>"; };
 		2F5103782785731100D0AE3F /* Notifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifying.swift; sourceTree = "<group>"; };
+		2FCFE625278A45B900BEC167 /* BarSettings-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BarSettings-CoreDataHelpers.swift"; sourceTree = "<group>"; };
+		2FCFE627278A6EBA00BEC167 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		2FD0B3F52782A7400039DBC7 /* CooldownsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CooldownsView.swift; sourceTree = "<group>"; };
 		2FD0B3F72782A8A10039DBC7 /* Cooldowns-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cooldowns-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		2FD0B3F92782BEF20039DBC7 /* NotificationHandlingPreferenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationHandlingPreferenceView.swift; sourceTree = "<group>"; };
@@ -144,7 +148,7 @@
 		2FF7AEE827745A3F0043ECC1 /* IndicatorBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatorBar.swift; sourceTree = "<group>"; };
 		2FF7AEE927745A400043ECC1 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		2FF7AEEB27745A400043ECC1 /* NotificationRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationRow.swift; sourceTree = "<group>"; };
-		2FF7AEEC27745A400043ECC1 /* NotifyQuickActionRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyQuickActionRow.swift; sourceTree = "<group>"; };
+		2FF7AEEC27745A400043ECC1 /* NoticeToggleRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoticeToggleRow.swift; sourceTree = "<group>"; };
 		2FF7AEF72774629D0043ECC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,7 +198,7 @@
 				2FF7AEE827745A3F0043ECC1 /* IndicatorBar.swift */,
 				2FF7AEE527745A3F0043ECC1 /* IndicatorRow.swift */,
 				2FF7AEEB27745A400043ECC1 /* NotificationRow.swift */,
-				2FF7AEEC27745A400043ECC1 /* NotifyQuickActionRow.swift */,
+				2FF7AEEC27745A400043ECC1 /* NoticeToggleRow.swift */,
 				2FF7AEE427745A3F0043ECC1 /* TimedView.swift */,
 				2FF7AE7A2773C1B20043ECC1 /* Model.xcdatamodeld */,
 				2FF7AE502773B1C10043ECC1 /* Assets.xcassets */,
@@ -268,6 +272,8 @@
 			isa = PBXGroup;
 			children = (
 				2F3A25602774F8320048145F /* BarsView.swift */,
+				2FCFE627278A6EBA00BEC167 /* BarView.swift */,
+				2FCFE625278A45B900BEC167 /* BarSettings-CoreDataHelpers.swift */,
 				2FF7AE87277450200043ECC1 /* Bar-CoreDataHelpers.swift */,
 				2FF7AE89277450D70043ECC1 /* Bar-Examples.swift */,
 				2FD49FFB2779B78C009B1B12 /* Bar-JSON.swift */,
@@ -420,7 +426,7 @@
 				2FF7AEE02774599B0043ECC1 /* BankView.swift in Sources */,
 				2FD0B3FA2782BEF20039DBC7 /* NotificationHandlingPreferenceView.swift in Sources */,
 				2FF7AEED27745A400043ECC1 /* TimedView.swift in Sources */,
-				2FF7AEF527745A400043ECC1 /* NotifyQuickActionRow.swift in Sources */,
+				2FF7AEF527745A400043ECC1 /* NoticeToggleRow.swift in Sources */,
 				2FD49FFA27783CF3009B1B12 /* Basics-JSON.swift in Sources */,
 				2FF7AE88277450470043ECC1 /* Bar-CoreDataHelpers.swift in Sources */,
 				2FF7AEC82774545B0043ECC1 /* MedicalView.swift in Sources */,
@@ -432,9 +438,11 @@
 				2FF7AEBA277453480043ECC1 /* PeriodicSectionView.swift in Sources */,
 				2FF7AE8627744F7C0043ECC1 /* Player-CoreDataHelpers.swift in Sources */,
 				2FF7AE4F2773B1C00043ECC1 /* ContentView.swift in Sources */,
+				2FCFE628278A6EBA00BEC167 /* BarView.swift in Sources */,
 				2FF7AED9277459840043ECC1 /* CountdownWithLocalTime.swift in Sources */,
 				2FD49FF62777F31E009B1B12 /* API-CoreDataHelpers.swift in Sources */,
 				2FF7AEB2277453080043ECC1 /* Location.swift in Sources */,
+				2FCFE626278A45B900BEC167 /* BarSettings-CoreDataHelpers.swift in Sources */,
 				2FD4A006277A821F009B1B12 /* DeleteNoticeButton.swift in Sources */,
 				2FF7AEEE27745A400043ECC1 /* IndicatorRow.swift in Sources */,
 				2FF7AE84277446D60043ECC1 /* DataController.swift in Sources */,

@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import SwiftUI
 
-extension Bar {
+extension Bar: Notifying {
     /// "energy", "nerve", etc.
     var barName: String {
         name ?? "Coalesced Label"
@@ -104,6 +105,34 @@ extension Bar {
             timeNeeded += (ticksToFill - 1) * barInterval
         }
         return timeNeeded
+    }
+
+    var barNoticeHandling: NoticeHandling {
+        if let handling = noticeHandling {
+            return handling
+        } else if let context = managedObjectContext {
+            let handling = NoticeHandling(context: context)
+            handling.bar = self
+            return handling
+        } else {
+            let handling = NoticeHandling()
+            handling.bar = self
+            return handling
+        }
+    }
+
+    var barSettings: BarSettings {
+        if let settings = settings {
+            return settings
+        } else if let context = managedObjectContext {
+            let settings = BarSettings(context: context)
+            settings.bar = self
+            return settings
+        } else {
+            let settings = BarSettings()
+            settings.bar = self
+            return settings
+        }
     }
 
     func validMultiples(of value: Int) -> [Int] {

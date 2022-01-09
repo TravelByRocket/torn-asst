@@ -80,15 +80,42 @@ extension Player {
     }
 
     var playerNerve: Bar {
-        playerBars.first { $0.barName == "nerve" } ?? Bar.exampleNerve
+        if let bar = playerBars.first(where: { $0.barName == "nerve" }) {
+            return bar
+        } else if let moc = managedObjectContext {
+            let bar = Bar(context: moc)
+            bar.name = "nerve"
+            bar.player = self
+            return bar
+        } else {
+            return Bar.exampleNerve
+        }
     }
 
     var playerHappy: Bar {
-        playerBars.first { $0.barName == "happy" } ?? Bar.exampleHappy
+        if let bar = playerBars.first(where: { $0.barName == "happy" }) {
+            return bar
+        } else if let moc = managedObjectContext {
+            let bar = Bar(context: moc)
+            bar.name = "happy"
+            bar.player = self
+            return bar
+        } else {
+            return Bar.exampleHappy
+        }
     }
 
     var playerLife: Bar {
-        playerBars.first { $0.barName == "life" } ?? Bar.exampleLife
+        if let bar = playerBars.first(where: { $0.barName == "life" }) {
+            return bar
+        } else if let moc = managedObjectContext {
+            let bar = Bar(context: moc)
+            bar.name = "life"
+            bar.player = self
+            return bar
+        } else {
+            return Bar.exampleLife
+        }
     }
 
     static var example: Player {

@@ -7,10 +7,11 @@
 
 import SwiftUI
 
-struct NotifyQuickActionRow: View {
+struct NoticeToggleRow: View {
     let message: String
     @ObservedObject var notice: Notice
 
+    @EnvironmentObject var player: Player
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
 
@@ -29,19 +30,20 @@ struct NotifyQuickActionRow: View {
     }
 }
 
-struct NotifyQuickActionRow_Previews: PreviewProvider {
+struct NoticeToggleRow_Previews: PreviewProvider {
     static var dataController = DataController.preview
 
     static var previews: some View {
         List {
-            NotifyQuickActionRow(
+            NoticeToggleRow(
                 message: "\(Notice.exampleActive.offset) seconds before whatever",
                 notice: Notice.exampleActive)
-            NotifyQuickActionRow(
+            NoticeToggleRow(
                 message: "\(Notice.exampleInactive.offset) seconds before whatever",
                 notice: Notice.exampleInactive)
         }
         .environment(\.managedObjectContext, dataController.container.viewContext)
         .environmentObject(dataController)
+        .environmentObject(Player.example)
     }
 }

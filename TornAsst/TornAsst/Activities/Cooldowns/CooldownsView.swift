@@ -90,17 +90,16 @@ struct CooldownsView: View {
     }
 
     func fetchCooldowns() {
-        isLoading = true
         Task.init {
+            isLoading = true
             let result = try await player.playerAPI.getNew(Cooldowns.JSON.self)
             withAnimation {
                 cooldowns.setFromJSON(result)
             }
+            player.objectWillChange.send()
+            isLoading = false
+            dataController.save()
         }
-        player.objectWillChange.send()
-        print(cooldowns.cooldownDrug)
-        isLoading = false
-        dataController.save()
     }
 }
 

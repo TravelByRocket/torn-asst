@@ -55,15 +55,16 @@ struct TravelView: View {
     }
 
     func fetchTravel() {
-        isLoading = true
         Task.init {
+            isLoading = true
             let result = try await player.playerAPI.getNew(Travel.JSON.self)
             withAnimation {
                 travel.setFromJSON(result)
             }
+            player.objectWillChange.send()
+            isLoading = false
+            dataController.save()
         }
-        isLoading = false
-        dataController.save()
     }
 }
 

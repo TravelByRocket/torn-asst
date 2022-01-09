@@ -32,7 +32,7 @@ struct NotifyOptionRowStepper: View {
 
     var body: some View {
         HStack {
-            NotifyQuickActionRow(message: message, notice: notice)
+            NoticeToggleRow(message: message, notice: notice)
             Stepper(
                 "Custom Multiple",
                 value: $value.onChange(update),

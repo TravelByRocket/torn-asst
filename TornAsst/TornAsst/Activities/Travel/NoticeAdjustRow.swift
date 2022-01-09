@@ -70,7 +70,7 @@ struct NoticeAdjustRow: View {
             }
         } label: {
             if let notice = notice {
-                NotifyQuickActionRow(message: "\(notice.noticeOffset) seconds before", notice: notice)
+                NoticeToggleRow(message: "\(notice.noticeOffset) seconds before", notice: notice)
             } else {
                 Button {
                     withAnimation {

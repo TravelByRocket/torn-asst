@@ -15,44 +15,46 @@ struct BarsView: View {
     @EnvironmentObject var dataController: DataController
     @Environment(\.managedObjectContext) var managedObjectContext
 
+    var sections: [BarSection] {
+        [
+            BarSection(bar: player.playerEnergy, color: .green),
+            BarSection(bar: player.playerNerve, color: .red),
+            BarSection(bar: player.playerHappy, color: .yellow),
+            BarSection(bar: player.playerLife, color: .blue)
+        ]
+    }
+
+    struct BarSection: Identifiable {
+        let bar: Bar
+        let color: Color
+
+        var id: String { bar.barName }
+    }
+
     var body: some View {
         List {
-            Section {
-                Text("Static Example")
-                IndicatorRow(name: "Mana", color: .purple, server_time: Int(Date().timeIntervalSince1970))
-            }
-            Button {
-                fetchBars()
-            } label: {
-                Text("Refresh")
-            }
-
-            Section {
-                Text("Energy \(player.playerEnergy.barCurrent)/\(player.playerEnergy.barMaximum)")
-                Text("Ticks to fill \(player.playerEnergy.ticksToFill)")
-                Text("Increment \(player.playerEnergy.barIncrement)")
-                Text("When full")
-                Text("At multiples of 25")
-                ForEach(player.playerEnergy.validMultiples(of: 25), id: \.self) { value in
-                    Text("\(value)")
+            ForEach(sections) {section in
+                Section {
+                    BarView(color: section.color, bar: section.bar)
                 }
-                Text("Seconds for 9 ticks \(player.playerEnergy.timeNeededFor(9))")
-//                Text("Full at \(player.playerEnergy.full)")
-                Text("At value of")
             }
+        }
+        .refreshable {
+            fetchBars()
         }
     }
 
     func fetchBars() {
-        isLoading = true
         Task.init {
+            isLoading = true
             let result = try await player.playerAPI.getNew(Player.BarsJSON.self)
             withAnimation {
                 player.setBarsFromJSON(result)
             }
+            player.objectWillChange.send()
+            isLoading = false
+            dataController.save()
         }
-        isLoading = false
-        dataController.save()
     }
 }
 

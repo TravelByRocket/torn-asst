@@ -9,23 +9,26 @@
 import SwiftUI
 
 struct IndicatorRow: View {
-    let name: String
     let color: Color
-    let server_time: Int
+    let bar: Bar
+    
+    @EnvironmentObject var player: Player
+    @EnvironmentObject var dataController: DataController
+    @Environment(\.managedObjectContext) var managedObjectContext
     
     var curValue: Int {
-        50
+        bar.barCurrent
     }
     
     var maxValue: Int {
-        100
+        bar.barMaximum
     }
     
     var curValText: Text {
         if curValue >= 1000 {
             return Text(String(curValue))
         } else {
-            return Text("\(curValue, specifier: "%4.d")")
+            return Text("\(curValue, specifier: "%5d")")
         }
     }
     
@@ -33,35 +36,31 @@ struct IndicatorRow: View {
         if maxValue >= 1000 {
             return Text(String(maxValue))
         } else {
-            return Text("\(maxValue, specifier: "%4.d")")
+            return Text("\(maxValue, specifier: "%d")")
         }
-    }
-    
-    var dateFull: Date {
-        Date(timeIntervalSince1970: TimeInterval(TimeInterval(server_time) + TimeInterval(1000)))
     }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack (spacing: 0) {
-                Text(name)
+                Text(bar.barName)
                 curValText+Text("/")+maxValText
                 Spacer()
-                Text("+\(215, specifier: "%2.d")/\(350.0/60, specifier: "%2.f")min").font(.system(.caption, design: .monospaced))
+                Text("+\(bar.barIncrement, specifier: "%d")/\(bar.barInterval/60, specifier: "%-2d")min").font(.system(.caption, design: .monospaced))
                     // \(String(name.prefix(1)).lowercased()) use this for first letter
             }
             .font(.system(.body, design: .monospaced))
             .background(color.opacity(0.2))
             HStack {
                 Spacer()
-                if (curValue == maxValue) {
+                if (bar.isFull) {
                     Text("FULL")
                         .font(.system(.body, design: .monospaced))
-                } else if (curValue > maxValue) {
+                } else if (bar.isOverFull) {
                     Text("OVER")
                         .font(.system(.body, design: .monospaced))
                 } else {
-                    Text("Full in\n\(dateFull, style: .timer)")
+                    Text("Full in\n\(bar.barFull, style: .timer)")
                         .font(.system(.caption, design: .monospaced))
                         .multilineTextAlignment(.trailing)
                 }
@@ -75,12 +74,16 @@ struct IndicatorRow: View {
 }
 
 struct IndicatorRow_Previews: PreviewProvider {
+    static var dataController = DataController.preview
+    
     static var previews: some View {
         IndicatorRow(
-            name: "Mana  ",
             color: .purple,
-            server_time: Int(Date().timeIntervalSince1970) - 20
+            bar: Bar.exampleEnergy
         )
             .previewLayout(.sizeThatFits)
+            .environment(\.managedObjectContext, dataController.container.viewContext)
+            .environmentObject(dataController)
+            .environmentObject(Player.example)
     }
 }
