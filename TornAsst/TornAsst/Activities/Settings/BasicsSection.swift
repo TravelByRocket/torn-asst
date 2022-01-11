@@ -23,9 +23,41 @@ struct BasicsSection: View {
     var levelString: String {
         let level = player.playerBasics.level
         if level > 0 {
-            return "Level " + String(level)
+            return "Level: " + String(level)
         } else {
-            return "Level unknown"
+            return "Level: unknown"
+        }
+    }
+
+    var isInErrorState: Bool {
+        api.lastChecked == nil || api.error != nil
+    }
+
+    var stateMessage: String {
+        if api.lastChecked == nil {
+            return "Never checked"
+        } else if let msg = api.error {
+            return msg
+        } else {
+            return "Success"
+        }
+    }
+
+    var lastCheckText: Text {
+        if let date = api.lastChecked {
+            return Text("\(date, style: .relative) ago")
+        } else {
+            return Text("Never").foregroundColor(.orange)
+        }
+    }
+
+    var statusText: Text {
+        if let msg = api.error {
+            return Text(msg).foregroundColor(.red)
+        } else if api.lastChecked != nil {
+            return Text("Success").foregroundColor(.green)
+        } else {
+            return Text("N/A").foregroundColor(.orange)
         }
     }
 
@@ -36,19 +68,17 @@ struct BasicsSection: View {
                 message: "API Status",
                 color: .accentColor
             )
-            Text(api.lastChecked != nil
-                 ? "Success \(api.lastChecked!, style: .relative) ago"
-                 : "Never checked")
-                .foregroundColor(api.lastChecked != nil ? .green : .orange)
-                .fixedSize(horizontal: false, vertical: true)
-                .font(.title3)
-                .padding(1)
-                .monospacedDigit()
-            Group {
-                Text(name)
-                Text(levelString)
+            .padding(.bottom)
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(name)
+                    Text(levelString)
+                    Text("Last checked: ") + lastCheckText
+                    (Text("Status: ") + statusText)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .font(.body.monospaced())
             }
-            .font(.body.monospaced())
         }
     }
 }

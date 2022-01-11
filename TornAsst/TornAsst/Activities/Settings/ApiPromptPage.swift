@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ApiPromptPage: View {
     @State private var keyText: String = ""
-    @State private var loading = false
+    @State private var isLoading = false
 
     @EnvironmentObject var player: Player
     @EnvironmentObject var dataController: DataController
@@ -57,7 +57,7 @@ struct ApiPromptPage: View {
                         .overlay(
                             HStack{
                                 Spacer()
-                                if loading {
+                                if isLoading {
                                     ProgressView().padding(.trailing)
                                 }
                             }
@@ -79,27 +79,9 @@ struct ApiPromptPage: View {
                     }
                     .buttonStyle(BorderlessButtonStyle())
                 }
-                Text(api.error ?? " ")
-                    .font(.footnote)
-                    .foregroundColor(.orange)
-                    .multilineTextAlignment(.center)
-                Button(
-                    action: {
-                        loading = true
-                        api.key = keyText
-                        Task.init {
-                            let basics = try? await api.getNew(Basics.JSON.self)
-                            if let basics = basics {
-                                player.objectWillChange.send()
-                                api.lastChecked = Date()
-                                api.error = nil
-                                api.player?.playerBasics.setFromJSON(basics)
-                            }
-                        }
-                        loading = false
-                        dataController.save()
-                    }
-                ) {
+                Button {
+                    fetchBasics()
+                } label: {
                     Text(invalidCharacterFound || isWrongLength ? "Invalid Entry" : "Submit")
                         .padding(8)
                 }
@@ -107,7 +89,7 @@ struct ApiPromptPage: View {
                 .background(Color.primary.opacity(0.1).cornerRadius(5.0))
                 .disabled(invalidCharacterFound || isWrongLength)
                 .animation(.default, value: invalidCharacterFound || isWrongLength)
-                .padding(.bottom)
+                .padding(.vertical)
             }
             Group {
                 Text("Ways to find your API Key:")
@@ -133,6 +115,21 @@ struct ApiPromptPage: View {
             .padding(.horizontal)
             .padding(.vertical,1)
             .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    func fetchBasics() {
+        Task.init {
+            isLoading = true
+            let result = try await player.playerAPI.getNew(Basics.JSON.self)
+            if let result = result {
+                withAnimation {
+                    player.playerBasics.setFromJSON(result)
+                }
+            }
+            player.objectWillChange.send()
+            isLoading = false
+            dataController.save()
         }
     }
 }

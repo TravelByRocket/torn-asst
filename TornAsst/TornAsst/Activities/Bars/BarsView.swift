@@ -48,8 +48,10 @@ struct BarsView: View {
         Task.init {
             isLoading = true
             let result = try await player.playerAPI.getNew(Player.BarsJSON.self)
-            withAnimation {
-                player.setBarsFromJSON(result)
+            if let result = result {
+                withAnimation {
+                    player.setBarsFromJSON(result)
+                }
             }
             player.objectWillChange.send()
             isLoading = false

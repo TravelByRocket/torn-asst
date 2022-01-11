@@ -58,8 +58,10 @@ struct TravelView: View {
         Task.init {
             isLoading = true
             let result = try await player.playerAPI.getNew(Travel.JSON.self)
-            withAnimation {
-                travel.setFromJSON(result)
+            if let result = result {
+                withAnimation {
+                    travel.setFromJSON(result)
+                }
             }
             player.objectWillChange.send()
             isLoading = false

@@ -93,8 +93,10 @@ struct CooldownsView: View {
         Task.init {
             isLoading = true
             let result = try await player.playerAPI.getNew(Cooldowns.JSON.self)
-            withAnimation {
-                cooldowns.setFromJSON(result)
+            if let result = result {
+                withAnimation {
+                    cooldowns.setFromJSON(result)
+                }
             }
             player.objectWillChange.send()
             isLoading = false

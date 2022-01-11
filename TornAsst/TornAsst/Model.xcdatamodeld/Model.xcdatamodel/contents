@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19574" systemVersion="21C52" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="API" representedClassName="API" syncable="YES" codeGenerationType="class">
+        <attribute name="code" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="error" optional="YES" attributeType="String"/>
         <attribute name="key" optional="YES" attributeType="String"/>
         <attribute name="lastChecked" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -100,7 +101,7 @@
         <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="travel" inverseEntity="Player"/>
     </entity>
     <elements>
-        <element name="API" positionX="-9" positionY="117" width="128" height="89"/>
+        <element name="API" positionX="-9" positionY="117" width="128" height="104"/>
         <element name="Bar" positionX="-63" positionY="-18" width="128" height="209"/>
         <element name="BarSettings" positionX="-9" positionY="99" width="128" height="119"/>
         <element name="Basics" positionX="-54" positionY="-9" width="128" height="104"/>
