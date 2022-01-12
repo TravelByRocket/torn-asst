@@ -47,6 +47,19 @@ struct BarView: View {
                 step: bar.barIncrement)
                 .labelsHidden()
         }
+        .onChange(of: notifyForValue) { changedToTrue in
+            if changedToTrue {
+                bar.setValueNotification(for: valueOf)
+            } else {
+                bar.deleteValueNotification()
+            }
+        }
+        .onChange(of: valueOf) { _ in
+            if notifyForValue {
+                bar.deleteValueNotification()
+                bar.setValueNotification(for: valueOf)
+            }
+        }
         HStack {
             Button {
                 notifyForMultiples.toggle()
@@ -75,7 +88,28 @@ struct BarView: View {
                 step: bar.barIncrement)
                 .labelsHidden()
         }
-        NotificationRow(enabled: $notifyForValue.onChange(update), message: "When full")
+        .onChange(of: notifyForMultiples) { changedToTrue in
+            if changedToTrue {
+                bar.setMultiplesNotifications(for: bar.validMultiples(of: multiplesOf))
+            } else {
+                bar.deleteMultiplesNotifications()
+            }
+        }
+        .onChange(of: multiplesOf) { _ in
+            if notifyForMultiples {
+                bar.deleteMultiplesNotifications()
+                bar.setMultiplesNotifications(for: bar.validMultiples(of: multiplesOf))
+            }
+        }
+        NotificationRow(enabled: $notifyWhenFull.onChange(update), message: "When full")
+            .onChange(of: notifyWhenFull) { changedToTrue in
+                if changedToTrue {
+                    bar.setFullNotification()
+                } else {
+                    bar.deleteFullNotification()
+                }
+            }
+
     }
 
     func update() {

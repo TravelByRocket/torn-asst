@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftUI
+import UserNotifications
 
 extension Bar: Notifying {
     /// "energy", "nerve", etc.
@@ -89,13 +89,13 @@ extension Bar: Notifying {
         return ticksMinimum + (partialTickNeeded ? 1 : 0)
     }
 
-    func timeNeededFor(_ ticks: Int) -> TimeInterval {
-        var dateOfNextTick = barDate.addingTimeInterval(TimeInterval(barTicktime))
-//        while dateOfNextTick.isBefore(Date()) {
-//            dateOfNextTick.addTimeInterval(TimeInterval(barInterval))
-//        }
-        let interval = dateOfNextTick.timeIntervalSinceNow + TimeInterval(barInterval * (ticks - 1))
-        return interval
+    func timeNeededForTicks(count tickCount: Int) -> TimeInterval {
+        if tickCount > 0 {
+            let seconds = barTicktime + barInterval * (tickCount - 1)
+            return TimeInterval(seconds)
+        } else {
+            return 0
+        }
     }
 
     var timeToFill: Int {
@@ -105,6 +105,12 @@ extension Bar: Notifying {
             timeNeeded += (ticksToFill - 1) * barInterval
         }
         return timeNeeded
+    }
+
+    func ticksToReachValue(of threshold: Int) -> Int {
+        let wholeTicks = (threshold - barCurrent) / barIncrement
+        let needsPartialTick = (threshold - barCurrent) % barIncrement > 0
+        return needsPartialTick ? wholeTicks + 1 : wholeTicks
     }
 
     var barNoticeHandling: NoticeHandling {
@@ -141,11 +147,68 @@ extension Bar: Notifying {
         return (1...multiplesCount).map { $0 * value }
     }
 
-//    func whenAt(value: Int) -> Date? {
-//        let ticksNeeded = current
-//    }
-//
-//    func whenAt(values: [Int]) -> [Date] {
-//
-//    }
+    func setValueNotification(for value: Int) {
+        let content = UNMutableNotificationContent()
+        content.title = "\(barName) bar at \(value)"
+        content.sound = UNNotificationSound.default
+        let count = ticksToReachValue(of: value)
+        let time = timeNeededForTicks(count: count)
+        let date = barDate.addingTimeInterval(time).advanced(by: TimeInterval(player?.playerClockOffset ?? 0))
+        let interval = Date().distance(to: date).magnitude
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+        let identifier = "\(barName) threshold value"
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request)
+    }
+
+    func deleteValueNotification() {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(
+            withIdentifiers: ["\(barName) threshold value"])
+        UNUserNotificationCenter.current().removeDeliveredNotifications(
+            withIdentifiers: ["\(barName) threshold value"])
+    }
+
+    func setFullNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = "\(barName) full"
+        content.sound = UNNotificationSound.default
+        let interval = Date().distance(to: barFull).magnitude
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+        let identifier = "\(barName) full"
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        UNUserNotificationCenter.current().add(request)
+    }
+
+    func deleteFullNotification() {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(
+            withIdentifiers: ["\(barName) full"])
+        UNUserNotificationCenter.current().removeDeliveredNotifications(
+            withIdentifiers: ["\(barName) full"])
+    }
+
+    func setMultiplesNotifications(for values: [Int]) {
+        for value in values {
+            let content = UNMutableNotificationContent()
+            content.title = "\(barName) bar at \(value)"
+            content.body = "Multiple of \(barSettings.barMultiplesOf)"
+            content.sound = UNNotificationSound.default
+            let count = ticksToReachValue(of: value)
+            let time = timeNeededForTicks(count: count)
+            let date = barDate.addingTimeInterval(time).advanced(by: TimeInterval(player?.playerClockOffset ?? 0))
+            let interval = Date().distance(to: date).magnitude
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
+            let identifier = "\(barName) multiple at \(value)"
+            let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request)
+        }
+    }
+
+    func deleteMultiplesNotifications() {
+        let multiples = (barIncrement...(barMaximum - barIncrement)).filter { $0.isMultiple(of: barIncrement) }
+        let idenitifiers = multiples.map { "\(barName) multiple at \($0)" }
+        UNUserNotificationCenter.current().removePendingNotificationRequests(
+            withIdentifiers: idenitifiers)
+        UNUserNotificationCenter.current().removeDeliveredNotifications(
+            withIdentifiers: idenitifiers)
+    }
 }
