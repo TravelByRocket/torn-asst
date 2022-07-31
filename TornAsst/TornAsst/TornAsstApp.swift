@@ -28,6 +28,25 @@ struct TornAsstApp: App {
                     perform: save
                 )
         }
+        #if os(iOS)
+        .backgroundTask(.appRefresh("RACE_CHECK")) {
+            await tester()
+//            do {
+//                let url = URL(string: "https://api.torn.com/user/?selections=log&key=wruaSWbBvFqNYXTV")!
+//                let (data, _) = try await URLSession.shared.data(from: url)
+//                let json = try JSONSerialization.jsonObject(with: data, options: [])
+//                if let object = json as? [String: [String: [String: Any]]] {
+//                    print(data)
+//                }
+//            } catch {
+//
+//            }
+        }
+        #endif
+    }
+
+    func tester() async {
+        print("ran async")
     }
 
     func save(note: Notification) {

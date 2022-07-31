@@ -12,7 +12,7 @@ struct ErrorJSON: DirectlyMatchedAPI {
 
     let error: TornError
 
-    struct TornError: Codable { // swiftlint:disable:this type_name
+    struct TornError: Codable {
         let code: Int
         let error: String
     }

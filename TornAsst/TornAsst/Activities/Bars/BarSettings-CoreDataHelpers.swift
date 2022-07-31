@@ -24,7 +24,8 @@ extension BarSettings {
         }
     }
 
-    /// The single-value trigger for the bar with a minimum equal to the bar increment and max equal to one increment less than the max
+    /// The single-value trigger for the bar with a minimum equal to the bar increment and max
+    /// equal to one increment less than the max
     var barValueOf: Int {
         get {
             if let bar = bar {

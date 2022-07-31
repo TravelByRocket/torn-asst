@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F3A25612774F8320048145F /* BarsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A25602774F8320048145F /* BarsView.swift */; };
+		2F49F12C28753423008E64F2 /* Log-JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49F12B28753422008E64F2 /* Log-JSON.swift */; };
 		2F51037327855DDC00D0AE3F /* NoticeHandling-CoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F51037227855DDC00D0AE3F /* NoticeHandling-CoreDataHelpers.swift */; };
 		2F510375278561AF00D0AE3F /* Cooldown-DoreDataHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F510374278561AF00D0AE3F /* Cooldown-DoreDataHelpers.swift */; };
 		2F5103792785731100D0AE3F /* Notifying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F5103782785731100D0AE3F /* Notifying.swift */; };
@@ -78,6 +79,8 @@
 
 /* Begin PBXFileReference section */
 		2F3A25602774F8320048145F /* BarsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarsView.swift; sourceTree = "<group>"; };
+		2F49F12A287533D9008E64F2 /* TornAsst.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TornAsst.entitlements; sourceTree = "<group>"; };
+		2F49F12B28753422008E64F2 /* Log-JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Log-JSON.swift"; sourceTree = "<group>"; };
 		2F51037227855DDC00D0AE3F /* NoticeHandling-CoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NoticeHandling-CoreDataHelpers.swift"; sourceTree = "<group>"; };
 		2F510374278561AF00D0AE3F /* Cooldown-DoreDataHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Cooldown-DoreDataHelpers.swift"; sourceTree = "<group>"; };
 		2F5103782785731100D0AE3F /* Notifying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifying.swift; sourceTree = "<group>"; };
@@ -159,6 +162,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F1FDF7E287B9A6A0010714D /* TornAPI */ = {
+			isa = PBXGroup;
+			children = (
+				2FF7AE91277452130043ECC1 /* Travel-JSON.swift */,
+				2FF7AEA8277452BD0043ECC1 /* Player-Bars-JSON.swift */,
+				2FD49FFB2779B78C009B1B12 /* Bar-JSON.swift */,
+				2FF7AEB3277453280043ECC1 /* MatchedAPI-Protocols.swift */,
+				2FD49FF927783CF3009B1B12 /* Basics-JSON.swift */,
+				2FD49FF727781D11009B1B12 /* ErrorJSON.swift */,
+			);
+			path = TornAPI;
+			sourceTree = "<group>";
+		};
 		2FF7AE402773B1C00043ECC1 = {
 			isa = PBXGroup;
 			children = (
@@ -178,19 +194,20 @@
 		2FF7AE4B2773B1C00043ECC1 /* TornAsst */ = {
 			isa = PBXGroup;
 			children = (
+				2F49F12A287533D9008E64F2 /* TornAsst.entitlements */,
 				2FF7AEF72774629D0043ECC1 /* Info.plist */,
 				2FF7AE4C2773B1C00043ECC1 /* TornAsstApp.swift */,
 				2FF7AE4E2773B1C00043ECC1 /* ContentView.swift */,
 				2FF7AE83277446D60043ECC1 /* DataController.swift */,
 				2FF7AEE2277459A60043ECC1 /* DataController-CreateDefaults.swift */,
+				2F49F12B28753422008E64F2 /* Log-JSON.swift */,
 				2FF7AE7E277446330043ECC1 /* Activities */,
 				2FF7AE8D277451060043ECC1 /* Extensions */,
 				2FF7AE9D2774523F0043ECC1 /* BigSectionBarView.swift */,
-				2FD49FF927783CF3009B1B12 /* Basics-JSON.swift */,
 				2FF7AED8277459840043ECC1 /* CountdownWithLocalTime.swift */,
-				2FD49FF727781D11009B1B12 /* ErrorJSON.swift */,
 				2FF7AEEB27745A400043ECC1 /* NotificationRow.swift */,
 				2FF7AEE927745A400043ECC1 /* Activity.swift */,
+				2F1FDF7E287B9A6A0010714D /* TornAPI */,
 				2FF7AE7A2773C1B20043ECC1 /* Model.xcdatamodeld */,
 				2FF7AE502773B1C10043ECC1 /* Assets.xcassets */,
 				2FF7AE522773B1C10043ECC1 /* Preview Content */,
@@ -230,7 +247,6 @@
 				2FF7AEBC2774535C0043ECC1 /* Sequence-Sorting.swift */,
 				2FF7AE8B277450FD0043ECC1 /* Date-Extension.swift */,
 				2FF7AE8E277451A30043ECC1 /* Calendar-Extension.swift */,
-				2FF7AEB3277453280043ECC1 /* MatchedAPI-Protocols.swift */,
 				2FF7AECB277455880043ECC1 /* Time-Typealiases.swift */,
 				2FD49FEF27757A9D009B1B12 /* Binding-OnChange.swift */,
 				2FD49FF52777F31E009B1B12 /* API-CoreDataHelpers.swift */,
@@ -252,7 +268,6 @@
 				2FD4A0012779CAAE009B1B12 /* OffsetChangingView.swift */,
 				2FD49FED277569E2009B1B12 /* MarketplaceTicksRow.swift */,
 				2FF7AEC5277454210043ECC1 /* Travel-CoreDataHelpers.swift */,
-				2FF7AE91277452130043ECC1 /* Travel-JSON.swift */,
 				2FF7AE94277452130043ECC1 /* TravelSummaryView.swift */,
 				2FF7AEB1277453080043ECC1 /* Location.swift */,
 				2FF7AEEC27745A400043ECC1 /* FlightNoticeToggleRow.swift */,
@@ -268,8 +283,6 @@
 				2FCFE625278A45B900BEC167 /* BarSettings-CoreDataHelpers.swift */,
 				2FF7AE87277450200043ECC1 /* Bar-CoreDataHelpers.swift */,
 				2FF7AE89277450D70043ECC1 /* Bar-Examples.swift */,
-				2FD49FFB2779B78C009B1B12 /* Bar-JSON.swift */,
-				2FF7AEA8277452BD0043ECC1 /* Player-Bars-JSON.swift */,
 				2FF7AEE827745A3F0043ECC1 /* IndicatorBar.swift */,
 				2FF7AEE527745A3F0043ECC1 /* IndicatorRow.swift */,
 			);
@@ -383,6 +396,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		2FF7AE5A2773B2710043ECC1 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -420,6 +434,7 @@
 				2FF7AEE02774599B0043ECC1 /* BankView.swift in Sources */,
 				2FD0B3FA2782BEF20039DBC7 /* NotificationHandlingPreferenceView.swift in Sources */,
 				2FF7AEF527745A400043ECC1 /* FlightNoticeToggleRow.swift in Sources */,
+				2F49F12C28753423008E64F2 /* Log-JSON.swift in Sources */,
 				2FD49FFA27783CF3009B1B12 /* Basics-JSON.swift in Sources */,
 				2FF7AE88277450470043ECC1 /* Bar-CoreDataHelpers.swift in Sources */,
 				2FF7AEC82774545B0043ECC1 /* MedicalView.swift in Sources */,
@@ -528,7 +543,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -583,7 +598,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -598,6 +613,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TornAsst/TornAsst.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TornAsst/Preview Content\"";
@@ -610,6 +626,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -617,9 +634,12 @@
 				MARKETING_VERSION = 2022.000.00;
 				PRODUCT_BUNDLE_IDENTIFIER = "co.synodic.TornAsst-PreProd01";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -628,6 +648,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TornAsst/TornAsst.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TornAsst/Preview Content\"";
@@ -640,6 +661,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -647,9 +669,12 @@
 				MARKETING_VERSION = 2022.000.00;
 				PRODUCT_BUNDLE_IDENTIFIER = "co.synodic.TornAsst-PreProd01";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
