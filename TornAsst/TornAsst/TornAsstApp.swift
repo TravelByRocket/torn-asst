@@ -28,9 +28,8 @@ struct TornAsstApp: App {
                     perform: save
                 )
         }
-        #if os(iOS)
-        .backgroundTask(.appRefresh("RACE_CHECK")) {
-            await tester()
+//        .backgroundTask(.appRefresh("RACE_CHECK")) {
+//            await tester()
 //            do {
 //                let url = URL(string: "https://api.torn.com/user/?selections=log&key=wruaSWbBvFqNYXTV")!
 //                let (data, _) = try await URLSession.shared.data(from: url)
@@ -41,8 +40,7 @@ struct TornAsstApp: App {
 //            } catch {
 //
 //            }
-        }
-        #endif
+//        }
     }
 
     func tester() async {
